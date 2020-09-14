@@ -94,9 +94,18 @@ let des4 = `"רובן" היא רשת מסעדות המבורגרים ובשרי�
 הרשת שמה לעצמה כמטרה את שדרוג טרנד ההמבורגריות בארץ וכיום מוגשים ברובן לצד
 ההמבורגרים וכריכי רובן המפורסמים גם סטייקים, אסאדו, מנות ראשונות מיוחדות
 וספיישלים מהמעשנה על בסיס יומי.`;  
+let des5 = `מסעדת אוכל רחוב עכשווי כשרה בלב ירושלים.
+מסעדה בה הטעמים מדברים בעד עצמם - טעמים מדוייקים שילוו אתכם כשתלכו לישון בחלומות ויקומו אתכם בבוקר.
+המסעדה שוכנת לאורכו של מדרחוב הלל (19) ומציעה חווית בילוי קלילה ונינוחה:
+קבלת פנים חברית ומקצועית, מוזיקה מעולה ומעל לכל, מנות מוכרות ואהובות שפירקנו והרכבנו מחדש, כדי לאפשר לכם לגלות אותן מחדש - ממאכלים שתזהו מהילדות ועד למאכלי רחוב קלאסיים, כולם בגירסאות מודרניות ומפתיעות.`
 
-let restaurantArray = [Restaurant("לאגו", des1,4),Restaurant("רק בשר", des2,5),Restaurant("פטגוניה",des3,4)];
+let restaurantArray = [];
+restaurantArray.push(Restaurant("לאגו",des1,4));
+restaurantArray.push(Restaurant("רק בשר",des2,5));
+restaurantArray.push(Restaurant("פטגוניה",des3,4));
 restaurantArray.push(Restaurant("רובן",des4,3));
+restaurantArray.push(Restaurant("שפשוואן",des5,5));
+
 
 function btRestaurants1() {
 
@@ -118,9 +127,9 @@ function btRestaurants1() {
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
   
-    ScreenRes_div.appendChild(search);
-    ScreenRes_div.appendChild(btSearch);
-    ScreenRes_div.appendChild(br);
+  ScreenRes_div.appendChild(search);
+  ScreenRes_div.appendChild(btSearch);
+  ScreenRes_div.appendChild(br);
   
   for(let i = 0 ; i < restaurantArray.length; i++)
   {
@@ -362,7 +371,46 @@ function writeMessage() {
 //1 Restaurants functions
 
 //---------------------------------------------
+function Recipe(name = "",ingred = "",prep = "",edName = "")
+{
+  return recipe = {
+    recipeName: name,
+    recipeIngredients: ingred,
+    recipePrepration: prep,
+    editorName: edName,
+  };
+}
+let recipesArray = [];
+
 //2 recipes functions
+function createRecipe(recipeObject)
+{
+  const resDiv = document.createElement("div");
+  const br = document.createElement("br");
+  const br1 = document.createElement("br");
+  const br2 = document.createElement("br");
+
+  resDiv.className = "recipe_class";
+
+  const recName = document.createElement("h4");
+  recName.textContent = recipeObject.recipeName;
+  const ingredients = document.createElement("par");
+  ingredients.textContent = "מצרכים:    " + recipeObject.recipeIngredients;
+  const prepration = document.createElement("par");
+  prepration.textContent = "אופן ההכנה:    " + recipeObject.recipePrepration;
+  const editor = document.createElement("h5");
+  editor.textContent = "עורך המתכון:    " + recipeObject.editorName;
+
+  resDiv.appendChild(recName);
+  resDiv.appendChild(ingredients);
+  resDiv.appendChild(br);
+  resDiv.appendChild(br1);
+  resDiv.appendChild(prepration);
+  resDiv.appendChild(editor);
+
+  return resDiv;
+}
+
 function btAddRecipe1() {
   //Break line
   const br = document.createElement("br");
@@ -450,22 +498,35 @@ function btAddRecipe1() {
 
 function saveRecipe() {
   // inputTitle
-  const inputTitle = document.getElementById("inputTitle");
-  const textAreaIngredients = document.getElementById("textAreaIngredients");
-  const textAreaPrepration = document.getElementById("textAreaPrepration");
-  const editorName = document.getElementById("editorName");
 
-  let recipe = {
-    RecipeName: inputTitle.value,
-    Ingredients: textAreaIngredients.value,
-    Prepration: textAreaPrepration.value,
-    Editor: editorName.value,
-  };
+  const main = document.getElementById("main");
+  const docFrag = document.createElement("div");
+  
+  const inputTitle = document.getElementById("inputTitle").value;
+  const textAreaIngredients = document.getElementById("textAreaIngredients").value;
+  const textAreaPrepration = document.getElementById("textAreaPrepration").value;
+  const editorName = document.getElementById("editorName").value;
 
-  editorName.value = "";
-  inputTitle.value = "";
-  textAreaIngredients.value = "";
-  textAreaPrepration.value = "";
+  recipesArray.push(Recipe(inputTitle,textAreaIngredients,textAreaPrepration,editorName));
+
+  const background_div = document.getElementById("background_div");
+  background_div.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
+
+  docFrag.appendChild(background_div);
+  docFrag.id = "main";
+  main.replaceWith(docFrag);
+
+  // let recipe = {
+  //   RecipeName: inputTitle.value,
+  //   Ingredients: textAreaIngredients.value,
+  //   Prepration: textAreaPrepration.value,
+  //   Editor: editorName.value,
+  // };
+
+  // editorName.value = "";
+  // inputTitle.value = "";
+  // textAreaIngredients.value = "";
+  // textAreaPrepration.value = "";
 }
 
 function btViewRecipe1() {
