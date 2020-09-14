@@ -68,7 +68,7 @@ footer {
   height: 82%;
   right: 150px;
   top: 100px;
-  opacity: 0.8;
+  /* opacity: 0.8; */
 }
 #main {
   display: inline-block;

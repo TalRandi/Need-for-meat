@@ -37,8 +37,29 @@ function navigationBarLoading() {
 }
 /*------------------------------------------------------------------------*/
 //private functions
-function Rating(number){
+function createRestaurant(resObject)
+{
+  const resDiv = document.createElement("div");
+  resDiv.className = "restaurant_class";
 
+  const resName = document.createElement("h4");
+  resName.textContent = resObject.restaurantName;
+  const resDesctiption = document.createElement("par");
+  resDesctiption.textContent = resObject.restaurantDescription;
+  const resRating = Rating(resObject.restaurantRating);
+  
+  const br = document.createElement("br");
+
+  resDiv.appendChild(resName);
+  resDiv.appendChild(resDesctiption);
+  resDiv.appendChild(resRating);
+  resDiv.appendChild(br);
+
+  return resDiv;
+}
+
+function Rating(number = 2)
+{
   const rating = document.createElement("h5");
   rating.textContent = "דירוג המסעדה: ";
   for(let i = 0 ; i < 5 ; i++)
@@ -55,11 +76,31 @@ function Rating(number){
 // ------------------------------------------------------
 // Main buttons
 // //1 restaurants
+function Restaurant(name = "", des = "", rating = 5){
+  return restaurant = {
+    restaurantName: name,
+    restaurantDescription: des,
+    restaurantRating: rating,
+  };
+}
+
+let des1 = `מסעדת לאגו – Lago – היוקרתית, שוכנת על שפת אגם בלב פארק שמיר שבמעלה אדומים. המקום נהנה מנוף מדברי מהפנט, מצמחייה יפה ומאווירה ייחודית,
+שנגזרים ממיקומו המקורי ומהאוכל המוקפד המוגש בו, שמבטיח לסועדים ולמבלים במקום חוויה קולנארית יוצאת דופן.`;
+let des2 = `"רק בשר" הוקמה בשנת 2008 ע"י דני ברנד - קיבוצניק וחקלאי, שחלם את הקונספט הייחודי כנגד כל עצות המומחים אך עם המון האהבה, מקצועיות  וכבוד לבשר.`;
+let des3 = `במסעדה תוכלו להנות מבשרים העסיסיים והמשובחים שלנו אשר מיובאים היישר מארגנטינה.
+  מבחר הבשרים הוא מצומצם ואיכותי והוא כולל בשרים כגון: אנטריקוט, אסאדו, נתחי שייטל ועוד אשר כולם מוכנים על גריל ארגנטינאי מקצועי.
+  לצד הבשרים הנפלאים מוגשים במסעדה מבחר סלטים מרעננים בסגנון דרום אמריקאי, אמפנדס בקר טעימות ומבחר יינות משובחים..`;
+let des4 = `"רובן" היא רשת מסעדות המבורגרים ובשרים מעושנים חמים באווירה ייחודית.
+הרשת שמה לעצמה כמטרה את שדרוג טרנד ההמבורגריות בארץ וכיום מוגשים ברובן לצד
+ההמבורגרים וכריכי רובן המפורסמים גם סטייקים, אסאדו, מנות ראשונות מיוחדות
+וספיישלים מהמעשנה על בסיס יומי.`;  
+
+let restaurantArray = [Restaurant("לאגו", des1,4),Restaurant("רק בשר", des2,5),Restaurant("פטגוניה",des3,4)];
+restaurantArray.push(Restaurant("רובן",des4,3));
+
 function btRestaurants1() {
-  
+
   const br = document.createElement("br");
-  const br1 = document.createElement("br");
-  const br2 = document.createElement("br");
 
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
@@ -76,46 +117,15 @@ function btRestaurants1() {
   
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
-
-  const restName1 = document.createElement("h4");
-  restName1.textContent = "-לאגו-";
   
-  const restDesc1 = document.createElement("par");
-  restDesc1.textContent = `מסעדת לאגו – Lago – היוקרתית, שוכנת על שפת אגם בלב פארק שמיר שבמעלה אדומים. המקום נהנה מנוף מדברי מהפנט, מצמחייה יפה ומאווירה ייחודית,
-  שנגזרים ממיקומו המקורי ומהאוכל המוקפד המוגש בו, שמבטיח לסועדים ולמבלים במקום חוויה קולנארית יוצאת דופן.`;
-  const rating = Rating(4);
-
-  const restName2 = document.createElement("h4");
-  restName2.textContent = "-רק בשר-";
-  const restDesc2 = document.createElement("par");
-  restDesc2.textContent = `"רק בשר" הוקמה בשנת 2008 ע"י דני ברנד - קיבוצניק וחקלאי, שחלם את הקונספט הייחודי כנגד כל עצות המומחים אך עם המון האהבה, מקצועיות  וכבוד לבשר.`;
-  const rating1 = Rating(5);
-
-  const restName3 = document.createElement("h4");
-  restName3.textContent = "-פטגוניה-";
-  const restDesc3 = document.createElement("par");
-  restDesc3.textContent = `במסעדה תוכלו להנות מבשרים העסיסיים והמשובחים שלנו אשר מיובאים היישר מארגנטינה.
-  מבחר הבשרים הוא מצומצם ואיכותי והוא כולל בשרים כגון: אנטריקוט, אסאדו, נתחי שייטל ועוד אשר כולם מוכנים על גריל ארגנטינאי מקצועי.
-  לצד הבשרים הנפלאים מוגשים במסעדה מבחר סלטים מרעננים בסגנון דרום אמריקאי, אמפנדס בקר טעימות ומבחר יינות משובחים..`;
-  const rating2 = Rating(3);
-
-  ScreenRes_div.appendChild(search);
-  ScreenRes_div.appendChild(btSearch);
-  ScreenRes_div.appendChild(br);
-
-  ScreenRes_div.appendChild(restName1);
-  ScreenRes_div.appendChild(restDesc1);
-  ScreenRes_div.appendChild(rating);
+    ScreenRes_div.appendChild(search);
+    ScreenRes_div.appendChild(btSearch);
+    ScreenRes_div.appendChild(br);
   
-  ScreenRes_div.appendChild(br1);
-  ScreenRes_div.appendChild(restName2);
-  ScreenRes_div.appendChild(restDesc2);
-  ScreenRes_div.appendChild(rating1);
-
-  ScreenRes_div.appendChild(br2);
-  ScreenRes_div.appendChild(restName3);
-  ScreenRes_div.appendChild(restDesc3);
-  ScreenRes_div.appendChild(rating2);
+  for(let i = 0 ; i < restaurantArray.length; i++)
+  {
+    ScreenRes_div.appendChild(createRestaurant(restaurantArray[i]));
+  }
 
   docFrag.appendChild(ScreenRes_div);
   docFrag.id = "main";
