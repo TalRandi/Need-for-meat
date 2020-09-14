@@ -1,4 +1,3 @@
-
 function navigationBarLoading() {
   const myNav = document.getElementById("nav_bar");
   const docFrag = document.createElement("nav");
@@ -37,8 +36,7 @@ function navigationBarLoading() {
 }
 /*------------------------------------------------------------------------*/
 //private functions
-function createRestaurant(resObject)
-{
+function createRestaurant(resObject) {
   const resDiv = document.createElement("div");
   resDiv.className = "restaurant_class";
 
@@ -47,7 +45,7 @@ function createRestaurant(resObject)
   const resDesctiption = document.createElement("par");
   resDesctiption.textContent = resObject.restaurantDescription;
   const resRating = Rating(resObject.restaurantRating);
-  
+
   const br = document.createElement("br");
 
   resDiv.appendChild(resName);
@@ -58,17 +56,15 @@ function createRestaurant(resObject)
   return resDiv;
 }
 
-function Rating(number = 2)
-{
+function Rating(number = 2) {
   const rating = document.createElement("h5");
   rating.textContent = "דירוג המסעדה: ";
-  for(let i = 0 ; i < 5 ; i++)
-  {
+  for (let i = 0; i < 5; i++) {
     const star = document.createElement("span");
-    if(i < number)
-      star.className = "fa fa-star checked";
-    else 
-      star.className = "fa fa-star";
+    star.className = "star";
+    if (i < number) star.className = "fa fa-star checked";
+    else star.className = "fa fa-star";
+
     rating.appendChild(star);
   }
   return rating;
@@ -76,12 +72,12 @@ function Rating(number = 2)
 // ------------------------------------------------------
 // Main buttons
 // //1 restaurants
-function Restaurant(name = "", des = "", rating = 5){
-  return restaurant = {
+function Restaurant(name = "", des = "", rating = 5) {
+  return (restaurant = {
     restaurantName: name,
     restaurantDescription: des,
     restaurantRating: rating,
-  };
+  });
 }
 
 let des1 = `מסעדת לאגו – Lago – היוקרתית, שוכנת על שפת אגם בלב פארק שמיר שבמעלה אדומים. המקום נהנה מנוף מדברי מהפנט, מצמחייה יפה ומאווירה ייחודית,
@@ -93,22 +89,20 @@ let des3 = `במסעדה תוכלו להנות מבשרים העסיסיים ו�
 let des4 = `"רובן" היא רשת מסעדות המבורגרים ובשרים מעושנים חמים באווירה ייחודית.
 הרשת שמה לעצמה כמטרה את שדרוג טרנד ההמבורגריות בארץ וכיום מוגשים ברובן לצד
 ההמבורגרים וכריכי רובן המפורסמים גם סטייקים, אסאדו, מנות ראשונות מיוחדות
-וספיישלים מהמעשנה על בסיס יומי.`;  
+וספיישלים מהמעשנה על בסיס יומי.`;
 let des5 = `מסעדת אוכל רחוב עכשווי כשרה בלב ירושלים.
 מסעדה בה הטעמים מדברים בעד עצמם - טעמים מדוייקים שילוו אתכם כשתלכו לישון בחלומות ויקומו אתכם בבוקר.
 המסעדה שוכנת לאורכו של מדרחוב הלל (19) ומציעה חווית בילוי קלילה ונינוחה:
-קבלת פנים חברית ומקצועית, מוזיקה מעולה ומעל לכל, מנות מוכרות ואהובות שפירקנו והרכבנו מחדש, כדי לאפשר לכם לגלות אותן מחדש - ממאכלים שתזהו מהילדות ועד למאכלי רחוב קלאסיים, כולם בגירסאות מודרניות ומפתיעות.`
+קבלת פנים חברית ומקצועית, מוזיקה מעולה ומעל לכל, מנות מוכרות ואהובות שפירקנו והרכבנו מחדש, כדי לאפשר לכם לגלות אותן מחדש - ממאכלים שתזהו מהילדות ועד למאכלי רחוב קלאסיים, כולם בגירסאות מודרניות ומפתיעות.`;
 
 let restaurantArray = [];
-restaurantArray.push(Restaurant("לאגו",des1,4));
-restaurantArray.push(Restaurant("רק בשר",des2,5));
-restaurantArray.push(Restaurant("פטגוניה",des3,4));
-restaurantArray.push(Restaurant("רובן",des4,3));
-restaurantArray.push(Restaurant("שפשוואן",des5,5));
-
+restaurantArray.push(Restaurant("לאגו", des1, 4));
+restaurantArray.push(Restaurant("רק בשר", des2, 5));
+restaurantArray.push(Restaurant("פטגוניה", des3, 4));
+restaurantArray.push(Restaurant("רובן", des4, 3));
+restaurantArray.push(Restaurant("שפשוואן", des5, 5));
 
 function btRestaurants1() {
-
   const br = document.createElement("br");
 
   const main = document.getElementById("main");
@@ -119,20 +113,19 @@ function btRestaurants1() {
   const title = document.createElement("h3");
   title.textContent = "מסעדות";
   ScreenRes_div.appendChild(title);
-  
+
   const search = document.createElement("input");
   search.style.fontSize = "16px";
   search.placeholder = "חיפוש מסעדה:";
-  
+
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
-  
+
   ScreenRes_div.appendChild(search);
   ScreenRes_div.appendChild(btSearch);
   ScreenRes_div.appendChild(br);
-  
-  for(let i = 0 ; i < restaurantArray.length; i++)
-  {
+
+  for (let i = 0; i < restaurantArray.length; i++) {
     ScreenRes_div.appendChild(createRestaurant(restaurantArray[i]));
   }
 
@@ -175,7 +168,7 @@ function btRecipes1() {
   title.textContent = "מתכונים";
   ScreenRecipe_div.appendChild(title);
 
-  const article = document.createElement("pre");
+  const article = document.createElement("par");
   article.textContent = `מחכים לכם כאן מתכונים פשוטים עם נתחי בשר אנגוס ועוף מובחרים וטריים, וגם כתבות וטיפים לארוחה מלאה בטעמים בלתי נשכחים.
 כאן תוכלו למצוא מתכונים עם בשר טחון, בשר בקר או תבשילי בשר, מתכוננים לארוחה מיוחדת לאירוח בשרי שיהפכו את הסעודה שלכם לחגיגית.
 יש לכם חשק לתבשיל בשר בקדירה? או להקפצה מהירה במחבת? במתחם מתכוני הבשר שלנו תוכלו למצוא את מגוון האפשרויות וללמוד כיצד להכין את המתכונים האהובים עליכם
@@ -189,7 +182,6 @@ function btRecipes1() {
 }
 //3 equeipment
 function btEquipment1() {
-  
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
 
@@ -205,7 +197,6 @@ function btEquipment1() {
 }
 //4 butchers
 function btButchers1() {
-  
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -218,11 +209,11 @@ function btButchers1() {
   const title = document.createElement("h3");
   title.textContent = "אטליזים";
   ScreenButchers_div.appendChild(title);
-  
+
   const search = document.createElement("input");
   search.style.fontSize = "16px";
   search.placeholder = "חיפוש אטליז:";
-  
+
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
 
@@ -244,7 +235,7 @@ function btButchers1() {
   const bucherDesc3 = document.createElement("par");
   bucherDesc3.textContent = `את האנטרקוט מיישנים כאן כ‭21-‬ יום במקרר מיוחד, לדרגת יישון אופטימאלית. הנתח עטוף בשומן ומשויש היטב, ויש לו טעם בשרי יוצא דופן.
   135 שקל לקילו, והוא שלכם. חוץ מזה, יש פה מבחר נאה של נתחי בשר מיוחדים, בשרים מעושנים ודגים, וצוות של מומחי בשר שישמח לענות לכם על כל שאלה.`;
-  
+
   ScreenButchers_div.appendChild(search);
   ScreenButchers_div.appendChild(btSearch);
   ScreenButchers_div.appendChild(br);
@@ -263,7 +254,6 @@ function btButchers1() {
 }
 //5 explenation of meats
 function btExplanation_of_meats1() {
-
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
 
@@ -277,7 +267,7 @@ function btExplanation_of_meats1() {
   Explention.style.paddingTop = "30px";
   //Explention.style.fontSize = "15px";
 
-  Explention.textContent =  ` בשר הבקר מתחלק באופן בסיסי לחלקים קדמיים ואחוריים, אך החלוקה החשובה ביותר היא על פי איכות הבשר ורכותו.
+  Explention.textContent = ` בשר הבקר מתחלק באופן בסיסי לחלקים קדמיים ואחוריים, אך החלוקה החשובה ביותר היא על פי איכות הבשר ורכותו.
 
   כאן מבחינים בין החלקים " הפעילים " בגוף הבהמה , כמו שריר הזרוע, הכתף והצוואר,
   לבין החלקים "הנייחים" הרכים כמו שייטל, סינטה וכמובן הפילה.
@@ -300,13 +290,12 @@ function btExplanation_of_meats1() {
   בשר מספר 17 - פלדה - כסליים - לנזיד , לטחינה ולרולדה.
   בשר מספר 18 - שריר אחורי - פולי - לנזיד , למרק  ולבישול איטי.
   בשר מספר 19 - ויסבראטן - ראש ירכה - לצלי קדירה.`;
-  
+
   const beefImage = document.createElement("img");
   beefImage.src = "./images/Beef.png";
   beefImage.style.position = "absolute";
   beefImage.style.left = "100px";
   beefImage.style.top = "170px";
-
 
   ScreenExp_div.appendChild(Explention);
   ScreenExp_div.appendChild(beefImage);
@@ -316,7 +305,6 @@ function btExplanation_of_meats1() {
 }
 //6 grillman
 function btGrillman_is_needed1() {
-  
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -358,7 +346,7 @@ function btGrillman_is_needed1() {
   screenDiv.appendChild(title);
   screenDiv.appendChild(openingStatement);
   docFrag.appendChild(screenDiv);
-  
+
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
@@ -371,20 +359,18 @@ function writeMessage() {
 //1 Restaurants functions
 
 //---------------------------------------------
-function Recipe(name = "",ingred = "",prep = "",edName = "")
-{
-  return recipe = {
+function Recipe(name = "", ingred = "", prep = "", edName = "") {
+  return (recipe = {
     recipeName: name,
     recipeIngredients: ingred,
     recipePrepration: prep,
     editorName: edName,
-  };
+  });
 }
 let recipesArray = [];
 
 //2 recipes functions
-function createRecipe(recipeObject)
-{
+function createRecipe(recipeObject) {
   const resDiv = document.createElement("div");
   const br = document.createElement("br");
   const br1 = document.createElement("br");
@@ -421,10 +407,10 @@ function btAddRecipe1() {
   const br5 = document.createElement("br");
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
-  
+
   const new_recipe = document.getElementById("background_div");
   const docFrag = document.createElement("div");
-  
+
   //Select
   const select = document.createElement("select");
   docFrag.textContent = "בחר קטגוריה: ";
@@ -501,16 +487,22 @@ function saveRecipe() {
 
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
-  
+
   const inputTitle = document.getElementById("inputTitle").value;
-  const textAreaIngredients = document.getElementById("textAreaIngredients").value;
-  const textAreaPrepration = document.getElementById("textAreaPrepration").value;
+  const textAreaIngredients = document.getElementById("textAreaIngredients")
+    .value;
+  const textAreaPrepration = document.getElementById("textAreaPrepration")
+    .value;
   const editorName = document.getElementById("editorName").value;
 
-  recipesArray.push(Recipe(inputTitle,textAreaIngredients,textAreaPrepration,editorName));
+  recipesArray.push(
+    Recipe(inputTitle, textAreaIngredients, textAreaPrepration, editorName)
+  );
 
   const background_div = document.getElementById("background_div");
-  background_div.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
+  background_div.appendChild(
+    createRecipe(recipesArray[recipesArray.length - 1])
+  );
 
   docFrag.appendChild(background_div);
   docFrag.id = "main";
@@ -537,8 +529,7 @@ function btSearchRecipe1() {
 }
 /*------------------------------------------------------------------------------*/
 //Grillman functions
-function newGrillman(){
-  
+function newGrillman() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -547,11 +538,11 @@ function newGrillman(){
   const br5 = document.createElement("br");
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
-  
+
   const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
   main.replaceWith(docFrag);
-  
+
   const title = document.createElement("h3");
   title.textContent = "חלון הוספת גרילמן";
   docFrag.appendChild(title);
@@ -564,7 +555,7 @@ function newGrillman(){
   docFrag.appendChild(inputFullName);
   docFrag.appendChild(br1);
   docFrag.appendChild(br2);
-  
+
   const inputPhoneNumber = document.createElement("input");
   inputPhoneNumber.placeholder = "מספר פלאפון: ";
   inputPhoneNumber.id = "inputTitle";
@@ -578,7 +569,7 @@ function newGrillman(){
   docFrag.appendChild(div1);
 
   const textArea1 = document.createElement("textarea");
-  textArea1.placeholder = "ספר על הניסיון הקודם שלך, אירועים שעשית וכו'"
+  textArea1.placeholder = "ספר על הניסיון הקודם שלך, אירועים שעשית וכו'";
   textArea1.rows = "10";
   textArea1.cols = "70";
   textArea1.style.alignContent = "center";
@@ -586,12 +577,12 @@ function newGrillman(){
   docFrag.appendChild(textArea1);
   docFrag.appendChild(br5);
   docFrag.appendChild(br6);
-  
+
   const priceOneHour = document.createElement("input");
   priceOneHour.placeholder = "מחיר לשעת עבודה";
   docFrag.appendChild(priceOneHour);
   docFrag.appendChild(br7);
-  
+
   //save button
   const btSave = document.createElement("button");
   btSave.style.position = "absolute";
@@ -607,14 +598,13 @@ function newGrillman(){
   grillmanImage.src = "./images/grillman.jpg";
   grillmanImage.className = "small_images";
   docFrag.appendChild(grillmanImage);
-  
+
   docFrag.id = "background_div";
 }
-function grillManList(){
+function grillManList() {
   alert("In grillManList");
 }
-function newEvent(){
-  
+function newEvent() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -642,23 +632,23 @@ function newEvent(){
   docFrag.appendChild(inputFullName);
   docFrag.appendChild(br1);
   docFrag.appendChild(br2);
-  
+
   const inputPhoneNumber = document.createElement("input");
   inputPhoneNumber.placeholder = "מספר פלאפון: ";
   inputPhoneNumber.id = "inputTitle";
   docFrag.appendChild(inputPhoneNumber);
   docFrag.appendChild(br3);
   docFrag.appendChild(br4);
-  
+
   //Event's details
   const participantAmount = document.createElement("input");
-  participantAmount.placeholder = "מספר משתתפים: "
+  participantAmount.placeholder = "מספר משתתפים: ";
   docFrag.appendChild(participantAmount);
   docFrag.appendChild(br5);
   docFrag.appendChild(br6);
- 
+
   const location = document.createElement("input");
-  location.placeholder = "איזור: "
+  location.placeholder = "איזור: ";
   docFrag.appendChild(location);
   docFrag.appendChild(br7);
   docFrag.appendChild(br8);
@@ -670,15 +660,15 @@ function newEvent(){
   buyTheFood.setAttribute("type", "checkbox");
   docFrag.appendChild(buyTheFood);
   docFrag.appendChild(br9);
-  
+
   const textArea1 = document.createElement("textarea");
-  textArea1.placeholder = "בקשות מיוחדות / מידע נוסף על האירוע: "
+  textArea1.placeholder = "בקשות מיוחדות / מידע נוסף על האירוע: ";
   textArea1.rows = "10";
   textArea1.cols = "70";
   textArea1.style.alignContent = "center";
   textArea1.id = "textArea";
   docFrag.appendChild(textArea1);
-  
+
   //save button
   const btSave = document.createElement("button");
   btSave.style.position = "absolute";
@@ -699,9 +689,9 @@ function newEvent(){
 
   main.replaceWith(docFrag);
 }
-function saveNewGrillman(){
+function saveNewGrillman() {
   alert("In saveNewGrillman");
 }
-function saveNewEvent(){
+function saveNewEvent() {
   alert("In saveNewEvent");
 }
