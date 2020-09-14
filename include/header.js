@@ -12,10 +12,10 @@ function navigationBarLoading() {
   btRecipes.addEventListener("click", btRecipes1);
   docFrag.appendChild(btRecipes);
   //3 equipment
-  const btEquipment = document.createElement("button");
-  btEquipment.textContent = "ציוד";
-  btEquipment.addEventListener("click", btEquipment1);
-  docFrag.appendChild(btEquipment);
+  // const btEquipment = document.createElement("button");
+  // btEquipment.textContent = "ציוד";
+  // btEquipment.addEventListener("click", btEquipment1);
+  // docFrag.appendChild(btEquipment);
   //4 Butchers
   const btButchers = document.createElement("button");
   btButchers.textContent = "אטליזים/ מקומות לקניית בשר";
