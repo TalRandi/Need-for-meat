@@ -24,22 +24,25 @@ button:active {
 button:hover {
   background-color: #8a1b20;
 }
-h3{
+h3 {
   font-family: "Comic Sans MS", cursive, sans-serif;
   padding-bottom: 30px;
 }
 h4{
   color: rgb(0, 245, 192);
 }
-h5{
+h5 {
   color: yellow;
 }
-pre{
+pre {
   font-weight: bold;
   font-size: 16px;
 }
-par{
+par {
   font-weight: bold;
+  line-height: 20px;
+  font-size: large;
+  line-break: loose;
 }
 body {
   background-repeat: no-repeat;
@@ -60,13 +63,18 @@ footer {
 .material-icons{
   color: rgb(189, 0, 88);
 } 
+/* stars */
+.fa-star {
+  color: rgb(171, 175, 136);
+}
 .checked {
-  color: orange;
+  color: yellow;
 }
 .solid{
   border-top: 1px solid rgb(187, 187, 187);
   border-radius: 5px;
 }
+
 /* 2 recipe ----------------------------------------------------------------*/
 #background_div {
   position: absolute;
@@ -83,10 +91,10 @@ footer {
   display: inline-block;
 }
 /* ----------------------------------------------------------------*/
-.rightSideButtons{
+.rightSideButtons {
   width: 125px;
 }
-.small_images{
+.small_images {
   position: absolute;
   border-radius: 50px;
   left: 170px;
