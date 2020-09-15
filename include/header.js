@@ -42,18 +42,36 @@ function createRestaurant(resObject)
   const resDiv = document.createElement("div");
   resDiv.className = "restaurant_class";
 
-  const resName = document.createElement("h4");
+  const resName = document.createElement("h2");
   resName.textContent = resObject.restaurantName;
   const resDesctiption = document.createElement("par");
   resDesctiption.textContent = resObject.restaurantDescription;
   const resRating = Rating(resObject.restaurantRating);
   
+  const kosher = document.createElement("h4");
+  if(resObject.restaurantKosher)
+    kosher.textContent = "כשר";
+  else
+    kosher.textContent = "לא כשר";
+
+  const divideLine = document.createElement("hr");
+  divideLine.className = "solid";
+
   const br = document.createElement("br");
+  
+  const location = document.createElement("i");
+  location.className = "material-icons";
+  if(resObject.restaurantLocation != "")
+    location.textContent = resObject.restaurantLocation + "place";
+
 
   resDiv.appendChild(resName);
   resDiv.appendChild(resDesctiption);
   resDiv.appendChild(resRating);
+  resDiv.appendChild(kosher);
+  resDiv.appendChild(location);
   resDiv.appendChild(br);
+  resDiv.appendChild(divideLine);
 
   return resDiv;
 }
@@ -76,11 +94,13 @@ function Rating(number = 2)
 // ------------------------------------------------------
 // Main buttons
 // //1 restaurants
-function Restaurant(name = "", des = "", rating = 5){
+function Restaurant(name = "", des = "", rating = 5, kosher = true, location = ""){
   return restaurant = {
     restaurantName: name,
     restaurantDescription: des,
     restaurantRating: rating,
+    restaurantKosher: kosher,
+    restaurantLocation: location,
   };
 }
 
@@ -99,12 +119,19 @@ let des5 = `מסעדת אוכל רחוב עכשווי כשרה בלב ירושל
 המסעדה שוכנת לאורכו של מדרחוב הלל (19) ומציעה חווית בילוי קלילה ונינוחה:
 קבלת פנים חברית ומקצועית, מוזיקה מעולה ומעל לכל, מנות מוכרות ואהובות שפירקנו והרכבנו מחדש, כדי לאפשר לכם לגלות אותן מחדש - ממאכלים שתזהו מהילדות ועד למאכלי רחוב קלאסיים, כולם בגירסאות מודרניות ומפתיעות.`
 
+let des6 = `מסעדת בני הדייג בתל אביב מגישה בשרים, דגים ופירות ים. 
+בני הדייג בתל אביב (יורדי הסירה, נמל תל אביב) נגיש לנכים, פתוח בשבת וניתן לקיים במקום כנסים ואירועים. 
+יש חניה מוסדרת, טייק אווי ואפשרות ישיבה בחוץ. בכל הסניפים של בני הדייג יודעים איך להכין מהדגים מנות משובחות, שלא תשכחו זמן רב. 
+אין זה מפתיע כי שוחרי דגים עולים לבני הדייג לרגל, כדי להתענג על מבחר המטעמים. 
+לצד הדגים המעולים, פירות ים, בשר, שפע סלטים ומנות פתיחה, תוכלו להתענג על יינות ובירות איכותיות. ויש גם תפריט ילדים. והפתעות מתוקות באגף הקינוחים.`
+
 let restaurantArray = [];
-restaurantArray.push(Restaurant("לאגו",des1,4));
-restaurantArray.push(Restaurant("רק בשר",des2,5));
-restaurantArray.push(Restaurant("פטגוניה",des3,4));
-restaurantArray.push(Restaurant("רובן",des4,3));
+restaurantArray.push(Restaurant("לאגו",des1,4,true,"מעלה אדומים"));
+restaurantArray.push(Restaurant("רק בשר",des2,5,true,"ראשון לציון"));
+restaurantArray.push(Restaurant("פטגוניה",des3,4,true));
+restaurantArray.push(Restaurant("רובן",des4,3,true));
 restaurantArray.push(Restaurant("שפשוואן",des5,5));
+restaurantArray.push(Restaurant("בני הדייג",des6,4,false,"תל אביב"));
 
 
 function btRestaurants1() {
@@ -226,20 +253,20 @@ function btButchers1() {
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
 
-  const bucherName1 = document.createElement("h4");
+  const bucherName1 = document.createElement("h2");
   bucherName1.textContent = "-מרינדו-";
   const bucherDesc1 = document.createElement("par");
   bucherDesc1.textContent = `רועי תבור ואיתמר קנדליק אמנם מגיעים ממושב כנף שברמת הגולן, אבל משווקים את התוצרת שלהם בכל הארץ.
   נקודות מכירה שלהם תמצאו בסניפי ספייסס ביהוד ובתל-אביב. חלק מהבשר כבר מתובל וארוז בוואקום, ונותר רק להתחיל לצלות.
   יש פה שוק טלה בעשבי תיבול, רוסטביף לתנור, צלעות טלה פרוסות למחבת בתיבול צ'ילי, שום ודבש, אנטרקוט, סינטה במגוון מרינדות, קבבים, וסוגים שונים של בשר טחון. לצד הבשר יש גם דליקטסים ייחודיים, כגון צירי עגל וטלה`;
 
-  const bucherName2 = document.createElement("h4");
+  const bucherName2 = document.createElement("h2");
   bucherName2.textContent = "-אטליז פרץ-";
   const bucherDesc2 = document.createElement("par");
   bucherDesc2.textContent = `לא נוצץ, לא מפונפן, לא מתוקשר – ובכל זאת, אטליז פרץ הוא מקום שכונתי, שבו תוכלו להשיג קציצות ביתיות, ירקרקות מרוב עשבי תיבול, קבבים טורקיים תוצרת בית, וגם נקניק סוג'וק יבש שמכינים בני משפחת פרץ.
   הבעלים משתייכים לשושלת קצבים מאיזמיר, טורקיה, וניכר בהם שהם גאים במלאכתם.`;
 
-  const bucherName3 = document.createElement("h4");
+  const bucherName3 = document.createElement("h2");
   bucherName3.textContent = "-לגעת באוכל-";
   const bucherDesc3 = document.createElement("par");
   bucherDesc3.textContent = `את האנטרקוט מיישנים כאן כ‭21-‬ יום במקרר מיוחד, לדרגת יישון אופטימאלית. הנתח עטוף בשומן ומשויש היטב, ויש לו טעם בשרי יוצא דופן.
@@ -392,7 +419,7 @@ function createRecipe(recipeObject)
 
   resDiv.className = "recipe_class";
 
-  const recName = document.createElement("h4");
+  const recName = document.createElement("h2");
   recName.textContent = recipeObject.recipeName;
   const ingredients = document.createElement("par");
   ingredients.textContent = "מצרכים:    " + recipeObject.recipeIngredients;
@@ -496,11 +523,11 @@ function btAddRecipe1() {
   new_recipe.replaceWith(docFrag);
 }
 
-function saveRecipe() {
+function saveRecipe(docFrag) {
   // inputTitle
 
-  const main = document.getElementById("main");
-  const docFrag = document.createElement("div");
+  const docFrag1 = document.getElementById("background_div");
+  // const docFrag = document.createElement("div");
   
   const inputTitle = document.getElementById("inputTitle").value;
   const textAreaIngredients = document.getElementById("textAreaIngredients").value;
@@ -509,24 +536,19 @@ function saveRecipe() {
 
   recipesArray.push(Recipe(inputTitle,textAreaIngredients,textAreaPrepration,editorName));
 
-  const background_div = document.getElementById("background_div");
-  background_div.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
+  document.getElementById("inputTitle").value = "";
+  document.getElementById("textAreaIngredients").value = "";
+  document.getElementById("textAreaPrepration").value = "";
+  document.getElementById("editorName").value = "";
 
-  docFrag.appendChild(background_div);
-  docFrag.id = "main";
-  main.replaceWith(docFrag);
+  docFrag1.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
 
-  // let recipe = {
-  //   RecipeName: inputTitle.value,
-  //   Ingredients: textAreaIngredients.value,
-  //   Prepration: textAreaPrepration.value,
-  //   Editor: editorName.value,
-  // };
+  // const background_div = document.getElementById("background_div");
+  // background_div.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
 
-  // editorName.value = "";
-  // inputTitle.value = "";
-  // textAreaIngredients.value = "";
-  // textAreaPrepration.value = "";
+  // docFrag.appendChild(background_div);
+  //docFrag.id = "main";
+  //main.replaceWith(docFrag);
 }
 
 function btViewRecipe1() {
