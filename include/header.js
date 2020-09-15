@@ -46,30 +46,32 @@ function createRestaurant(resObject) {
   resDesctiption.textContent = resObject.restaurantDescription;
   const resRating = Rating(resObject.restaurantRating);
   
-  const kosher = document.createElement("h4");
+  const kosher = document.createElement("h2");
   if(resObject.restaurantKosher)
     kosher.textContent = "כשר";
   else
     kosher.textContent = "לא כשר";
 
-  const divideLine = document.createElement("hr");
-  divideLine.className = "solid";
-
-  const br = document.createElement("br");
-  
   const location = document.createElement("i");
   location.className = "material-icons";
   if(resObject.restaurantLocation != "")
     location.textContent = resObject.restaurantLocation + "place";
+  else 
+    location.textContent = "לא צוין מיקום";
+    
+  const divideLine = document.createElement("hr");
+  divideLine.className = "solid";
 
+  const br = document.createElement("br");
 
   resDiv.appendChild(resName);
   resDiv.appendChild(resDesctiption);
   resDiv.appendChild(resRating);
   resDiv.appendChild(kosher);
   resDiv.appendChild(location);
-  resDiv.appendChild(br);
   resDiv.appendChild(divideLine);
+
+  resDiv.appendChild(br);
 
   return resDiv;
 }
@@ -98,12 +100,6 @@ function Restaurant(name = "", des = "", rating = 5, kosher = true, location = "
     restaurantKosher: kosher,
     restaurantLocation: location,
   };
-function Restaurant(name = "", des = "", rating = 5) {
-  return (restaurant = {
-    restaurantName: name,
-    restaurantDescription: des,
-    restaurantRating: rating,
-  });
 }
 
 let des1 = `מסעדת לאגו – Lago – היוקרתית, שוכנת על שפת אגם בלב פארק שמיר שבמעלה אדומים. המקום נהנה מנוף מדברי מהפנט, מצמחייה יפה ומאווירה ייחודית,
@@ -122,12 +118,10 @@ let des5 = `מסעדת אוכל רחוב עכשווי כשרה בלב ירושל
 קבלת פנים חברית ומקצועית, מוזיקה מעולה ומעל לכל, מנות מוכרות ואהובות שפירקנו והרכבנו מחדש, כדי לאפשר לכם לגלות אותן מחדש - ממאכלים שתזהו מהילדות ועד למאכלי רחוב קלאסיים, כולם בגירסאות מודרניות ומפתיעות.`;
 
 let des6 = `מסעדת בני הדייג בתל אביב מגישה בשרים, דגים ופירות ים. 
-בני הדייג בתל אביב (יורדי הסירה, נמל תל אביב) נגיש לנכים, פתוח בשבת וניתן לקיים במקום כנסים ואירועים. 
-יש חניה מוסדרת, טייק אווי ואפשרות ישיבה בחוץ. בכל הסניפים של בני הדייג יודעים איך להכין מהדגים מנות משובחות, שלא תשכחו זמן רב. 
-אין זה מפתיע כי שוחרי דגים עולים לבני הדייג לרגל, כדי להתענג על מבחר המטעמים. 
-לצד הדגים המעולים, פירות ים, בשר, שפע סלטים ומנות פתיחה, תוכלו להתענג על יינות ובירות איכותיות. ויש גם תפריט ילדים. והפתעות מתוקות באגף הקינוחים.`
+בני הדייג בתל אביב (יורדי הסירה, נמל תל אביב) נגיש לנכים, פתוח בשבת וניתן לקיים במקום כנסים ואירועים.`;
 
 let restaurantArray = [];
+
 restaurantArray.push(Restaurant("לאגו",des1,4,true,"מעלה אדומים"));
 restaurantArray.push(Restaurant("רק בשר",des2,5,true,"ראשון לציון"));
 restaurantArray.push(Restaurant("פטגוניה",des3,4,true));
@@ -135,11 +129,6 @@ restaurantArray.push(Restaurant("רובן",des4,3,true));
 restaurantArray.push(Restaurant("שפשוואן",des5,5));
 restaurantArray.push(Restaurant("בני הדייג",des6,4,false,"תל אביב"));
 
-restaurantArray.push(Restaurant("לאגו", des1, 4));
-restaurantArray.push(Restaurant("רק בשר", des2, 5));
-restaurantArray.push(Restaurant("פטגוניה", des3, 4));
-restaurantArray.push(Restaurant("רובן", des4, 3));
-restaurantArray.push(Restaurant("שפשוואן", des5, 5));
 
 function btRestaurants1() {
   const br = document.createElement("br");
@@ -149,7 +138,7 @@ function btRestaurants1() {
 
   const ScreenRes_div = document.createElement("div");
   ScreenRes_div.id = "background_div";
-  const title = document.createElement("h3");
+  const title = document.createElement("h1");
   title.textContent = "מסעדות";
   ScreenRes_div.appendChild(title);
 
@@ -203,7 +192,7 @@ function btRecipes1() {
   docFrag.appendChild(br2);
 
   const ScreenRecipe_div = document.createElement("div");
-  const title = document.createElement("h3");
+  const title = document.createElement("h1");
   title.textContent = "מתכונים";
   ScreenRecipe_div.appendChild(title);
 
@@ -220,20 +209,20 @@ function btRecipes1() {
   main.replaceWith(docFrag);
 }
 //3 equeipment
-function btEquipment1() {
-  const main = document.getElementById("main");
-  const docFrag = document.createElement("div");
+// function btEquipment1() {
+//   const main = document.getElementById("main");
+//   const docFrag = document.createElement("div");
 
-  const screenDiv = document.createElement("div");
-  screenDiv.id = "background_div";
-  const title = document.createElement("h3");
-  title.textContent = "ציוד";
-  screenDiv.appendChild(title);
+//   const screenDiv = document.createElement("div");
+//   screenDiv.id = "background_div";
+//   const title = document.createElement("h3");
+//   title.textContent = "ציוד";
+//   screenDiv.appendChild(title);
 
-  docFrag.appendChild(screenDiv);
-  docFrag.id = "main";
-  main.replaceWith(docFrag);
-}
+//   docFrag.appendChild(screenDiv);
+//   docFrag.id = "main";
+//   main.replaceWith(docFrag);
+//}
 //4 butchers
 function btButchers1() {
   const br = document.createElement("br");
@@ -245,7 +234,7 @@ function btButchers1() {
 
   const ScreenButchers_div = document.createElement("div");
   ScreenButchers_div.id = "background_div";
-  const title = document.createElement("h3");
+  const title = document.createElement("h1");
   title.textContent = "אטליזים";
   ScreenButchers_div.appendChild(title);
 
@@ -298,7 +287,7 @@ function btExplanation_of_meats1() {
 
   const ScreenExp_div = document.createElement("div");
   ScreenExp_div.id = "background_div";
-  const title = document.createElement("h3");
+  const title = document.createElement("h1");
   title.textContent = "חלקי הפרה";
   ScreenExp_div.appendChild(title);
 
@@ -378,7 +367,7 @@ function btGrillman_is_needed1() {
   docFrag.appendChild(btNewEvent);
   docFrag.appendChild(br2);
 
-  const title = document.createElement("h3");
+  const title = document.createElement("h1");
   title.textContent = "גרילמן";
   screenDiv.appendChild(title);
 
@@ -417,7 +406,7 @@ function createRecipe(recipeObject) {
 
   resDiv.className = "recipe_class";
 
-  const recName = document.createElement("h2");
+  const recName = document.createElement("h4");
   recName.textContent = recipeObject.recipeName;
   const ingredients = document.createElement("par");
   ingredients.textContent = "מצרכים:    " + recipeObject.recipeIngredients;
@@ -521,43 +510,26 @@ function btAddRecipe1() {
   new_recipe.replaceWith(docFrag);
 }
 
-function saveRecipe(docFrag) {
+function saveRecipe() {
   // inputTitle
 
   const docFrag1 = document.getElementById("background_div");
-  // const docFrag = document.createElement("div");
-  
-  const main = document.getElementById("main");
-  const docFrag = document.createElement("div");
 
   const inputTitle = document.getElementById("inputTitle").value;
-  const textAreaIngredients = document.getElementById("textAreaIngredients")
-    .value;
-  const textAreaPrepration = document.getElementById("textAreaPrepration")
-    .value;
+  const textAreaIngredients = document.getElementById("textAreaIngredients").value;
+  const textAreaPrepration = document.getElementById("textAreaPrepration").value;
   const editorName = document.getElementById("editorName").value;
 
-  recipesArray.push(
-    Recipe(inputTitle, textAreaIngredients, textAreaPrepration, editorName)
-  );
+  recipesArray.push( Recipe(inputTitle, textAreaIngredients, textAreaPrepration, editorName));
 
   document.getElementById("inputTitle").value = "";
   document.getElementById("textAreaIngredients").value = "";
   document.getElementById("textAreaPrepration").value = "";
   document.getElementById("editorName").value = "";
-  const background_div = document.getElementById("background_div");
-  background_div.appendChild(
-    createRecipe(recipesArray[recipesArray.length - 1])
-  );
+  //const background_div = document.getElementById("background_div");
+  //background_div.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
 
   docFrag1.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
-
-  // const background_div = document.getElementById("background_div");
-  // background_div.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
-
-  // docFrag.appendChild(background_div);
-  //docFrag.id = "main";
-  //main.replaceWith(docFrag);
 }
 
 function btViewRecipe1() {

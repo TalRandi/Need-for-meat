@@ -1,9 +1,13 @@
+
 nav {
-  background-color: #8a1b20;
+
+  background: #C50000;
+  background: -moz-radial-gradient(center, #C50000 0%, #A46206 57%, #D7C819 100%);
+  background: -webkit-radial-gradient(center, #C50000 0%, #A46206 57%, #D7C819 100%);
+  background: radial-gradient(ellipse at center, #C50000 0%, #A46206 57%, #D7C819 100%);
   padding: 10px;
   text-align: center;
-  /* opacity: 0.8; */
-  border-radius: "8px";
+  border-radius: 50px;
 }
 button {
   position: relative;
@@ -14,7 +18,7 @@ button {
   color: rgb(255, 255, 255);
   font-family: verdana;
   font-size: 18px;
-  background-color: rgb(109, 6, 20);
+  background-color: #C50000;
 }
 button:active {
   transform: translate(0px, 5px);
@@ -22,7 +26,13 @@ button:active {
   box-shadow: 0px 5px 0px 0px #520105;
 }
 button:hover {
-  background-color: #8a1b20;
+  background-color: #fffb0091;
+}
+h1{
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 30px;
+  color: #1A0878;
+  text-decoration: underline solid rgb(8, 0, 80);
 }
 h3 {
   font-family: "Comic Sans MS", cursive, sans-serif;
@@ -37,10 +47,11 @@ h5 {
 pre {
   font-weight: bold;
   font-size: 16px;
+  line-height: 25px;
 }
 par {
   font-weight: bold;
-  line-height: 20px;
+  line-height: 30px;
   font-size: large;
   line-break: loose;
 }
@@ -51,7 +62,7 @@ body {
 }
 footer {
   position: absolute;
-  bottom: 2px;
+  bottom: 1px;
   text-align: center;
   flex: content;
   right: 45%;
@@ -61,7 +72,7 @@ footer {
   color: yellow;
 }
 .material-icons{
-  color: rgb(189, 0, 88);
+  color: rgb(56, 240, 0);
 } 
 /* stars */
 .fa-star {
@@ -74,18 +85,21 @@ footer {
   border-top: 1px solid rgb(187, 187, 187);
   border-radius: 5px;
 }
-
 /* 2 recipe ----------------------------------------------------------------*/
 #background_div {
+
   position: absolute;
   overflow: auto;
-  background-image: linear-gradient(#8a1b20, rgb(66, 12, 153));
+  background: #CEC82B;
+  background: -moz-radial-gradient(center, #CEC82B 0%, #A46206 59%, #C50000 100%);
+  background: -webkit-radial-gradient(center, #CEC82B 0%, #A46206 59%, #C50000 100%);
+  background: radial-gradient(ellipse at center, #CEC82B 0%, #A46206 59%, #C50000 100%);
   border-radius: 10px;
   padding: 15px;
-  width: 80%;
+  width: 88%;
   height: 82%;
   right: 150px;
-  top: 100px;
+  top: 100px; 
 }
 #main {
   display: inline-block;
