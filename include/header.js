@@ -41,6 +41,7 @@ function createRestaurant(resObject) {
   resDiv.className = "restaurant_class";
 
   const resName = document.createElement("h2");
+  resName.className = "restaurantName";
   resName.textContent = resObject.restaurantName;
   const resDesctiption = document.createElement("par");
   resDesctiption.textContent = resObject.restaurantDescription;
@@ -69,13 +70,13 @@ function createRestaurant(resObject) {
   resDiv.appendChild(resRating);
   resDiv.appendChild(kosher);
   resDiv.appendChild(location);
-  resDiv.appendChild(divideLine);
+  if(resObject != restaurantArray[restaurantArray.length - 1])
+    resDiv.appendChild(divideLine);
 
   resDiv.appendChild(br);
 
   return resDiv;
 }
-
 function Rating(number = 2) {
   const rating = document.createElement("h5");
   rating.textContent = "דירוג המסעדה: ";
@@ -224,6 +225,44 @@ function btRecipes1() {
 //   main.replaceWith(docFrag);
 //}
 //4 butchers
+function Butcher(name = "", description = "", location = "", kosher = true) {
+  return (butcher = {
+    butcherName: name,
+    butcherDescription: description,
+    butcherLocation: location,
+    butcherKosher: kosher,
+  });
+}
+
+let butchersArray = [];
+
+//butchers functions
+function createButher(butcherObject) {
+  const butchDiv = document.createElement("div");
+  const br = document.createElement("br");
+  const br1 = document.createElement("br");
+  const br2 = document.createElement("br");
+
+  butchDiv.className = "butcher_class";
+
+  const butcherName = document.createElement("h4");
+  butcherName.textContent =  "שם האטליז:    " +butcherObject.butcherName;
+  const description = document.createElement("par");
+  description.textContent = "תיאור:    " + butcherObject.butcherDescription;
+  const location = document.createElement("h5");
+  location.textContent = "מיקום:    " + butcherObject.butcherLocation;
+  const kosher = document.createElement("h5");
+  kosher.textContent = "כשר:    " + butcherObject.butcherKosher;
+
+  butchDiv.appendChild(butcherName);
+  butchDiv.appendChild(description);
+  butchDiv.appendChild(br);
+  butchDiv.appendChild(br1);
+  butchDiv.appendChild(location);
+  butchDiv.appendChild(kosher);
+
+  return butchDiv;
+}
 function btButchers1() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
@@ -234,51 +273,129 @@ function btButchers1() {
 
   const ScreenButchers_div = document.createElement("div");
   ScreenButchers_div.id = "background_div";
+
   const title = document.createElement("h1");
   title.textContent = "אטליזים";
   ScreenButchers_div.appendChild(title);
 
   const search = document.createElement("input");
-  search.style.fontSize = "16px";
   search.placeholder = "חיפוש אטליז:";
 
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
 
-  const bucherName1 = document.createElement("h2");
-  bucherName1.textContent = "-מרינדו-";
+  const butcherName1 = document.createElement("h2");
+  butcherName1.className = "butcherName";
+  butcherName1.textContent = "-מרינדו-";
   const bucherDesc1 = document.createElement("par");
   bucherDesc1.textContent = `רועי תבור ואיתמר קנדליק אמנם מגיעים ממושב כנף שברמת הגולן, אבל משווקים את התוצרת שלהם בכל הארץ.
   נקודות מכירה שלהם תמצאו בסניפי ספייסס ביהוד ובתל-אביב. חלק מהבשר כבר מתובל וארוז בוואקום, ונותר רק להתחיל לצלות.
   יש פה שוק טלה בעשבי תיבול, רוסטביף לתנור, צלעות טלה פרוסות למחבת בתיבול צ'ילי, שום ודבש, אנטרקוט, סינטה במגוון מרינדות, קבבים, וסוגים שונים של בשר טחון. לצד הבשר יש גם דליקטסים ייחודיים, כגון צירי עגל וטלה`;
-
-  const bucherName2 = document.createElement("h2");
-  bucherName2.textContent = "-אטליז פרץ-";
-  const bucherDesc2 = document.createElement("par");
-  bucherDesc2.textContent = `לא נוצץ, לא מפונפן, לא מתוקשר – ובכל זאת, אטליז פרץ הוא מקום שכונתי, שבו תוכלו להשיג קציצות ביתיות, ירקרקות מרוב עשבי תיבול, קבבים טורקיים תוצרת בית, וגם נקניק סוג'וק יבש שמכינים בני משפחת פרץ.
+  
+  const butcherName2 = document.createElement("h2");
+  butcherName2.textContent = "-אטליז פרץ-";
+  butcherName2.className = "butcherName";
+  const butcherDesc2 = document.createElement("par");
+  butcherDesc2.textContent = `לא נוצץ, לא מפונפן, לא מתוקשר – ובכל זאת, אטליז פרץ הוא מקום שכונתי, שבו תוכלו להשיג קציצות ביתיות, ירקרקות מרוב עשבי תיבול, קבבים טורקיים תוצרת בית, וגם נקניק סוג'וק יבש שמכינים בני משפחת פרץ.
   הבעלים משתייכים לשושלת קצבים מאיזמיר, טורקיה, וניכר בהם שהם גאים במלאכתם.`;
-
-  const bucherName3 = document.createElement("h2");
-  bucherName3.textContent = "-לגעת באוכל-";
-  const bucherDesc3 = document.createElement("par");
-  bucherDesc3.textContent = `את האנטרקוט מיישנים כאן כ‭21-‬ יום במקרר מיוחד, לדרגת יישון אופטימאלית. הנתח עטוף בשומן ומשויש היטב, ויש לו טעם בשרי יוצא דופן.
+  
+  const butcherName3 = document.createElement("h2");
+  butcherName3.textContent = "-לגעת באוכל-";
+  butcherName3.className = "butcherName";
+  const butcherDesc3 = document.createElement("par");
+  butcherDesc3.textContent = `את האנטרקוט מיישנים כאן כ‭21-‬ יום במקרר מיוחד, לדרגת יישון אופטימאלית. הנתח עטוף בשומן ומשויש היטב, ויש לו טעם בשרי יוצא דופן.
   135 שקל לקילו, והוא שלכם. חוץ מזה, יש פה מבחר נאה של נתחי בשר מיוחדים, בשרים מעושנים ודגים, וצוות של מומחי בשר שישמח לענות לכם על כל שאלה.`;
-
+  
   ScreenButchers_div.appendChild(search);
   ScreenButchers_div.appendChild(btSearch);
   ScreenButchers_div.appendChild(br);
-  ScreenButchers_div.appendChild(bucherName1);
+  ScreenButchers_div.appendChild(butcherName1);
   ScreenButchers_div.appendChild(bucherDesc1);
   ScreenButchers_div.appendChild(br1);
-  ScreenButchers_div.appendChild(bucherName2);
-  ScreenButchers_div.appendChild(bucherDesc2);
+  ScreenButchers_div.appendChild(butcherName2);
+  ScreenButchers_div.appendChild(butcherDesc2);
   ScreenButchers_div.appendChild(br2);
-  ScreenButchers_div.appendChild(bucherName3);
-  ScreenButchers_div.appendChild(bucherDesc3);
+  ScreenButchers_div.appendChild(butcherName3);
+  ScreenButchers_div.appendChild(butcherDesc3);
 
+  const btAddButcher = document.createElement("button");
+  btAddButcher.className = "rightSideButtons";
+  btAddButcher.textContent = "הוסף אטליז";
+  btAddButcher.addEventListener('click',addButcher);
+
+  docFrag.appendChild(btAddButcher);
   docFrag.appendChild(ScreenButchers_div);
   docFrag.id = "main";
   main.replaceWith(docFrag);
+}
+function addButcher(){
+  
+  const br = document.createElement("br");
+  const br1 = document.createElement("br");
+  const br2 = document.createElement("br");
+  const br3 = document.createElement("br");
+
+  const new_butcher = document.getElementById("background_div");
+  const docFrag = document.createElement("div");
+
+  //Butcher name
+  const inputTitle = document.createElement("input");
+  inputTitle.placeholder = "שם האטליז: ";
+  inputTitle.id = "inputTitleButcher";  
+
+  //Butcher description
+  const textArea = document.createElement("textarea");
+  textArea.placeholder = "תיאור: ";
+  textArea.id = "textAreaButcher"; 
+
+  //Butcher location
+  const butcherLocation = document.createElement("input");
+  butcherLocation.placeholder = "מיקום: ";
+  butcherLocation.id = "butcherLocation";
+  
+  //Butcher Kosher
+  const butcherKosher = document.createElement("input");
+  butcherKosher.placeholder = "כשר/לא כשר";
+  butcherKosher.id = "butcherKosher";
+
+  //save button
+  const btSave = document.createElement("button");
+  btSave.textContent = "שמור";
+  btSave.id = "btSave";
+  btSave.style.position = "absolute";
+  btSave.style.right = "50%";
+  btSave.style.top = "90%";
+  btSave.addEventListener("click", saveButcher);  
+
+  docFrag.appendChild(br);
+  docFrag.appendChild(inputTitle);
+  docFrag.appendChild(br1);
+  docFrag.appendChild(textArea);
+  docFrag.appendChild(br2);
+  docFrag.appendChild(butcherLocation);
+  docFrag.appendChild(br3);
+  docFrag.appendChild(butcherKosher);
+  docFrag.appendChild(btSave);
+
+  docFrag.id = "background_div";
+  new_butcher.replaceWith(docFrag);
+}
+function saveButcher(){
+  const docFrag1 = document.getElementById("background_div");
+
+  const inputTitleButcher = document.getElementById("inputTitleButcher").value;
+  const butchDescription = document.getElementById("textAreaButcher").value;
+  const butcherLocation = document.getElementById("butcherLocation").value;
+  const butcherKosher = document.getElementById("butcherKosher").value;
+
+  butchersArray.push(Butcher(inputTitleButcher, butchDescription, butcherLocation, butcherKosher));
+  
+  document.getElementById("inputTitleButcher").value = "";
+  document.getElementById("textAreaButcher").value = "";
+  document.getElementById("butcherLocation").value = "";
+  document.getElementById("butcherKosher").value = "";
+
+  docFrag1.appendChild(createButher(butchersArray[butchersArray.length - 1]));
 }
 //5 explenation of meats
 function btExplanation_of_meats1() {
@@ -292,8 +409,6 @@ function btExplanation_of_meats1() {
   ScreenExp_div.appendChild(title);
 
   const Explention = document.createElement("pre");
-  Explention.style.paddingTop = "30px";
-  //Explention.style.fontSize = "15px";
 
   Explention.textContent = ` בשר הבקר מתחלק באופן בסיסי לחלקים קדמיים ואחוריים, אך החלוקה החשובה ביותר היא על פי איכות הבשר ורכותו.
 
@@ -439,39 +554,19 @@ function btAddRecipe1() {
   const new_recipe = document.getElementById("background_div");
   const docFrag = document.createElement("div");
 
-  //Select
-  const select = document.createElement("select");
-  docFrag.textContent = "בחר קטגוריה: ";
-  //Options
-  const option = document.createElement("option");
-  option.textContent = "אנטריקוט";
-  select.appendChild(option);
-  const option1 = document.createElement("option");
-  option1.textContent = "סינטה";
-  select.appendChild(option1);
-  const option2 = document.createElement("option");
-  option2.textContent = "אחר";
-  select.appendChild(option2);
-
   //Recipe title
   const inputTitle = document.createElement("input");
-  inputTitle.placeholder = "שם המתכון ";
+  inputTitle.placeholder = "שם המתכון: ";
   inputTitle.id = "inputTitle";
   //Ingredients text
   const div1 = document.createElement("div");
   div1.textContent = "מצרכים: ";
   const textArea1 = document.createElement("textarea");
-  textArea1.rows = "4";
-  textArea1.cols = "50";
-  textArea1.style.alignContent = "center";
   textArea1.id = "textAreaIngredients";
   //Prepration text
   const div2 = document.createElement("div");
   div2.textContent = "אופן הכנה: ";
   const textArea2 = document.createElement("textarea");
-  textArea2.rows = "4";
-  textArea2.cols = "50";
-  textArea2.style.alignContent = "center";
   textArea2.id = "textAreaPrepration";
   //Editor name
   const editorName = document.createElement("input");
@@ -488,7 +583,7 @@ function btAddRecipe1() {
   chefImage.className = "small_images";
 
   //Build the new frag
-  docFrag.appendChild(select);
+  // docFrag.appendChild(select);
   docFrag.appendChild(br6);
   docFrag.appendChild(br7);
   docFrag.appendChild(inputTitle);
@@ -526,8 +621,6 @@ function saveRecipe() {
   document.getElementById("textAreaIngredients").value = "";
   document.getElementById("textAreaPrepration").value = "";
   document.getElementById("editorName").value = "";
-  //const background_div = document.getElementById("background_div");
-  //background_div.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
 
   docFrag1.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
 }
@@ -577,6 +670,8 @@ function newGrillman() {
   //Addition data on grillman
   const div1 = document.createElement("div");
   div1.textContent = "פרט על עצמך: ";
+  div1.style.fontSize = "20px";
+  div1.style.fontWeight = "bold";
   docFrag.appendChild(div1);
 
   const textArea1 = document.createElement("textarea");
