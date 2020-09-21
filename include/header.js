@@ -154,6 +154,9 @@ function btRestaurants1() {
   ScreenRes_div.appendChild(btSearch);
   ScreenRes_div.appendChild(br);
 
+  const divideLine = document.createElement("hr");
+  divideLine.className = "solid";
+  
   for (let i = 0; i < restaurantArray.length; i++) {
     ScreenRes_div.appendChild(createRestaurant(restaurantArray[i]));
   }
@@ -530,12 +533,17 @@ function createRecipe(recipeObject) {
   const editor = document.createElement("h5");
   editor.textContent = "עורך המתכון:    " + recipeObject.editorName;
 
+  const divideLine = document.createElement("hr");
+  divideLine.className = "solid";
+
   resDiv.appendChild(recName);
   resDiv.appendChild(ingredients);
   resDiv.appendChild(br);
   resDiv.appendChild(br1);
   resDiv.appendChild(prepration);
   resDiv.appendChild(editor);
+  if(recipeObject != recipesArray[recipesArray.length - 1])
+    resDiv.appendChild(divideLine);
 
   return resDiv;
 }
@@ -626,7 +634,38 @@ function saveRecipe() {
 }
 
 function btViewRecipe1() {
-  alert("In view recipe");
+
+  const br = document.createElement("br");
+
+  const main = document.getElementById("main");
+  const docFrag = document.createElement("div");
+
+  const ScreenRecipe_div = document.createElement("div");
+  ScreenRecipe_div.id = "background_div";
+  const title = document.createElement("h1");
+  title.textContent = "מתכונים";
+  ScreenRecipe_div.appendChild(title);
+
+  const search = document.createElement("input");
+  search.style.fontSize = "16px";
+  search.placeholder = "חיפוש מתכון:";
+
+  const btSearch = document.createElement("button");
+  btSearch.textContent = "חפש";
+  
+
+  ScreenRecipe_div.appendChild(search);
+  ScreenRecipe_div.appendChild(btSearch);
+  ScreenRecipe_div.appendChild(br);
+  
+  
+  for(let i = 0; i < recipesArray.length ; i++)
+    ScreenRecipe_div.appendChild(createRecipe(recipesArray[i]));
+
+
+  docFrag.appendChild(ScreenRecipe_div);
+  docFrag.id = "main";
+  main.replaceWith(docFrag);
 }
 function btSearchRecipe1() {
   alert("In Serarch recipe");
