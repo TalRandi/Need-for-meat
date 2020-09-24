@@ -33,6 +33,8 @@ function navigationBarLoading() {
   docFrag.appendChild(btGrillman_is_needed);
 
   myNav.replaceWith(docFrag);
+  //firebase
+  fireBase();
 }
 /*------------------------------------------------------------------------*/
 //private functions
@@ -46,20 +48,17 @@ function createRestaurant(resObject) {
   const resDesctiption = document.createElement("par");
   resDesctiption.textContent = resObject.restaurantDescription;
   const resRating = Rating(resObject.restaurantRating);
-  
+
   const kosher = document.createElement("h2");
-  if(resObject.restaurantKosher)
-    kosher.textContent = "כשר";
-  else
-    kosher.textContent = "לא כשר";
+  if (resObject.restaurantKosher) kosher.textContent = "כשר";
+  else kosher.textContent = "לא כשר";
 
   const location = document.createElement("i");
   location.className = "material-icons";
-  if(resObject.restaurantLocation != "")
+  if (resObject.restaurantLocation != "")
     location.textContent = resObject.restaurantLocation + "place";
-  else 
-    location.textContent = "לא צוין מיקום";
-    
+  else location.textContent = "לא צוין מיקום";
+
   const divideLine = document.createElement("hr");
   divideLine.className = "solid";
 
@@ -70,7 +69,7 @@ function createRestaurant(resObject) {
   resDiv.appendChild(resRating);
   resDiv.appendChild(kosher);
   resDiv.appendChild(location);
-  if(resObject != restaurantArray[restaurantArray.length - 1])
+  if (resObject != restaurantArray[restaurantArray.length - 1])
     resDiv.appendChild(divideLine);
 
   resDiv.appendChild(br);
@@ -93,14 +92,20 @@ function Rating(number = 2) {
 // ------------------------------------------------------
 // Main buttons
 // //1 restaurants
-function Restaurant(name = "", des = "", rating = 5, kosher = true, location = ""){
-  return restaurant = {
+function Restaurant(
+  name = "",
+  des = "",
+  rating = 5,
+  kosher = true,
+  location = ""
+) {
+  return (restaurant = {
     restaurantName: name,
     restaurantDescription: des,
     restaurantRating: rating,
     restaurantKosher: kosher,
     restaurantLocation: location,
-  };
+  });
 }
 
 let des1 = `מסעדת לאגו – Lago – היוקרתית, שוכנת על שפת אגם בלב פארק שמיר שבמעלה אדומים. המקום נהנה מנוף מדברי מהפנט, מצמחייה יפה ומאווירה ייחודית,
@@ -123,13 +128,12 @@ let des6 = `מסעדת בני הדייג בתל אביב מגישה בשרים, 
 
 let restaurantArray = [];
 
-restaurantArray.push(Restaurant("לאגו",des1,4,true,"מעלה אדומים"));
-restaurantArray.push(Restaurant("רק בשר",des2,5,true,"ראשון לציון"));
-restaurantArray.push(Restaurant("פטגוניה",des3,4,true));
-restaurantArray.push(Restaurant("רובן",des4,3,true));
-restaurantArray.push(Restaurant("שפשוואן",des5,5));
-restaurantArray.push(Restaurant("בני הדייג",des6,4,false,"תל אביב"));
-
+restaurantArray.push(Restaurant("לאגו", des1, 4, true, "מעלה אדומים"));
+restaurantArray.push(Restaurant("רק בשר", des2, 5, true, "ראשון לציון"));
+restaurantArray.push(Restaurant("פטגוניה", des3, 4, true));
+restaurantArray.push(Restaurant("רובן", des4, 3, true));
+restaurantArray.push(Restaurant("שפשוואן", des5, 5));
+restaurantArray.push(Restaurant("בני הדייג", des6, 4, false, "תל אביב"));
 
 function btRestaurants1() {
   const br = document.createElement("br");
@@ -160,8 +164,7 @@ function btRestaurants1() {
   ScreenRes_div.appendChild(btSearch);
   ScreenRes_div.appendChild(br);
 
-  if(restaurantArray.length != 0)
-  {
+  if (restaurantArray.length != 0) {
     const divideLine = document.createElement("hr");
     divideLine.style.borderStyle = "solid double";
     divideLine.style.borderWidth = "medium";
@@ -171,7 +174,7 @@ function btRestaurants1() {
 
   const divideLine = document.createElement("hr");
   divideLine.className = "solid";
-  
+
   for (let i = 0; i < restaurantArray.length; i++) {
     ScreenRes_div.appendChild(createRestaurant(restaurantArray[i]));
   }
@@ -180,8 +183,7 @@ function btRestaurants1() {
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
-function addRestaurant(){
-    
+function addRestaurant() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -199,7 +201,7 @@ function addRestaurant(){
   //Restaurant name
   const inputTitle = document.createElement("input");
   inputTitle.placeholder = "שם המסעדה: ";
-  inputTitle.id = "restaurantTitle";  
+  inputTitle.id = "restaurantTitle";
   docFrag.appendChild(br);
   docFrag.appendChild(br1);
   docFrag.appendChild(inputTitle);
@@ -207,7 +209,7 @@ function addRestaurant(){
   //Restaurant description
   const restaurantDescription = document.createElement("textarea");
   restaurantDescription.placeholder = "תיאור: ";
-  restaurantDescription.id = "textAreaRestaurant"; 
+  restaurantDescription.id = "textAreaRestaurant";
   docFrag.appendChild(br2);
   docFrag.appendChild(br3);
   docFrag.appendChild(restaurantDescription);
@@ -227,7 +229,7 @@ function addRestaurant(){
   docFrag.appendChild(br6);
   docFrag.appendChild(br7);
   docFrag.appendChild(restaurantLocation);
-  
+
   //Restaurant Kosher
   const restaurantKosher = document.createElement("input");
   restaurantKosher.placeholder = "כשר/לא כשר";
@@ -243,15 +245,13 @@ function addRestaurant(){
   btSave.style.position = "absolute";
   btSave.style.right = "50%";
   btSave.style.top = "90%";
-  btSave.addEventListener("click", saveRestaurant);  
+  btSave.addEventListener("click", saveRestaurant);
   docFrag.appendChild(btSave);
-
 
   docFrag.id = "background_div";
   new_restaurant.replaceWith(docFrag);
 }
-function saveRestaurant(){
-
+function saveRestaurant() {
   const docFrag1 = document.getElementById("background_div");
 
   const restaurantTitle = document.getElementById("restaurantTitle").value;
@@ -260,19 +260,31 @@ function saveRestaurant(){
   const restaurantLoc = document.getElementById("restaurantLocation").value;
   const restaurantKosh = document.getElementById("restaurantKosher").value;
 
-  if(restaurantTitle == "" || restaurantDes == "" || restaurantRat == "" || restaurantLoc == "" || restaurantKosh == "")
-  {
+  if (
+    restaurantTitle == "" ||
+    restaurantDes == "" ||
+    restaurantRat == "" ||
+    restaurantLoc == "" ||
+    restaurantKosh == ""
+  ) {
     alert("חובה למלא את כל השדות");
     return;
   }
-  restaurantArray.push(Restaurant(restaurantTitle, restaurantDes, restaurantRat, restaurantKosh, restaurantLoc));
+  restaurantArray.push(
+    Restaurant(
+      restaurantTitle,
+      restaurantDes,
+      restaurantRat,
+      restaurantKosh,
+      restaurantLoc
+    )
+  );
 
   document.getElementById("restaurantTitle").value = "";
   document.getElementById("textAreaRestaurant").value = "";
   document.getElementById("restaurantRating").value = "";
   document.getElementById("restaurantLocation").value = "";
   document.getElementById("restaurantKosher").value = "";
-
 }
 //2 recipes
 function btRecipes1() {
@@ -351,7 +363,7 @@ function createButher(butcherObject) {
   butchDiv.className = "butcher_class";
 
   const butcherName = document.createElement("h4");
-  butcherName.textContent =  "שם האטליז:    " +butcherObject.butcherName;
+  butcherName.textContent = "שם האטליז:    " + butcherObject.butcherName;
   const description = document.createElement("par");
   description.textContent = "תיאור:    " + butcherObject.butcherDescription;
   const location = document.createElement("h5");
@@ -369,7 +381,6 @@ function createButher(butcherObject) {
   return butchDiv;
 }
 function btButchers1() {
-  
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   // const br2 = document.createElement("br");
@@ -399,8 +410,8 @@ function btButchers1() {
   const article = document.createElement("par");
   article.textContent = `בעמוד זה תוכלו להנות ממגוון עשיר של אוסף האטליזים שלנו.
 תוכלו גם להוסיף את האטליז המועדף עליכם לרשימת האטליזים באתר.`;
-ScreenButchers_div.appendChild(article);
-ScreenButchers_div.id = "background_div";
+  ScreenButchers_div.appendChild(article);
+  ScreenButchers_div.id = "background_div";
   docFrag.appendChild(ScreenButchers_div);
 
   // const ScreenButchers_div = document.createElement("div");
@@ -423,21 +434,21 @@ ScreenButchers_div.id = "background_div";
   // bucherDesc1.textContent = `רועי תבור ואיתמר קנדליק אמנם מגיעים ממושב כנף שברמת הגולן, אבל משווקים את התוצרת שלהם בכל הארץ.
   // נקודות מכירה שלהם תמצאו בסניפי ספייסס ביהוד ובתל-אביב. חלק מהבשר כבר מתובל וארוז בוואקום, ונותר רק להתחיל לצלות.
   // יש פה שוק טלה בעשבי תיבול, רוסטביף לתנור, צלעות טלה פרוסות למחבת בתיבול צ'ילי, שום ודבש, אנטרקוט, סינטה במגוון מרינדות, קבבים, וסוגים שונים של בשר טחון. לצד הבשר יש גם דליקטסים ייחודיים, כגון צירי עגל וטלה`;
-  
+
   // const butcherName2 = document.createElement("h2");
   // butcherName2.textContent = "-אטליז פרץ-";
   // butcherName2.className = "butcherName";
   // const butcherDesc2 = document.createElement("par");
   // butcherDesc2.textContent = `לא נוצץ, לא מפונפן, לא מתוקשר – ובכל זאת, אטליז פרץ הוא מקום שכונתי, שבו תוכלו להשיג קציצות ביתיות, ירקרקות מרוב עשבי תיבול, קבבים טורקיים תוצרת בית, וגם נקניק סוג'וק יבש שמכינים בני משפחת פרץ.
   // הבעלים משתייכים לשושלת קצבים מאיזמיר, טורקיה, וניכר בהם שהם גאים במלאכתם.`;
-  
+
   // const butcherName3 = document.createElement("h2");
   // butcherName3.textContent = "-לגעת באוכל-";
   // butcherName3.className = "butcherName";
   // const butcherDesc3 = document.createElement("par");
   // butcherDesc3.textContent = `את האנטרקוט מיישנים כאן כ‭21-‬ יום במקרר מיוחד, לדרגת יישון אופטימאלית. הנתח עטוף בשומן ומשויש היטב, ויש לו טעם בשרי יוצא דופן.
   // 135 שקל לקילו, והוא שלכם. חוץ מזה, יש פה מבחר נאה של נתחי בשר מיוחדים, בשרים מעושנים ודגים, וצוות של מומחי בשר שישמח לענות לכם על כל שאלה.`;
-  
+
   // ScreenButchers_div.appendChild(search);
   // ScreenButchers_div.appendChild(btSearch);
   // ScreenButchers_div.appendChild(br);
@@ -460,8 +471,7 @@ ScreenButchers_div.id = "background_div";
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
-function addButcher(){
-  
+function addButcher() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -477,18 +487,18 @@ function addButcher(){
   //Butcher name
   const inputTitle = document.createElement("input");
   inputTitle.placeholder = "שם האטליז: ";
-  inputTitle.id = "inputTitleButcher";  
+  inputTitle.id = "inputTitleButcher";
 
   //Butcher description
   const textArea = document.createElement("textarea");
   textArea.placeholder = "תיאור: ";
-  textArea.id = "textAreaButcher"; 
+  textArea.id = "textAreaButcher";
 
   //Butcher location
   const butcherLocation = document.createElement("input");
   butcherLocation.placeholder = "מיקום: ";
   butcherLocation.id = "butcherLocation";
-  
+
   //Butcher Kosher
   const butcherKosher = document.createElement("input");
   butcherKosher.placeholder = "כשר/לא כשר";
@@ -501,7 +511,7 @@ function addButcher(){
   btSave.style.position = "absolute";
   btSave.style.right = "50%";
   btSave.style.top = "90%";
-  btSave.addEventListener("click", saveButcher);  
+  btSave.addEventListener("click", saveButcher);
 
   docFrag.appendChild(br);
   docFrag.appendChild(br1);
@@ -520,8 +530,7 @@ function addButcher(){
   docFrag.id = "background_div";
   new_butcher.replaceWith(docFrag);
 }
-function viewButchers(){
-
+function viewButchers() {
   const br = document.createElement("br");
 
   const main = document.getElementById("background_div");
@@ -539,27 +548,26 @@ function viewButchers(){
 
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
-  
+
   ScreenButcher_div.appendChild(search);
   ScreenButcher_div.appendChild(btSearch);
   ScreenButcher_div.appendChild(br);
-  if(butchersArray.length != 0)
-   {
-     const divideLine = document.createElement("hr");
-     divideLine.style.borderStyle = "solid double";
-     divideLine.style.borderWidth = "medium";
-     divideLine.style.backgroundColor = "black";
-     ScreenButcher_div.appendChild(divideLine);
-   }
+  if (butchersArray.length != 0) {
+    const divideLine = document.createElement("hr");
+    divideLine.style.borderStyle = "solid double";
+    divideLine.style.borderWidth = "medium";
+    divideLine.style.backgroundColor = "black";
+    ScreenButcher_div.appendChild(divideLine);
+  }
 
-  for(let i = 0; i < butchersArray.length ; i++)
-  ScreenButcher_div.appendChild(createButher(butchersArray[i]));
+  for (let i = 0; i < butchersArray.length; i++)
+    ScreenButcher_div.appendChild(createButher(butchersArray[i]));
 
   docFrag.appendChild(ScreenButcher_div);
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
-function saveButcher(){
+function saveButcher() {
   const docFrag1 = document.getElementById("background_div");
 
   const inputTitleButcher = document.getElementById("inputTitleButcher").value;
@@ -567,14 +575,20 @@ function saveButcher(){
   const butcherLocation = document.getElementById("butcherLocation").value;
   const butcherKosher = document.getElementById("butcherKosher").value;
 
-  if(inputTitleButcher == "" || butchDescription == "" || butcherLocation == "" || butcherKosher == "")
-  {
+  if (
+    inputTitleButcher == "" ||
+    butchDescription == "" ||
+    butcherLocation == "" ||
+    butcherKosher == ""
+  ) {
     alert("חובה למלא את כל השדות");
     return;
   }
 
-  butchersArray.push(Butcher(inputTitleButcher, butchDescription, butcherLocation, butcherKosher));
-  
+  butchersArray.push(
+    Butcher(inputTitleButcher, butchDescription, butcherLocation, butcherKosher)
+  );
+
   document.getElementById("inputTitleButcher").value = "";
   document.getElementById("textAreaButcher").value = "";
   document.getElementById("butcherLocation").value = "";
@@ -724,7 +738,7 @@ function createRecipe(recipeObject) {
   resDiv.appendChild(br1);
   resDiv.appendChild(prepration);
   resDiv.appendChild(editor);
-  if(recipeObject != recipesArray[recipesArray.length - 1])
+  if (recipeObject != recipesArray[recipesArray.length - 1])
     resDiv.appendChild(divideLine);
 
   return resDiv;
@@ -801,16 +815,24 @@ function saveRecipe() {
   const docFrag1 = document.getElementById("background_div");
 
   const inputTitle = document.getElementById("inputTitle").value;
-  const textAreaIngredients = document.getElementById("textAreaIngredients").value;
-  const textAreaPrepration = document.getElementById("textAreaPrepration").value;
+  const textAreaIngredients = document.getElementById("textAreaIngredients")
+    .value;
+  const textAreaPrepration = document.getElementById("textAreaPrepration")
+    .value;
   const editorName = document.getElementById("editorName").value;
 
-  if(inputTitle == "" || textAreaIngredients == "" || textAreaPrepration == "" || editorName == "")
-  {
+  if (
+    inputTitle == "" ||
+    textAreaIngredients == "" ||
+    textAreaPrepration == "" ||
+    editorName == ""
+  ) {
     alert("חובה למלא את כל השדות");
     return;
   }
-  recipesArray.push(Recipe(inputTitle, textAreaIngredients, textAreaPrepration, editorName));
+  recipesArray.push(
+    Recipe(inputTitle, textAreaIngredients, textAreaPrepration, editorName)
+  );
 
   document.getElementById("inputTitle").value = "";
   document.getElementById("textAreaIngredients").value = "";
@@ -821,7 +843,6 @@ function saveRecipe() {
 }
 
 function btViewRecipe1() {
-
   const br = document.createElement("br");
 
   const main = document.getElementById("background_div");
@@ -839,23 +860,20 @@ function btViewRecipe1() {
 
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
-  
+
   ScreenRecipe_div.appendChild(search);
   ScreenRecipe_div.appendChild(btSearch);
   ScreenRecipe_div.appendChild(br);
-  if(recipesArray.length != 0)
-   {
-     const divideLine = document.createElement("hr");
-     divideLine.style.borderStyle = "solid double";
-     divideLine.style.borderWidth = "medium";
-     divideLine.style.backgroundColor = "black";
-     ScreenRecipe_div.appendChild(divideLine);
-   }
-  
-  
-  for(let i = 0; i < recipesArray.length ; i++)
-    ScreenRecipe_div.appendChild(createRecipe(recipesArray[i]));
+  if (recipesArray.length != 0) {
+    const divideLine = document.createElement("hr");
+    divideLine.style.borderStyle = "solid double";
+    divideLine.style.borderWidth = "medium";
+    divideLine.style.backgroundColor = "black";
+    ScreenRecipe_div.appendChild(divideLine);
+  }
 
+  for (let i = 0; i < recipesArray.length; i++)
+    ScreenRecipe_div.appendChild(createRecipe(recipesArray[i]));
 
   docFrag.appendChild(ScreenRecipe_div);
   docFrag.id = "main";
@@ -1033,4 +1051,35 @@ function saveNewGrillman() {
 }
 function saveNewEvent() {
   alert("In saveNewEvent");
+}
+
+//-----------------------------------------
+// firebase
+function fireBase() {
+  firebase
+    .database()
+    .ref("recipes")
+    .child(1 + "")
+    .set({
+      text: "yolo",
+      author: "yakov",
+    });
+  firebase
+    .database()
+    .ref("recipes")
+    .child(2 + "")
+    .set({
+      text: "blabla",
+      author: "yisrael",
+    });
+  for (let i = 1; i < 3; i++) {
+    number = i;
+    firebase
+      .database()
+      .ref("recipes")
+      .child(number + "")
+      .on("value", function (snapshot) {
+        console.log(snapshot.val().text);
+      });
+  }
 }
