@@ -270,15 +270,17 @@ function saveRestaurant() {
     alert("חובה למלא את כל השדות");
     return;
   }
-  restaurantArray.push(
-    Restaurant(
-      restaurantTitle,
-      restaurantDes,
-      restaurantRat,
-      restaurantKosh,
-      restaurantLoc
-    )
+  let r1 = Restaurant(
+    restaurantTitle,
+    restaurantDes,
+    restaurantRat,
+    restaurantKosh,
+    restaurantLoc
   );
+  restaurantArray.push(r1);
+
+  //send to fire base
+  sendRestauranToFireBase(r1);
 
   document.getElementById("restaurantTitle").value = "";
   document.getElementById("textAreaRestaurant").value = "";
@@ -830,9 +832,16 @@ function saveRecipe() {
     alert("חובה למלא את כל השדות");
     return;
   }
-  recipesArray.push(
-    Recipe(inputTitle, textAreaIngredients, textAreaPrepration, editorName)
+  let r1 = Recipe(
+    inputTitle,
+    textAreaIngredients,
+    textAreaPrepration,
+    editorName
   );
+
+  recipesArray.push(r1);
+  //send recipe to fb
+  sendRecipeToFireBase(r1);
 
   document.getElementById("inputTitle").value = "";
   document.getElementById("textAreaIngredients").value = "";
@@ -1055,31 +1064,122 @@ function saveNewEvent() {
 
 //-----------------------------------------
 // firebase
+let restaurantCounter = 0;
+let recipeCounter = 0;
+
+// function User(name, pass) {
+//   let user = {
+//     Name: name,
+//     Pass: pass,
+//   };
+//   return user;
+// }
 function fireBase() {
+  //init
+
+  //restaurant Counter
   firebase
     .database()
-    .ref("recipes")
-    .child(1 + "")
-    .set({
-      text: "yolo",
-      author: "yakov",
+    .ref("Restaurants")
+    .child("restaurantCounter")
+    .on("value", function (snapshot) {
+      restaurantCounter = snapshot.val().restaurantCounter;
+      // console.log("restaurantCounter: " + restaurantCounter);
     });
+  // recipe counter
   firebase
     .database()
-    .ref("recipes")
-    .child(2 + "")
-    .set({
-      text: "blabla",
-      author: "yisrael",
+    .ref("Recipes")
+    .child("recipeCounter")
+    .on("value", function (snapshot) {
+      recipeCounter = snapshot.val().recipeCounter;
+      // console.log("recipeCounter: " + recipeCounter);
     });
-  for (let i = 1; i < 3; i++) {
+  // console.log("recipeCounter: " + recipeCounter);
+
+  ///
+  // let u1 = User("yisrael", "1234");
+  // let u2 = User("meir", "4020");
+  // firebase
+  //   .database()
+  //   .ref("recipes")
+  //   .child(0 + "")
+  //   .set(u1);
+  // recipeCounter++;
+  // firebase
+  //   .database()
+  //   .ref("recipes")
+  //   .child(1 + "")
+  //   .set(u2);
+  // recipeCounter++;
+  // for (let i = 1; i < 3; i++) {
+  //   number = i;
+  //   firebase
+  //     .database()
+  //     .ref("recipes")
+  //     .child(number + "")
+  //     .on("value", function (snapshot) {
+  //       let u3 = snapshot.val();
+  //       console.log(u3);
+  //     });
+  // }
+}
+//send and get Restaurants from fb
+function sendRestauranToFireBase(r1) {
+  firebase
+    .database()
+    .ref("Restaurants")
+    .child(restaurantCounter + "")
+    .set(r1);
+  //counter
+  restaurantCounter++;
+  firebase.database().ref("Restaurants").child("restaurantCounter").set({
+    restaurantCounter: restaurantCounter,
+  });
+  // console.log("im here res count: " + restaurantCounter);
+}
+
+function getRestauranToFireBase() {
+  for (let i = 0; i < restaurantCounter; i++) {
     number = i;
     firebase
       .database()
-      .ref("recipes")
+      .ref("Restaurants")
       .child(number + "")
       .on("value", function (snapshot) {
-        console.log(snapshot.val().text);
+        let r1 = snapshot.val();
+        restaurantArray.push(r1);
+        // console.log(r1);
+      });
+  }
+}
+
+// //send and get recipes from fb
+
+function sendRecipeToFireBase(r1) {
+  firebase
+    .database()
+    .ref("Recipes")
+    .child(restaurantCounter + "")
+    .set(r1);
+  //counter
+  recipeCounter++;
+  firebase.database().ref("Recipes").child("recipeCounter").set({
+    recipeCounter: recipeCounter,
+  });
+}
+
+function getRecipeToFireBase() {
+  for (let i = 0; i < restaurantCounter; i++) {
+    number = i;
+    firebase
+      .database()
+      .ref("Recipes")
+      .child(number + "")
+      .on("value", function (snapshot) {
+        let r1 = snapshot.val();
+        recipesArray.push(r1);
+        console.log(r1);
       });
   }
 }
