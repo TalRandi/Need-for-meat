@@ -21,16 +21,16 @@ function navigationBarLoading() {
   btButchers.textContent = "אטליזים/ מקומות לקניית בשר";
   btButchers.addEventListener("click", btButchers1);
   docFrag.appendChild(btButchers);
-  //5 Explanation_of_meats
-  const btExplanation_of_meats = document.createElement("button");
-  btExplanation_of_meats.textContent = "הסבר על בשרים";
-  btExplanation_of_meats.addEventListener("click", btExplanation_of_meats1);
-  docFrag.appendChild(btExplanation_of_meats);
-  //6 Grillman_is_needed
+  //5 Grillman_is_needed
   const btGrillman_is_needed = document.createElement("button");
   btGrillman_is_needed.textContent = "דרוש גרילמן";
   btGrillman_is_needed.addEventListener("click", btGrillman_is_needed1);
   docFrag.appendChild(btGrillman_is_needed);
+  //6 Explanation_of_meats
+  const btExplanation_of_meats = document.createElement("button");
+  btExplanation_of_meats.textContent = "הסבר על בשרים";
+  btExplanation_of_meats.addEventListener("click", btExplanation_of_meats1);
+  docFrag.appendChild(btExplanation_of_meats);
 
   myNav.replaceWith(docFrag);
 }
@@ -636,6 +636,7 @@ function btGrillman_is_needed1() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
+  const br3 = document.createElement("br");
 
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
@@ -659,13 +660,20 @@ function btGrillman_is_needed1() {
   btGrillmanList.className = "rightSideButtons";
   docFrag.appendChild(btGrillmanList);
   docFrag.appendChild(br1);
-
+  
   const btNewEvent = document.createElement("button");
   btNewEvent.textContent = "יצירת איוונט";
   btNewEvent.addEventListener("click", newEvent);
   btNewEvent.className = "rightSideButtons";
   docFrag.appendChild(btNewEvent);
   docFrag.appendChild(br2);
+  
+  const btEventList = document.createElement("button");
+  btEventList.textContent = "רשימת איוונטים";
+  btEventList.addEventListener("click", eventList);
+  btEventList.className = "rightSideButtons";
+  docFrag.appendChild(btEventList);
+  docFrag.appendChild(br3);
 
   const title = document.createElement("h1");
   title.textContent = "גרילמן";
@@ -866,7 +874,47 @@ function btSearchRecipe1() {
 }
 /*------------------------------------------------------------------------------*/
 //Grillman functions
+function Grillman(name = "", phoneNumber = "", details = "", price = "") {
+  return (grillman = {
+    grillmanName : name,
+    grillmanPhoneNumber : phoneNumber,
+    grillmanDetails : details,
+    grillmanPrice : price,
+  });
+}
+
+let grillmanArray = [];
+
+function createGrillman(grillmanObject) {
+  const grillDiv = document.createElement("div");
+
+  
+  grillDiv.className = "grillman_class";
+  
+  const grillmanName = document.createElement("h4");
+  grillmanName.textContent = "שם:    " + grillmanObject.grillmanName;
+  const grillmanPhone = document.createElement("h4");
+  grillmanPhone.textContent = "מספר פלאפון:    " + grillmanObject.grillmanPhoneNumber;
+  const details = document.createElement("par");
+  details.textContent = "פרטים:    " + grillmanObject.grillmanDetails;
+  const price = document.createElement("h5");
+  price.textContent = "מחיר לשעת עבודה:    " + grillmanObject.grillmanPrice;
+  
+  const divideLine = document.createElement("hr");
+  divideLine.className = "solid";
+  
+  grillDiv.appendChild(grillmanName);
+  grillDiv.appendChild(grillmanPhone);
+  grillDiv.appendChild(details);
+  grillDiv.appendChild(price);
+
+  if(grillmanObject != grillmanArray[grillmanArray.length - 1])
+  grillDiv.appendChild(divideLine);
+  
+  return grillDiv;
+}  
 function newGrillman() {
+
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -875,16 +923,16 @@ function newGrillman() {
   const br5 = document.createElement("br");
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
-
+  
   const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
   main.replaceWith(docFrag);
-
+  
   const title = document.createElement("h3");
   title.textContent = "חלון הוספת גרילמן";
   docFrag.appendChild(title);
   docFrag.appendChild(br);
-
+  
   //Grillman's details
   const inputFullName = document.createElement("input");
   inputFullName.placeholder = "שם מלא: ";
@@ -895,7 +943,7 @@ function newGrillman() {
 
   const inputPhoneNumber = document.createElement("input");
   inputPhoneNumber.placeholder = "מספר פלאפון: ";
-  inputPhoneNumber.id = "inputTitle";
+  inputPhoneNumber.id = "grillmanPhone";
   docFrag.appendChild(inputPhoneNumber);
   docFrag.appendChild(br3);
   docFrag.appendChild(br4);
@@ -912,13 +960,14 @@ function newGrillman() {
   textArea1.rows = "10";
   textArea1.cols = "70";
   textArea1.style.alignContent = "center";
-  textArea1.id = "textArea";
+  textArea1.id = "details";
   docFrag.appendChild(textArea1);
   docFrag.appendChild(br5);
   docFrag.appendChild(br6);
 
   const priceOneHour = document.createElement("input");
   priceOneHour.placeholder = "מחיר לשעת עבודה";
+  priceOneHour.id = "grillmanPrice";
   docFrag.appendChild(priceOneHour);
   docFrag.appendChild(br7);
 
@@ -941,8 +990,96 @@ function newGrillman() {
   docFrag.id = "background_div";
 }
 function grillManList() {
-  alert("In grillManList");
+ 
+  const br = document.createElement("br");
+
+  const main = document.getElementById("background_div");
+  const docFrag = document.createElement("div");
+
+  const ScreenGrillman_div = document.createElement("div");
+  ScreenGrillman_div.id = "background_div";
+  const title = document.createElement("h1");
+  title.textContent = "רשימת גרילמנים";
+  ScreenGrillman_div.appendChild(title);
+
+  const search = document.createElement("input");
+  search.style.fontSize = "16px";
+  search.placeholder = "חיפוש גרילמן: ";
+
+  const btSearch = document.createElement("button");
+  btSearch.textContent = "חפש";
+  
+  ScreenGrillman_div.appendChild(search);
+  ScreenGrillman_div.appendChild(btSearch);
+  ScreenGrillman_div.appendChild(br);
+  if(grillmanArray.length != 0)
+   {
+     const divideLine = document.createElement("hr");
+     divideLine.style.borderStyle = "solid double";
+     divideLine.style.borderWidth = "medium";
+     divideLine.style.backgroundColor = "black";
+     ScreenGrillman_div.appendChild(divideLine);
+   }
+  
+  for(let i = 0; i < grillmanArray.length ; i++)
+    ScreenGrillman_div.appendChild(createGrillman(grillmanArray[i]));
+
+  docFrag.appendChild(ScreenGrillman_div);
+  docFrag.id = "main";
+  main.replaceWith(docFrag);
 }
+//2 event functions
+function Event(name = "", phone = "", participant = 0, location = "", moreDetails = ""){
+  return (evt = {
+    eventName : name,
+    eventPhone : phone,
+    eventParticipant : participant,
+    eventLocation : location,
+    eventDetails : moreDetails,
+  });
+}
+
+let eventArray = [];
+
+function createEvent(eventObject) {
+  const evtDiv = document.createElement("div");
+  const br = document.createElement("br");
+
+  evtDiv.className = "event_class";
+  
+  const eventName = document.createElement("h4");
+  eventName.textContent = "שם:    " + eventObject.eventName;
+  const eventPhone = document.createElement("h4");
+  eventPhone.textContent = "מספר פלאפון:    " + eventObject.eventPhone;
+  const partic = document.createElement("h4");
+  partic.textContent = "מספר משתתפים:    " + eventObject.eventParticipant;
+  
+  const location = document.createElement("i");
+  location.className = "material-icons";
+  if(eventObject.eventLocation != "")
+    location.textContent = eventObject.eventLocation + "place";
+  else 
+    location.textContent = "לא צוין מיקום";
+  
+  const details = document.createElement("par");
+  details.textContent = "פרטים נוספים:    " + eventObject.eventDetails;
+
+  const divideLine = document.createElement("hr");
+    divideLine.className = "solid";
+  
+  evtDiv.appendChild(eventName);
+  evtDiv.appendChild(eventPhone);
+  evtDiv.appendChild(partic);
+  evtDiv.appendChild(location);
+  evtDiv.appendChild(br);
+  evtDiv.appendChild(details);
+
+  if(eventObject != eventArray[eventArray.length - 1])
+    evtDiv.appendChild(divideLine);
+  
+  return evtDiv;
+}  
+
 function newEvent() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
@@ -967,14 +1104,14 @@ function newEvent() {
   //Event's owner details
   const inputFullName = document.createElement("input");
   inputFullName.placeholder = "שם מלא: ";
-  inputFullName.id = "inputTitle";
+  inputFullName.id = "name";
   docFrag.appendChild(inputFullName);
   docFrag.appendChild(br1);
   docFrag.appendChild(br2);
 
   const inputPhoneNumber = document.createElement("input");
   inputPhoneNumber.placeholder = "מספר פלאפון: ";
-  inputPhoneNumber.id = "inputTitle";
+  inputPhoneNumber.id = "phone";
   docFrag.appendChild(inputPhoneNumber);
   docFrag.appendChild(br3);
   docFrag.appendChild(br4);
@@ -982,30 +1119,24 @@ function newEvent() {
   //Event's details
   const participantAmount = document.createElement("input");
   participantAmount.placeholder = "מספר משתתפים: ";
+  participantAmount.id = "part";
   docFrag.appendChild(participantAmount);
   docFrag.appendChild(br5);
   docFrag.appendChild(br6);
 
   const location = document.createElement("input");
   location.placeholder = "איזור: ";
+  location.id = "loc";
   docFrag.appendChild(location);
   docFrag.appendChild(br7);
   docFrag.appendChild(br8);
-
-  const lable = document.createElement("h5");
-  lable.textContent = "הבשר עלינו";
-  docFrag.appendChild(lable);
-  const buyTheFood = document.createElement("input");
-  buyTheFood.setAttribute("type", "checkbox");
-  docFrag.appendChild(buyTheFood);
-  docFrag.appendChild(br9);
 
   const textArea1 = document.createElement("textarea");
   textArea1.placeholder = "בקשות מיוחדות / מידע נוסף על האירוע: ";
   textArea1.rows = "10";
   textArea1.cols = "70";
   textArea1.style.alignContent = "center";
-  textArea1.id = "textArea";
+  textArea1.id = "moreDetails";
   docFrag.appendChild(textArea1);
 
   //save button
@@ -1028,9 +1159,89 @@ function newEvent() {
 
   main.replaceWith(docFrag);
 }
-function saveNewGrillman() {
-  alert("In saveNewGrillman");
+function eventList(){
+ 
+  // const br = document.createElement("br");
+
+  const main = document.getElementById("background_div");
+  const docFrag = document.createElement("div");
+
+  const ScreenEvent_div = document.createElement("div");
+  ScreenEvent_div.id = "background_div";
+  const title = document.createElement("h1");
+  title.textContent = "רשימת איוונטים";
+  ScreenEvent_div.appendChild(title);
+
+  // const search = document.createElement("input");
+  // search.style.fontSize = "16px";
+  // search.placeholder = "חיפוש גרילמן: ";
+
+  // const btSearch = document.createElement("button");
+  // btSearch.textContent = "חפש";
+  
+  // ScreenEvent_div.appendChild(search);
+  // // ScreenEvent_div.appendChild(btSearch);
+  // ScreenEvent_div.appendChild(br);
+
+  if(eventArray.length != 0)
+   {
+     const divideLine = document.createElement("hr");
+     divideLine.style.borderStyle = "solid double";
+     divideLine.style.borderWidth = "medium";
+     divideLine.style.backgroundColor = "black";
+     ScreenEvent_div.appendChild(divideLine);
+   }
+  
+  for(let i = 0; i < eventArray.length ; i++)
+    ScreenEvent_div.appendChild(createEvent(eventArray[i]));
+
+  docFrag.appendChild(ScreenEvent_div);
+  docFrag.id = "main";
+  main.replaceWith(docFrag);
+
 }
+function saveNewGrillman() {
+  
+  const docFrag1 = document.getElementById("background_div");
+
+  const name = document.getElementById("inputTitle").value;
+  const phone = document.getElementById("grillmanPhone").value;
+  const details = document.getElementById("details").value;
+  const price = document.getElementById("grillmanPrice").value;
+
+  if(name == "" || phone == "" || details == "" || price == "")
+  {
+    alert("חובה למלא את כל השדות");
+    return;
+  }
+  grillmanArray.push(Grillman(name, phone, details, price));
+
+  document.getElementById("inputTitle").value = "";
+  document.getElementById("grillmanPhone").value = "";
+  document.getElementById("details").value = "";
+  document.getElementById("grillmanPrice").value = "";
+}
+
 function saveNewEvent() {
-  alert("In saveNewEvent");
+
+  const docFrag1 = document.getElementById("background_div");
+
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const partic = document.getElementById("part").value;
+  const loc = document.getElementById("loc").value;
+  const details = document.getElementById("moreDetails").value;
+
+  if(name == "" || phone == "" || partic == "" || loc == "" || details == "")
+  {
+    alert("חובה למלא את כל השדות");
+    return;
+  }
+  eventArray.push(Event(name, phone, partic, loc, details));
+
+  document.getElementById("name").value = "";
+  document.getElementById("phone").value = "";
+  document.getElementById("part").value = "";
+  document.getElementById("loc").value = "";
+  document.getElementById("moreDetails").value = "";
 }
