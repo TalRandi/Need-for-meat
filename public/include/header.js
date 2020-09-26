@@ -136,6 +136,13 @@ restaurantArray.push(Restaurant("שפשוואן", des5, 5));
 restaurantArray.push(Restaurant("בני הדייג", des6, 4, false, "תל אביב"));
 
 function btRestaurants1() {
+  ///get all Restaurant from fb
+  if (restaurantFlag) {
+    getRestauranFromFireBase();
+    restaurantFlag = false;
+  }
+  // console.log("im here 1 " + restaurantArray.length);
+
   const br = document.createElement("br");
 
   const main = document.getElementById("main");
@@ -290,6 +297,12 @@ function saveRestaurant() {
 }
 //2 recipes
 function btRecipes1() {
+  //get all Recipes from fb
+  if (recipeFlag) {
+    getRecipeFromFireBase();
+    recipeFlag = false;
+  }
+
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   // const br2 = document.createElement("br");
@@ -383,6 +396,12 @@ function createButher(butcherObject) {
   return butchDiv;
 }
 function btButchers1() {
+  //get all the butchers from fb
+  if (buthcerFlag) {
+    getButcherFromFireBase();
+    buthcerFlag = false;
+  }
+
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   // const br2 = document.createElement("br");
@@ -586,10 +605,15 @@ function saveButcher() {
     alert("חובה למלא את כל השדות");
     return;
   }
-
-  butchersArray.push(
-    Butcher(inputTitleButcher, butchDescription, butcherLocation, butcherKosher)
+  let b1 = Butcher(
+    inputTitleButcher,
+    butchDescription,
+    butcherLocation,
+    butcherKosher
   );
+  butchersArray.push(b1);
+  // send new Buthcer to fire base
+  sendButcherToFireBase(b1);
 
   document.getElementById("inputTitleButcher").value = "";
   document.getElementById("textAreaButcher").value = "";
@@ -649,6 +673,17 @@ function btExplanation_of_meats1() {
 }
 //6 grillman
 function btGrillman_is_needed1() {
+  // get all grillmans from fb
+  if (grillManFlag) {
+    getGrillManFromFireBase();
+    grillManFlag = false;
+  }
+  // get all events from fb
+  if (eventFlag) {
+    getEventFromFireBase();
+    eventFlag = false;
+  }
+
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -676,14 +711,14 @@ function btGrillman_is_needed1() {
   btGrillmanList.className = "rightSideButtons";
   docFrag.appendChild(btGrillmanList);
   docFrag.appendChild(br1);
-  
+
   const btNewEvent = document.createElement("button");
   btNewEvent.textContent = "יצירת איוונט";
   btNewEvent.addEventListener("click", newEvent);
   btNewEvent.className = "rightSideButtons";
   docFrag.appendChild(btNewEvent);
   docFrag.appendChild(br2);
-  
+
   const btEventList = document.createElement("button");
   btEventList.textContent = "רשימת איוונטים";
   btEventList.addEventListener("click", eventList);
@@ -903,10 +938,10 @@ function btSearchRecipe1() {
 //Grillman functions
 function Grillman(name = "", phoneNumber = "", details = "", price = "") {
   return (grillman = {
-    grillmanName : name,
-    grillmanPhoneNumber : phoneNumber,
-    grillmanDetails : details,
-    grillmanPrice : price,
+    grillmanName: name,
+    grillmanPhoneNumber: phoneNumber,
+    grillmanDetails: details,
+    grillmanPrice: price,
   });
 }
 
@@ -915,33 +950,32 @@ let grillmanArray = [];
 function createGrillman(grillmanObject) {
   const grillDiv = document.createElement("div");
 
-  
   grillDiv.className = "grillman_class";
-  
+
   const grillmanName = document.createElement("h4");
   grillmanName.textContent = "שם:    " + grillmanObject.grillmanName;
   const grillmanPhone = document.createElement("h4");
-  grillmanPhone.textContent = "מספר פלאפון:    " + grillmanObject.grillmanPhoneNumber;
+  grillmanPhone.textContent =
+    "מספר פלאפון:    " + grillmanObject.grillmanPhoneNumber;
   const details = document.createElement("par");
   details.textContent = "פרטים:    " + grillmanObject.grillmanDetails;
   const price = document.createElement("h5");
   price.textContent = "מחיר לשעת עבודה:    " + grillmanObject.grillmanPrice;
-  
+
   const divideLine = document.createElement("hr");
   divideLine.className = "solid";
-  
+
   grillDiv.appendChild(grillmanName);
   grillDiv.appendChild(grillmanPhone);
   grillDiv.appendChild(details);
   grillDiv.appendChild(price);
 
-  if(grillmanObject != grillmanArray[grillmanArray.length - 1])
-  grillDiv.appendChild(divideLine);
-  
-  return grillDiv;
-}  
-function newGrillman() {
+  if (grillmanObject != grillmanArray[grillmanArray.length - 1])
+    grillDiv.appendChild(divideLine);
 
+  return grillDiv;
+}
+function newGrillman() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -950,16 +984,16 @@ function newGrillman() {
   const br5 = document.createElement("br");
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
-  
+
   const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
   main.replaceWith(docFrag);
-  
+
   const title = document.createElement("h3");
   title.textContent = "חלון הוספת גרילמן";
   docFrag.appendChild(title);
   docFrag.appendChild(br);
-  
+
   //Grillman's details
   const inputFullName = document.createElement("input");
   inputFullName.placeholder = "שם מלא: ";
@@ -1017,7 +1051,6 @@ function newGrillman() {
   docFrag.id = "background_div";
 }
 function grillManList() {
- 
   const br = document.createElement("br");
 
   const main = document.getElementById("background_div");
@@ -1035,20 +1068,19 @@ function grillManList() {
 
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
-  
+
   ScreenGrillman_div.appendChild(search);
   ScreenGrillman_div.appendChild(btSearch);
   ScreenGrillman_div.appendChild(br);
-  if(grillmanArray.length != 0)
-   {
-     const divideLine = document.createElement("hr");
-     divideLine.style.borderStyle = "solid double";
-     divideLine.style.borderWidth = "medium";
-     divideLine.style.backgroundColor = "black";
-     ScreenGrillman_div.appendChild(divideLine);
-   }
-  
-  for(let i = 0; i < grillmanArray.length ; i++)
+  if (grillmanArray.length != 0) {
+    const divideLine = document.createElement("hr");
+    divideLine.style.borderStyle = "solid double";
+    divideLine.style.borderWidth = "medium";
+    divideLine.style.backgroundColor = "black";
+    ScreenGrillman_div.appendChild(divideLine);
+  }
+
+  for (let i = 0; i < grillmanArray.length; i++)
     ScreenGrillman_div.appendChild(createGrillman(grillmanArray[i]));
 
   docFrag.appendChild(ScreenGrillman_div);
@@ -1056,13 +1088,19 @@ function grillManList() {
   main.replaceWith(docFrag);
 }
 //2 event functions
-function Event(name = "", phone = "", participant = 0, location = "", moreDetails = ""){
+function Event(
+  name = "",
+  phone = "",
+  participant = 0,
+  location = "",
+  moreDetails = ""
+) {
   return (evt = {
-    eventName : name,
-    eventPhone : phone,
-    eventParticipant : participant,
-    eventLocation : location,
-    eventDetails : moreDetails,
+    eventName: name,
+    eventPhone: phone,
+    eventParticipant: participant,
+    eventLocation: location,
+    eventDetails: moreDetails,
   });
 }
 
@@ -1073,27 +1111,26 @@ function createEvent(eventObject) {
   const br = document.createElement("br");
 
   evtDiv.className = "event_class";
-  
+
   const eventName = document.createElement("h4");
   eventName.textContent = "שם:    " + eventObject.eventName;
   const eventPhone = document.createElement("h4");
   eventPhone.textContent = "מספר פלאפון:    " + eventObject.eventPhone;
   const partic = document.createElement("h4");
   partic.textContent = "מספר משתתפים:    " + eventObject.eventParticipant;
-  
+
   const location = document.createElement("i");
   location.className = "material-icons";
-  if(eventObject.eventLocation != "")
+  if (eventObject.eventLocation != "")
     location.textContent = eventObject.eventLocation + "place";
-  else 
-    location.textContent = "לא צוין מיקום";
-  
+  else location.textContent = "לא צוין מיקום";
+
   const details = document.createElement("par");
   details.textContent = "פרטים נוספים:    " + eventObject.eventDetails;
 
   const divideLine = document.createElement("hr");
-    divideLine.className = "solid";
-  
+  divideLine.className = "solid";
+
   evtDiv.appendChild(eventName);
   evtDiv.appendChild(eventPhone);
   evtDiv.appendChild(partic);
@@ -1101,11 +1138,11 @@ function createEvent(eventObject) {
   evtDiv.appendChild(br);
   evtDiv.appendChild(details);
 
-  if(eventObject != eventArray[eventArray.length - 1])
+  if (eventObject != eventArray[eventArray.length - 1])
     evtDiv.appendChild(divideLine);
-  
+
   return evtDiv;
-}  
+}
 
 function newEvent() {
   const br = document.createElement("br");
@@ -1186,8 +1223,7 @@ function newEvent() {
 
   main.replaceWith(docFrag);
 }
-function eventList(){
- 
+function eventList() {
   // const br = document.createElement("br");
 
   const main = document.getElementById("background_div");
@@ -1205,30 +1241,27 @@ function eventList(){
 
   // const btSearch = document.createElement("button");
   // btSearch.textContent = "חפש";
-  
+
   // ScreenEvent_div.appendChild(search);
   // // ScreenEvent_div.appendChild(btSearch);
   // ScreenEvent_div.appendChild(br);
 
-  if(eventArray.length != 0)
-   {
-     const divideLine = document.createElement("hr");
-     divideLine.style.borderStyle = "solid double";
-     divideLine.style.borderWidth = "medium";
-     divideLine.style.backgroundColor = "black";
-     ScreenEvent_div.appendChild(divideLine);
-   }
-  
-  for(let i = 0; i < eventArray.length ; i++)
+  if (eventArray.length != 0) {
+    const divideLine = document.createElement("hr");
+    divideLine.style.borderStyle = "solid double";
+    divideLine.style.borderWidth = "medium";
+    divideLine.style.backgroundColor = "black";
+    ScreenEvent_div.appendChild(divideLine);
+  }
+
+  for (let i = 0; i < eventArray.length; i++)
     ScreenEvent_div.appendChild(createEvent(eventArray[i]));
 
   docFrag.appendChild(ScreenEvent_div);
   docFrag.id = "main";
   main.replaceWith(docFrag);
-
 }
 function saveNewGrillman() {
-  
   const docFrag1 = document.getElementById("background_div");
 
   const name = document.getElementById("inputTitle").value;
@@ -1236,12 +1269,15 @@ function saveNewGrillman() {
   const details = document.getElementById("details").value;
   const price = document.getElementById("grillmanPrice").value;
 
-  if(name == "" || phone == "" || details == "" || price == "")
-  {
+  if (name == "" || phone == "" || details == "" || price == "") {
     alert("חובה למלא את כל השדות");
     return;
   }
-  grillmanArray.push(Grillman(name, phone, details, price));
+  let g1 = Grillman(name, phone, details, price);
+  grillmanArray.push(g1);
+  // need to add an id
+  //sent grilman to fb
+  sendGrillManToFireBase(g1);
 
   document.getElementById("inputTitle").value = "";
   document.getElementById("grillmanPhone").value = "";
@@ -1250,7 +1286,6 @@ function saveNewGrillman() {
 }
 
 function saveNewEvent() {
-
   const docFrag1 = document.getElementById("background_div");
 
   const name = document.getElementById("name").value;
@@ -1259,12 +1294,15 @@ function saveNewEvent() {
   const loc = document.getElementById("loc").value;
   const details = document.getElementById("moreDetails").value;
 
-  if(name == "" || phone == "" || partic == "" || loc == "" || details == "")
-  {
+  if (name == "" || phone == "" || partic == "" || loc == "" || details == "") {
     alert("חובה למלא את כל השדות");
     return;
   }
-  eventArray.push(Event(name, phone, partic, loc, details));
+  let e1 = Event(name, phone, partic, loc, details);
+  eventArray.push(e1);
+  // need to add id
+  // send event to fire base
+  sendEventToFireBase(e1);
 
   document.getElementById("name").value = "";
   document.getElementById("phone").value = "";
@@ -1273,10 +1311,18 @@ function saveNewEvent() {
   document.getElementById("moreDetails").value = "";
 }
 
-//-----------------------------------------
+//--------------------------------------------------------------------------
 // firebase
 let restaurantCounter = 0;
 let recipeCounter = 0;
+let butcherCounter = 0;
+let grillManCounter = 0;
+let eventCounter = 0;
+let restaurantFlag = true;
+let recipeFlag = true;
+let buthcerFlag = true;
+let grillManFlag = true;
+let eventFlag = true;
 
 // function User(name, pass) {
 //   let user = {
@@ -1288,7 +1334,7 @@ let recipeCounter = 0;
 function fireBase() {
   //init
 
-  //restaurant Counter
+  //get restaurant Counter
   firebase
     .database()
     .ref("Restaurants")
@@ -1297,16 +1343,42 @@ function fireBase() {
       restaurantCounter = snapshot.val().restaurantCounter;
       // console.log("restaurantCounter: " + restaurantCounter);
     });
-  // recipe counter
+  //get recipe counter
   firebase
     .database()
     .ref("Recipes")
     .child("recipeCounter")
     .on("value", function (snapshot) {
       recipeCounter = snapshot.val().recipeCounter;
-      // console.log("recipeCounter: " + recipeCounter);
     });
+  //get butcher counter
+  firebase
+    .database()
+    .ref("Butchers")
+    .child("butcherCounter")
+    .on("value", function (snapshot) {
+      butcherCounter = snapshot.val().butcherCounter;
+    });
+  //get grillMan counter
+  firebase
+    .database()
+    .ref("GrillMans")
+    .child("grillManCounter")
+    .on("value", function (snapshot) {
+      grillManCounter = snapshot.val().grillManCounter;
+    });
+  //get Events counter
+  firebase
+    .database()
+    .ref("Events")
+    .child("eventCounter")
+    .on("value", function (snapshot) {
+      eventCounter = snapshot.val().eventCounter;
+    });
+
   // console.log("recipeCounter: " + recipeCounter);
+  // getRecipeFromFireBase();
+  // getRestauranFromFireBase();
 
   ///
   // let u1 = User("yisrael", "1234");
@@ -1350,7 +1422,7 @@ function sendRestauranToFireBase(r1) {
   // console.log("im here res count: " + restaurantCounter);
 }
 
-function getRestauranToFireBase() {
+function getRestauranFromFireBase() {
   for (let i = 0; i < restaurantCounter; i++) {
     number = i;
     firebase
@@ -1359,13 +1431,15 @@ function getRestauranToFireBase() {
       .child(number + "")
       .on("value", function (snapshot) {
         let r1 = snapshot.val();
-        restaurantArray.push(r1);
-        // console.log(r1);
+        if (r1 != null) {
+          restaurantArray.push(r1);
+          console.log("restaurantArray leng " + restaurantArray.length);
+        }
       });
   }
 }
 
-// //send and get recipes from fb
+//send and get recipes from fb
 
 function sendRecipeToFireBase(r1) {
   firebase
@@ -1380,8 +1454,10 @@ function sendRecipeToFireBase(r1) {
   });
 }
 
-function getRecipeToFireBase() {
-  for (let i = 0; i < restaurantCounter; i++) {
+function getRecipeFromFireBase() {
+  // console.log("restaurantCounter " + restaurantCounter);
+
+  for (let i = 0; i < recipeCounter; i++) {
     number = i;
     firebase
       .database()
@@ -1389,8 +1465,104 @@ function getRecipeToFireBase() {
       .child(number + "")
       .on("value", function (snapshot) {
         let r1 = snapshot.val();
-        recipesArray.push(r1);
-        console.log(r1);
+        // console.log(r1);
+        if (r1 != null) {
+          recipesArray.push(r1);
+        }
+      });
+  }
+}
+
+//send and get Butchers from fb
+
+function sendButcherToFireBase(b1) {
+  firebase
+    .database()
+    .ref("Butchers")
+    .child(butcherCounter + "")
+    .set(b1);
+  //counter
+  butcherCounter++;
+  firebase.database().ref("Butchers").child("butcherCounter").set({
+    butcherCounter: butcherCounter,
+  });
+}
+
+function getButcherFromFireBase() {
+  for (let i = 0; i < butcherCounter; i++) {
+    number = i;
+    firebase
+      .database()
+      .ref("Butchers")
+      .child(number + "")
+      .on("value", function (snapshot) {
+        let b1 = snapshot.val();
+        if (b1 != null) {
+          butchersArray.push(b1);
+        }
+      });
+  }
+}
+//
+
+//send and get Grillman from fb
+
+function sendGrillManToFireBase(g1) {
+  firebase
+    .database()
+    .ref("GrillMans")
+    .child(grillManCounter + "")
+    .set(g1);
+  //counter
+  grillManCounter++;
+  firebase.database().ref("GrillMans").child("grillManCounter").set({
+    grillManCounter: grillManCounter,
+  });
+}
+
+function getGrillManFromFireBase() {
+  for (let i = 0; i < grillManCounter; i++) {
+    number = i;
+    firebase
+      .database()
+      .ref("GrillMans")
+      .child(number + "")
+      .on("value", function (snapshot) {
+        let g1 = snapshot.val();
+        if (g1 != null) {
+          grillmanArray.push(g1);
+        }
+      });
+  }
+}
+
+//send and get event from fb
+
+function sendEventToFireBase(e1) {
+  firebase
+    .database()
+    .ref("Events")
+    .child(eventCounter + "")
+    .set(e1);
+  //counter
+  eventCounter++;
+  firebase.database().ref("Events").child("eventCounter").set({
+    eventCounter: eventCounter,
+  });
+}
+
+function getEventFromFireBase() {
+  for (let i = 0; i < eventCounter; i++) {
+    number = i;
+    firebase
+      .database()
+      .ref("Events")
+      .child(number + "")
+      .on("value", function (snapshot) {
+        let e1 = snapshot.val();
+        if (e1 != null) {
+          eventArray.push(e1);
+        }
       });
   }
 }
