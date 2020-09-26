@@ -144,6 +144,7 @@ function btRestaurants1() {
   // console.log("im here 1 " + restaurantArray.length);
 
   const br = document.createElement("br");
+  const br1 = document.createElement("br");
 
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
@@ -153,38 +154,57 @@ function btRestaurants1() {
   btAddRestaurant.className = "rightSideButtons";
   btAddRestaurant.addEventListener("click", addRestaurant);
   docFrag.appendChild(btAddRestaurant);
+  docFrag.appendChild(br1);
+  
+  const btViewRestaurant = document.createElement("button");
+  btViewRestaurant.textContent = "רשימת המסעדות";
+  btViewRestaurant.className = "rightSideButtons";
+  btViewRestaurant.addEventListener("click", viewRestaurant);
+  docFrag.appendChild(btViewRestaurant);
 
   const ScreenRes_div = document.createElement("div");
   ScreenRes_div.id = "background_div";
+
   const title = document.createElement("h1");
   title.textContent = "מסעדות";
   ScreenRes_div.appendChild(title);
+  
+  const article = document.createElement("par");
+  article.textContent = `בעמוד זה תוכלו לצפות ברשימת מסעדות הבשרים המובלות והמעולות שהאתר מציג,
+  תוכלו להוסיף מסעדות בעצמכם ולאפשר לשאר משתמשי האתר להנות ולהכיר מסעדות חדשות.
+  המסעדות מדורגות לפי 1-5 כוכבים.`; 
+  
+  ScreenRes_div.appendChild(article);
 
-  const search = document.createElement("input");
-  search.style.fontSize = "16px";
-  search.placeholder = "חיפוש מסעדה:";
+  // const title = document.createElement("h1");
+  // title.textContent = "מסעדות";
+  // ScreenRes_div.appendChild(title);
 
-  const btSearch = document.createElement("button");
-  btSearch.textContent = "חפש";
+  // const search = document.createElement("input");
+  // search.style.fontSize = "16px";
+  // search.placeholder = "חיפוש מסעדה:";
 
-  ScreenRes_div.appendChild(search);
-  ScreenRes_div.appendChild(btSearch);
-  ScreenRes_div.appendChild(br);
+  // const btSearch = document.createElement("button");
+  // btSearch.textContent = "חפש";
 
-  if (restaurantArray.length != 0) {
-    const divideLine = document.createElement("hr");
-    divideLine.style.borderStyle = "solid double";
-    divideLine.style.borderWidth = "medium";
-    divideLine.style.backgroundColor = "black";
-    ScreenRes_div.appendChild(divideLine);
-  }
+  // ScreenRes_div.appendChild(search);
+  // ScreenRes_div.appendChild(btSearch);
+  // ScreenRes_div.appendChild(br);
 
-  const divideLine = document.createElement("hr");
-  divideLine.className = "solid";
+  // if (restaurantArray.length != 0) {
+  //   const divideLine = document.createElement("hr");
+  //   divideLine.style.borderStyle = "solid double";
+  //   divideLine.style.borderWidth = "medium";
+  //   divideLine.style.backgroundColor = "black";
+  //   ScreenRes_div.appendChild(divideLine);
+  // }
 
-  for (let i = 0; i < restaurantArray.length; i++) {
-    ScreenRes_div.appendChild(createRestaurant(restaurantArray[i]));
-  }
+  // const divideLine = document.createElement("hr");
+  // divideLine.className = "solid";
+
+  // for (let i = 0; i < restaurantArray.length; i++) {
+  //   ScreenRes_div.appendChild(createRestaurant(restaurantArray[i]));
+  // }
 
   docFrag.appendChild(ScreenRes_div);
   docFrag.id = "main";
@@ -201,9 +221,15 @@ function addRestaurant() {
   const br7 = document.createElement("br");
   const br8 = document.createElement("br");
   const br9 = document.createElement("br");
+  const br10 = document.createElement("br");
 
   const new_restaurant = document.getElementById("background_div");
   const docFrag = document.createElement("div");
+
+  const title = document.createElement("h3");
+  title.textContent = "חלון הוספת מסעדה";
+  docFrag.appendChild(title);
+  docFrag.appendChild(br10);
 
   //Restaurant name
   const inputTitle = document.createElement("input");
@@ -295,6 +321,52 @@ function saveRestaurant() {
   document.getElementById("restaurantLocation").value = "";
   document.getElementById("restaurantKosher").value = "";
 }
+
+function viewRestaurant(){
+    ///get all Restaurant from fb
+  if (restaurantFlag) {
+    getRestauranFromFireBase();
+    restaurantFlag = false;
+  }
+
+  const br = document.createElement("br");
+
+  const main = document.getElementById("background_div");
+  const docFrag = document.createElement("div");
+
+  const ScreenRestaurant_div = document.createElement("div");
+  ScreenRestaurant_div.id = "background_div";
+  const title = document.createElement("h1");
+  title.textContent = "מסעדות";
+  ScreenRestaurant_div.appendChild(title);
+
+  const search = document.createElement("input");
+  search.style.fontSize = "16px";
+  search.placeholder = "חיפוש מסעדה: ";
+
+  const btSearch = document.createElement("button");
+  btSearch.textContent = "חפש";
+
+  ScreenRestaurant_div.appendChild(search);
+  ScreenRestaurant_div.appendChild(btSearch);
+  ScreenRestaurant_div.appendChild(br);
+  if (restaurantArray.length != 0) {
+    const divideLine = document.createElement("hr");
+    divideLine.style.borderStyle = "solid double";
+    divideLine.style.borderWidth = "medium";
+    divideLine.style.backgroundColor = "black";
+    ScreenRestaurant_div.appendChild(divideLine);
+  }
+
+  for (let i = 0; i < restaurantArray.length; i++)
+    ScreenRestaurant_div.appendChild(createRestaurant(restaurantArray[i]));
+
+  docFrag.appendChild(ScreenRestaurant_div);
+  docFrag.id = "main";
+  main.replaceWith(docFrag);
+}
+
+
 //2 recipes
 function btRecipes1() {
   //get all Recipes from fb
@@ -501,9 +573,15 @@ function addButcher() {
   const br5 = document.createElement("br");
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
+  const br8 = document.createElement("br");
 
   const new_butcher = document.getElementById("background_div");
   const docFrag = document.createElement("div");
+
+  const title = document.createElement("h3");
+  title.textContent = "חלון הוספת אטליז";
+  docFrag.appendChild(title);
+  docFrag.appendChild(br8);
 
   //Butcher name
   const inputTitle = document.createElement("input");
@@ -799,9 +877,15 @@ function btAddRecipe1() {
   const br5 = document.createElement("br");
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
+  const br8 = document.createElement("br");
 
   const new_recipe = document.getElementById("background_div");
   const docFrag = document.createElement("div");
+
+  const title = document.createElement("h3");
+  title.textContent = "חלון הוספת מתכון";
+  docFrag.appendChild(title);
+  docFrag.appendChild(br8);
 
   //Recipe title
   const inputTitle = document.createElement("input");
