@@ -1,27 +1,60 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <title>change picture</title>
+    <script type = "text/javascript">
+        function displayNextImage() {
+            x = (x === images.length - 1) ? 0 : x + 1;
+            document.getElementById("img").src = images[x];
+        }
+
+        function displayPreviousImage() {
+            x = (x <= 0) ? images.length - 1 : x - 1;
+            document.getElementById("img").src = images[x];
+        }
+
+        // function startTimer() {
+        //     setInterval(displayNextImage, 3000);
+        // }
+
+        var images = [], x = -1;
+        images[0] = "public/images/homepage1.jpg";
+        images[1] = "public/images/homepage2.jpg";
+        images[2] = "public/images/back_pic.jpg";
+    </script>
+        <style>
+          * {
+              margin: 0;
+              padding: 0;
+          }
+          .imgbox {
+              display: grid;
+              height: 100%;
+          }
+          .center-fit {
+              max-width: 100%;
+              max-height: 100vh;
+              margin: auto;
+          }
+      </style>
     <html dir="rtl" lang="hebrew"></html>
 
     <meta charset="UTF-8" />
     <title>Need For Meat</title>
     
     <link rel="shortcut icon" href="images/y.png">
-    <!-- <link rel="icon" type="image/x-icon" href="images/favicon .ICO"/> -->
     
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel = "stylesheet">
     <link href="./include/stylesheet.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="./include/header.js" type="text/javascript"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-<!-- 
-
-    <link rel = "icon" href =  
-    "images/y.png" 
-            type = "image/x-icon">  -->
+ 
   </head>
-  <body style="background-image: url(images/back_pic.jpg)">
+  <body onload = "startTimer()">
+    <img id="img" src="startpicture.jpg"/>
+    <button type="button" onclick="displayPreviousImage()">Previous</button>
+    <button type="button" onclick="displayNextImage()">Next</button>
     <header>
       <nav id="nav_bar">
 
@@ -33,4 +66,36 @@
     </footer>
   </body>
 </html>
+
+<!-- <html>
+   <head>
+      <title>change picture</title>
+      <script type = "text/javascript">
+          function displayNextImage() {
+              x = (x === images.length - 1) ? 0 : x + 1;
+              document.getElementById("img").src = images[x];
+          }
+
+          function displayPreviousImage() {
+              x = (x <= 0) ? images.length - 1 : x - 1;
+              document.getElementById("img").src = images[x];
+          }
+
+          function startTimer() {
+              setInterval(displayNextImage, 3000);
+          }
+
+          var images = [], x = -1;
+          images[0] = "image1.jpg";
+          images[1] = "image2.jpg";
+          images[2] = "image3.jpg";
+      </script>
+   </head>
+
+   <body onload = "startTimer()">
+       <img id="img" src="startpicture.jpg"/>
+       <button type="button" onclick="displayPreviousImage()">Previous</button>
+       <button type="button" onclick="displayNextImage()">Next</button>
+   </body>
+</html> -->
 
