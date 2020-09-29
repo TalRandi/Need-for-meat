@@ -16,22 +16,21 @@
         // function startTimer() {
         //     setInterval(displayNextImage, 3000);
         // }
+        // <body style="background-image: url(images/back_pic.jpg)">
 
         var images = [], x = -1;
-        images[0] = "public/images/homepage1.jpg";
-        images[1] = "public/images/homepage2.jpg";
-        images[2] = "public/images/back_pic.jpg";
+        images[0] = "public/images/homepage_high.jpg";
+        images[1] = "public/images/homepage_high2.jpg";
+        images[2] = "public/images/homepage_high3.jpg";
     </script>
         <style>
           * {
               margin: 0;
               padding: 0;
           }
-          .imgbox {
+          .center-fit {
               display: grid;
               height: 100%;
-          }
-          .center-fit {
               max-width: 100%;
               max-height: 100vh;
               margin: auto;
@@ -52,7 +51,8 @@
  
   </head>
   <body onload = "startTimer()">
-    <img id="img" src="startpicture.jpg"/>
+    <img id="img" class= "center-fit" src="startpicture.jpg"/>
+
     <button type="button" onclick="displayPreviousImage()">Previous</button>
     <button type="button" onclick="displayNextImage()">Next</button>
     <header>
@@ -67,35 +67,4 @@
   </body>
 </html>
 
-<!-- <html>
-   <head>
-      <title>change picture</title>
-      <script type = "text/javascript">
-          function displayNextImage() {
-              x = (x === images.length - 1) ? 0 : x + 1;
-              document.getElementById("img").src = images[x];
-          }
-
-          function displayPreviousImage() {
-              x = (x <= 0) ? images.length - 1 : x - 1;
-              document.getElementById("img").src = images[x];
-          }
-
-          function startTimer() {
-              setInterval(displayNextImage, 3000);
-          }
-
-          var images = [], x = -1;
-          images[0] = "image1.jpg";
-          images[1] = "image2.jpg";
-          images[2] = "image3.jpg";
-      </script>
-   </head>
-
-   <body onload = "startTimer()">
-       <img id="img" src="startpicture.jpg"/>
-       <button type="button" onclick="displayPreviousImage()">Previous</button>
-       <button type="button" onclick="displayNextImage()">Next</button>
-   </body>
-</html> -->
 

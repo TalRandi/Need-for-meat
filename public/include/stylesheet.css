@@ -1,12 +1,15 @@
 
 nav {
   background: #C50000;
-  background: -moz-radial-gradient(center, #C50000 0%, #A46206 57%, #D7C819 100%);
+  background: rgb(183,143,27);
+  background: radial-gradient(circle, rgba(183,143,27,1) 0%, rgba(166,161,40,1) 35%, rgba(145,34,22,1) 100%);
+  opacity: 0.9;
+  /* background: -moz-radial-gradient(center, #C50000 0%, #A46206 57%, #D7C819 100%);
   background: -webkit-radial-gradient(center, #C50000 0%, #A46206 57%, #D7C819 100%);
-  background: radial-gradient(ellipse at center, #C50000 0%, #A46206 57%, #D7C819 100%);
+  background: radial-gradient(ellipse at center, #C50000 0%, #A46206 57%, #D7C819 100%); */
   padding: 10px;
   text-align: center;
-  border: 5px inset #EFFF1C;
+  border: 5px inset #91991c;
   border-radius: 40px 0px 40px 0px;
 }
 button {
@@ -83,12 +86,8 @@ body {
 footer {
   position: absolute;
   bottom: 1px;
-  text-align: center;
-  flex: content;
   right: 45%;
-  align-self: center;
-  align-items: center;
-  align-content: center;
+  font-size: large;
   color: yellow;
 }
 .material-icons{
@@ -111,9 +110,14 @@ footer {
   position: absolute;
   overflow: auto;
   background: #CEC82B;
-  background: -moz-radial-gradient(center, #CEC82B 0%, #A46206 59%, #C50000 100%);
+  opacity: 0.9;
+  background: rgb(183,143,27);
+  background: radial-gradient(circle, rgba(183,143,27,1) 0%, rgba(166,161,40,1) 35%, rgba(145,34,22,1) 100%);
+  border: 5px inset #91991c;
+  border-radius: 40px 0px 40px 0px;
+  /* background: -moz-radial-gradient(center, #CEC82B 0%, #A46206 59%, #C50000 100%);
   background: -webkit-radial-gradient(center, #CEC82B 0%, #A46206 59%, #C50000 100%);
-  background: radial-gradient(ellipse at center, #CEC82B 0%, #A46206 59%, #C50000 100%);
+  background: radial-gradient(ellipse at center, #CEC82B 0%, #A46206 59%, #C50000 100%); */
   border-radius: 10px;
   padding: 15px;
   width: 82%;
@@ -139,4 +143,13 @@ footer {
   border-radius: 50px;
   left: 170px;
   top: 170px;
+}
+
+/* background */
+.center-fit {
+  display: grid;
+  height: 100%;
+  max-width: 100%;
+  max-height: 100vh;
+  margin: auto;
 }

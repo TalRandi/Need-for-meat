@@ -702,19 +702,26 @@ function saveButcher() {
 }
 //5 explenation of meats
 function btExplanation_of_meats1() {
+
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
-
+  // const br = document.createElement("br");
+  // const br1 = document.createElement("br");
+  
   const ScreenExp_div = document.createElement("div");
   ScreenExp_div.id = "background_div";
   const title = document.createElement("h1");
   title.textContent = "חלקי הפרה";
   ScreenExp_div.appendChild(title);
-
+  // ScreenExp_div.appendChild(br);
+  
+  const ScreenInside_div = document.createElement("div");
+  ScreenInside_div.style.display = "flex";
+  ScreenInside_div.style.flexWrap = "wrap";
   const Explention = document.createElement("pre");
 
-  Explention.textContent = ` בשר הבקר מתחלק באופן בסיסי לחלקים קדמיים ואחוריים, אך החלוקה החשובה ביותר היא על פי איכות הבשר ורכותו.
-
+  Explention.textContent = `בשר הבקר מתחלק באופן בסיסי לחלקים קדמיים ואחוריים, אך החלוקה החשובה ביותר היא על פי איכות הבשר ורכותו.
+  
   כאן מבחינים בין החלקים " הפעילים " בגוף הבהמה , כמו שריר הזרוע, הכתף והצוואר,
   לבין החלקים "הנייחים" הרכים כמו שייטל, סינטה וכמובן הפילה.
   
@@ -736,16 +743,18 @@ function btExplanation_of_meats1() {
   בשר מספר 17 - פלדה - כסליים - לנזיד , לטחינה ולרולדה.
   בשר מספר 18 - שריר אחורי - פולי - לנזיד , למרק  ולבישול איטי.
   בשר מספר 19 - ויסבראטן - ראש ירכה - לצלי קדירה.`;
-
+  
   const beefImage = document.createElement("img");
   beefImage.src = "./images/Beef.png";
-  beefImage.style.position = "absolute";
-  beefImage.style.left = "100px";
-  beefImage.style.top = "170px";
+  beefImage.style.width = "450px";
+  beefImage.style.height = "500px";
+  beefImage.style.paddingTop = "70px";
 
-  ScreenExp_div.appendChild(Explention);
-  ScreenExp_div.appendChild(beefImage);
+  ScreenInside_div.appendChild(Explention);
+  ScreenInside_div.appendChild(beefImage);
+  ScreenExp_div.appendChild(ScreenInside_div);
   docFrag.appendChild(ScreenExp_div);
+  // docFrag.className = "zoom";
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
@@ -815,9 +824,35 @@ function btGrillman_is_needed1() {
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
+function displayNextImage() {
+  // x = (x === images.length - 1) ? 0 : x + 1;
+  // document.getElementById("img").src = images[x];
+  document.getElementById("img").style.backgroundImage ="url(" + images[x]+")";
+  x++;
+  // while(true){
+    var delayInMilliseconds = 4000; //1 second
+    setTimeout(function() {
+      displayNextImage();
+      
+      if(x == images.length)
+        x = 0;
+    }, delayInMilliseconds)
+  // }
+}
+
+let images = [];
+let x = 0;
 window.onload = writeMessage;
 function writeMessage() {
+
+  images[0] = "./images/homepage_high3.jpg";
+  images[1] = "./images/homepage_high2.jpg";
+  images[2] = "./images/homepage_high.jpg";
+  
+displayNextImage();
   navigationBarLoading();
+
+
 }
 
 //---------------------------------------------
