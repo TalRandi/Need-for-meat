@@ -45,7 +45,8 @@ function createRestaurant(resObject) {
   const resName = document.createElement("h2");
   resName.className = "restaurantName";
   resName.textContent = resObject.restaurantName;
-  const resDesctiption = document.createElement("par");
+  const resDesctiption = document.createElement("div");
+  resDesctiption.className = "description";
   resDesctiption.textContent = resObject.restaurantDescription;
   const resRating = Rating(resObject.restaurantRating);
 
@@ -169,10 +170,12 @@ function btRestaurants1() {
   title.textContent = "מסעדות";
   ScreenRes_div.appendChild(title);
   
-  const article = document.createElement("par");
+  const article = document.createElement("div");
+  article.className = "par";
   article.textContent = `בעמוד זה תוכלו לצפות ברשימת מסעדות הבשרים המובלות והמעולות שהאתר מציג,
-  תוכלו להוסיף מסעדות בעצמכם ולאפשר לשאר משתמשי האתר להנות ולהכיר מסעדות חדשות.
-  המסעדות מדורגות לפי 1-5 כוכבים.`; 
+תוכלו להוסיף מסעדות בעצמכם ולאפשר לשאר משתמשי האתר להנות ולהכיר מסעדות חדשות.
+המסעדות מדורגות לפי 1-5 כוכבים.
+מחפשים מסעדה מומלצת? כאן תוכלו למצוא מגוון רחב של מסעדות בכל האזורים, מכל הסוגים והסגנונות.`; 
   
   ScreenRes_div.appendChild(article);
 
@@ -221,7 +224,6 @@ function addRestaurant() {
   const br7 = document.createElement("br");
   const br8 = document.createElement("br");
   const br9 = document.createElement("br");
-  const br10 = document.createElement("br");
 
   const new_restaurant = document.getElementById("background_div");
   const docFrag = document.createElement("div");
@@ -229,7 +231,6 @@ function addRestaurant() {
   const title = document.createElement("h3");
   title.textContent = "חלון הוספת מסעדה";
   docFrag.appendChild(title);
-  docFrag.appendChild(br10);
 
   //Restaurant name
   const inputTitle = document.createElement("input");
@@ -341,11 +342,13 @@ function viewRestaurant(){
   ScreenRestaurant_div.appendChild(title);
 
   const search = document.createElement("input");
+  search.id = "searchRestaurant";
   search.style.fontSize = "16px";
   search.placeholder = "חיפוש מסעדה: ";
 
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
+  btSearch.addEventListener('click', searchRestaurant);
 
   ScreenRestaurant_div.appendChild(search);
   ScreenRestaurant_div.appendChild(btSearch);
@@ -360,6 +363,45 @@ function viewRestaurant(){
 
   for (let i = 0; i < restaurantArray.length; i++)
     ScreenRestaurant_div.appendChild(createRestaurant(restaurantArray[i]));
+
+  docFrag.appendChild(ScreenRestaurant_div);
+  docFrag.id = "main";
+  main.replaceWith(docFrag);
+}
+
+function searchRestaurant(){
+
+  const searchRestaurant = document.getElementById("searchRestaurant");
+  let resName = searchRestaurant.value;
+  let result = [];
+  for(let i = 0 ; i < restaurantArray.length ; i++)
+  {
+    if(restaurantArray[i].restaurantName === resName)
+      result.push(restaurantArray[i]);
+  }
+
+  const main = document.getElementById("background_div");
+  const docFrag = document.createElement("div");
+  
+  const ScreenRestaurant_div = document.createElement("div");
+  ScreenRestaurant_div.id = "background_div";
+  const title = document.createElement("h1");
+
+  if (result.length != 0) {
+    title.textContent = "תוצאות חיפוש";
+    ScreenRestaurant_div.appendChild(title);
+    const divideLine = document.createElement("hr");
+    divideLine.style.borderStyle = "solid double";
+    divideLine.style.borderWidth = "medium";
+    divideLine.style.backgroundColor = "black";
+    ScreenRestaurant_div.appendChild(divideLine);
+    for (let i = 0; i < result.length ; i++)
+      ScreenRestaurant_div.appendChild(createRestaurant(result[i]));
+  }
+  else{
+    title.textContent = "לא נמצאו מסעדות";
+    ScreenRestaurant_div.appendChild(title);
+  }
 
   docFrag.appendChild(ScreenRestaurant_div);
   docFrag.id = "main";
@@ -401,7 +443,8 @@ function btRecipes1() {
   title.textContent = "מתכונים";
   ScreenRecipe_div.appendChild(title);
 
-  const article = document.createElement("par");
+  const article = document.createElement("div");
+  article.className = "par";
   article.textContent = `מחכים לכם כאן מתכונים פשוטים עם נתחי בשר אנגוס ועוף מובחרים וטריים, וגם כתבות וטיפים לארוחה מלאה בטעמים בלתי נשכחים.
 כאן תוכלו למצוא מתכונים עם בשר טחון, בשר בקר או תבשילי בשר, מתכוננים לארוחה מיוחדת לאירוח בשרי שיהפכו את הסעודה שלכם לחגיגית.
 יש לכם חשק לתבשיל בשר בקדירה? או להקפצה מהירה במחבת? במתחם מתכוני הבשר שלנו תוכלו למצוא את מגוון האפשרויות וללמוד כיצד להכין את המתכונים האהובים עליכם
@@ -500,7 +543,8 @@ function btButchers1() {
   title.textContent = "אטליזים";
   ScreenButchers_div.appendChild(title);
 
-  const article = document.createElement("par");
+  const article = document.createElement("div");
+  article.className = "par";
   article.textContent = `בעמוד זה תוכלו להנות ממגוון עשיר של אוסף האטליזים שלנו.
 תוכלו גם להוסיף את האטליז המועדף עליכם לרשימת האטליזים באתר.`;
   ScreenButchers_div.appendChild(article);
@@ -573,7 +617,6 @@ function addButcher() {
   const br5 = document.createElement("br");
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
-  const br8 = document.createElement("br");
 
   const new_butcher = document.getElementById("background_div");
   const docFrag = document.createElement("div");
@@ -581,7 +624,6 @@ function addButcher() {
   const title = document.createElement("h3");
   title.textContent = "חלון הוספת אטליז";
   docFrag.appendChild(title);
-  docFrag.appendChild(br8);
 
   //Butcher name
   const inputTitle = document.createElement("input");
@@ -642,10 +684,12 @@ function viewButchers() {
   ScreenButcher_div.appendChild(title);
 
   const search = document.createElement("input");
+  search.id = "searchButcher";
   search.style.fontSize = "16px";
   search.placeholder = "חיפוש אטליז";
 
   const btSearch = document.createElement("button");
+  btSearch.addEventListener('click', searchBucher);
   btSearch.textContent = "חפש";
 
   ScreenButcher_div.appendChild(search);
@@ -659,12 +703,54 @@ function viewButchers() {
     ScreenButcher_div.appendChild(divideLine);
   }
 
-  for (let i = 0; i < butchersArray.length; i++)
+  for (let i = 0; i < butchersArray.length; i++){
+    console.log(butchersArray[i]);
     ScreenButcher_div.appendChild(createButher(butchersArray[i]));
+  }
 
   docFrag.appendChild(ScreenButcher_div);
   docFrag.id = "main";
   main.replaceWith(docFrag);
+}
+function searchBucher(){
+
+  const searchButcher = document.getElementById("searchButcher");
+  let resName = searchButcher.value;
+  let result = [];
+  for(let i = 0 ; i < butchersArray.length ; i++)
+  {
+    if(butchersArray[i].butcherName === resName)
+      result.push(butchersArray[i]);
+  }
+
+  const main = document.getElementById("background_div");
+  const docFrag = document.createElement("div");
+  
+  const ScreenButcher_div = document.createElement("div");
+  ScreenButcher_div.id = "background_div";
+  const title = document.createElement("h1");
+
+  if (result.length != 0) {
+    title.textContent = "תוצאות חיפוש";
+    ScreenButcher_div.appendChild(title);
+    const divideLine = document.createElement("hr");
+    divideLine.style.borderStyle = "solid double";
+    divideLine.style.borderWidth = "medium";
+    divideLine.style.backgroundColor = "black";
+    ScreenButcher_div.appendChild(divideLine);
+    for (let i = 0; i < result.length ; i++)
+      ScreenButcher_div.appendChild(createButher(result[i]));
+  }
+  else{
+    title.textContent = "לא נמצאו אטליזים";
+    ScreenButcher_div.appendChild(title);
+  }
+
+  docFrag.appendChild(ScreenButcher_div);
+  docFrag.id = "main";
+  main.replaceWith(docFrag);
+
+
 }
 function saveButcher() {
   const docFrag1 = document.getElementById("background_div");
@@ -782,7 +868,8 @@ function btGrillman_is_needed1() {
   const screenDiv = document.createElement("div");
   screenDiv.id = "background_div";
 
-  const openingStatement = document.createElement("pre");
+  const openingStatement = document.createElement("div");
+  openingStatement.className = "par";
   openingStatement.textContent = `בעמוד זה תוכלו למצוא גרילמנים לאירועים פרטיים,
 לצפות ברשימת הגרילמנים הפרטיים המצויינים שלנו,ולבחור ע"פ דירוג.`;
   const btNewGrillman = document.createElement("button");
@@ -912,7 +999,6 @@ function btAddRecipe1() {
   const br5 = document.createElement("br");
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
-  const br8 = document.createElement("br");
 
   const new_recipe = document.getElementById("background_div");
   const docFrag = document.createElement("div");
@@ -920,7 +1006,6 @@ function btAddRecipe1() {
   const title = document.createElement("h3");
   title.textContent = "חלון הוספת מתכון";
   docFrag.appendChild(title);
-  docFrag.appendChild(br8);
 
   //Recipe title
   const inputTitle = document.createElement("input");
@@ -1026,11 +1111,13 @@ function btViewRecipe1() {
   ScreenRecipe_div.appendChild(title);
 
   const search = document.createElement("input");
+  search.id = "searchRecipe";
   search.style.fontSize = "16px";
   search.placeholder = "חיפוש מתכון:";
 
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
+  btSearch.addEventListener('click', searchRecipe);
 
   ScreenRecipe_div.appendChild(search);
   ScreenRecipe_div.appendChild(btSearch);
@@ -1050,8 +1137,43 @@ function btViewRecipe1() {
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
-function btSearchRecipe1() {
-  alert("In Serarch recipe");
+function searchRecipe() {
+  
+  const searchRecipe = document.getElementById("searchRecipe");
+  let resName = searchRecipe.value;
+  let result = [];
+  for(let i = 0 ; i < recipesArray.length ; i++)
+  {
+    if(recipesArray[i].recipeName === resName)
+      result.push(recipesArray[i]);
+  }
+
+  const main = document.getElementById("background_div");
+  const docFrag = document.createElement("div");
+  
+  const ScreenRecipe_div = document.createElement("div");
+  ScreenRecipe_div.id = "background_div";
+  const title = document.createElement("h1");
+
+  if (result.length != 0) {
+    title.textContent = "תוצאות חיפוש";
+    ScreenRecipe_div.appendChild(title);
+    const divideLine = document.createElement("hr");
+    divideLine.style.borderStyle = "solid double";
+    divideLine.style.borderWidth = "medium";
+    divideLine.style.backgroundColor = "black";
+    ScreenRecipe_div.appendChild(divideLine);
+    for (let i = 0; i < result.length ; i++)
+    ScreenRecipe_div.appendChild(createRecipe(result[i]));
+  }
+  else{
+    title.textContent = "לא נמצאו מתכונים";
+    ScreenRecipe_div.appendChild(title);
+  }
+
+  docFrag.appendChild(ScreenRecipe_div);
+  docFrag.id = "main";
+  main.replaceWith(docFrag);
 }
 /*------------------------------------------------------------------------------*/
 //Grillman functions
@@ -1095,7 +1217,6 @@ function createGrillman(grillmanObject) {
   return grillDiv;
 }
 function newGrillman() {
-  const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
   const br3 = document.createElement("br");
@@ -1111,7 +1232,6 @@ function newGrillman() {
   const title = document.createElement("h3");
   title.textContent = "חלון הוספת גרילמן";
   docFrag.appendChild(title);
-  docFrag.appendChild(br);
 
   //Grillman's details
   const inputFullName = document.createElement("input");
@@ -1182,10 +1302,12 @@ function grillManList() {
   ScreenGrillman_div.appendChild(title);
 
   const search = document.createElement("input");
+  search.id = "searchGrillman";
   search.style.fontSize = "16px";
   search.placeholder = "חיפוש גרילמן: ";
 
   const btSearch = document.createElement("button");
+  btSearch.addEventListener('click', searchGrillman);
   btSearch.textContent = "חפש";
 
   ScreenGrillman_div.appendChild(search);
@@ -1205,6 +1327,45 @@ function grillManList() {
   docFrag.appendChild(ScreenGrillman_div);
   docFrag.id = "main";
   main.replaceWith(docFrag);
+}
+function searchGrillman(){
+
+  const searchGrillman = document.getElementById("searchGrillman");
+  let resName = searchGrillman.value;
+  let result = [];
+  for(let i = 0 ; i < grillmanArray.length ; i++)
+  {
+    if(grillmanArray[i].grillmanName === resName)
+      result.push(grillmanArray[i]);
+  }
+
+  const main = document.getElementById("background_div");
+  const docFrag = document.createElement("div");
+  
+  const ScreenGrillman_div = document.createElement("div");
+  ScreenGrillman_div.id = "background_div";
+  const title = document.createElement("h1");
+
+  if (result.length != 0) {
+    title.textContent = "תוצאות חיפוש";
+    ScreenGrillman_div.appendChild(title);
+    const divideLine = document.createElement("hr");
+    divideLine.style.borderStyle = "solid double";
+    divideLine.style.borderWidth = "medium";
+    divideLine.style.backgroundColor = "black";
+    ScreenGrillman_div.appendChild(divideLine);
+    for (let i = 0; i < result.length ; i++)
+      ScreenGrillman_div.appendChild(createGrillman(result[i]));
+  }
+  else{
+    title.textContent = "לא נמצאו גרילמנים";
+    ScreenGrillman_div.appendChild(title);
+  }
+
+  docFrag.appendChild(ScreenGrillman_div);
+  docFrag.id = "main";
+  main.replaceWith(docFrag);
+
 }
 //2 event functions
 function Event(
@@ -1264,7 +1425,6 @@ function createEvent(eventObject) {
 }
 
 function newEvent() {
-  const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
   const br3 = document.createElement("br");
@@ -1273,7 +1433,6 @@ function newEvent() {
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
   const br8 = document.createElement("br");
-  const br9 = document.createElement("br");
 
   const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
@@ -1282,7 +1441,6 @@ function newEvent() {
   const title = document.createElement("h3");
   title.textContent = "יצירת אירוע חדש";
   docFrag.appendChild(title);
-  docFrag.appendChild(br);
 
   //Event's owner details
   const inputFullName = document.createElement("input");
@@ -1333,12 +1491,12 @@ function newEvent() {
   docFrag.appendChild(btSave);
 
   //beef image
-  const beefEventImage = document.createElement("img");
-  beefEventImage.src = "./images/beef_event.jpg";
-  beefEventImage.style.position = "absolute";
-  beefEventImage.style.left = "70px";
-  beefEventImage.style.top = "70px";
-  docFrag.appendChild(beefEventImage);
+  // const beefEventImage = document.createElement("img");
+  // beefEventImage.src = "./images/beef_event.jpg";
+  // beefEventImage.style.position = "absolute";
+  // beefEventImage.style.left = "70px";
+  // beefEventImage.style.top = "70px";
+  // docFrag.appendChild(beefEventImage);
 
   main.replaceWith(docFrag);
 }
@@ -1552,7 +1710,6 @@ function getRestauranFromFireBase() {
         let r1 = snapshot.val();
         if (r1 != null) {
           restaurantArray.push(r1);
-          console.log("restaurantArray leng " + restaurantArray.length);
         }
       });
   }

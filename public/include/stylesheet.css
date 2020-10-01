@@ -42,25 +42,46 @@ button:hover {
 }
 h1{
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
-  font-size: 30px;
-  color: #1A0878;
-  text-decoration: underline solid rgb(8, 0, 80);
+  font-size: 40px;
+  color:  rgb(73, 3, 3);
+  /* text-decoration: underline solid rgb(73, 3, 3); */
+  margin: auto;
+  text-align: center;
 }
 h3 {
-  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+  color:  rgb(34, 4, 4);
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   padding-bottom: 30px;
 }
 h4{
-  color: rgb(0, 245, 192);
+  color:  rgb(73, 3, 3);
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
-h5 {
+h5{
   color: yellow;
 }
-pre, par{
+pre{
   font-weight: bold;
   line-height: 25px;
   color: #11100de5;
   font-size: large;
+}
+.par{
+  font-weight: bold;
+  text-align: center;
+  color: #11100de5;
+  font-size: 22px;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  line-height: 2.2;
+}
+.description{
+  font-weight: bold;
+  font-size: large;
+  width: 50%;
 }
 ::placeholder{
   color:black ;
