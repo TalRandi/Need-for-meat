@@ -156,7 +156,7 @@ function btRestaurants1() {
   btAddRestaurant.addEventListener("click", addRestaurant);
   docFrag.appendChild(btAddRestaurant);
   docFrag.appendChild(br1);
-  
+
   const btViewRestaurant = document.createElement("button");
   btViewRestaurant.textContent = "רשימת המסעדות";
   btViewRestaurant.className = "rightSideButtons";
@@ -169,14 +169,14 @@ function btRestaurants1() {
   const title = document.createElement("h1");
   title.textContent = "מסעדות";
   ScreenRes_div.appendChild(title);
-  
+
   const article = document.createElement("div");
   article.className = "par";
   article.textContent = `בעמוד זה תוכלו לצפות ברשימת מסעדות הבשרים המובלות והמעולות שהאתר מציג,
 תוכלו להוסיף מסעדות בעצמכם ולאפשר לשאר משתמשי האתר להנות ולהכיר מסעדות חדשות.
 המסעדות מדורגות לפי 1-5 כוכבים.
-מחפשים מסעדה מומלצת? כאן תוכלו למצוא מגוון רחב של מסעדות בכל האזורים, מכל הסוגים והסגנונות.`; 
-  
+מחפשים מסעדה מומלצת? כאן תוכלו למצוא מגוון רחב של מסעדות בכל האזורים, מכל הסוגים והסגנונות.`;
+
   ScreenRes_div.appendChild(article);
 
   // const title = document.createElement("h1");
@@ -323,8 +323,8 @@ function saveRestaurant() {
   document.getElementById("restaurantKosher").value = "";
 }
 
-function viewRestaurant(){
-    ///get all Restaurant from fb
+function viewRestaurant() {
+  ///get all Restaurant from fb
   if (restaurantFlag) {
     getRestauranFromFireBase();
     restaurantFlag = false;
@@ -348,7 +348,7 @@ function viewRestaurant(){
 
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
-  btSearch.addEventListener('click', searchRestaurant);
+  btSearch.addEventListener("click", searchRestaurant);
 
   ScreenRestaurant_div.appendChild(search);
   ScreenRestaurant_div.appendChild(btSearch);
@@ -369,20 +369,18 @@ function viewRestaurant(){
   main.replaceWith(docFrag);
 }
 
-function searchRestaurant(){
-
+function searchRestaurant() {
   const searchRestaurant = document.getElementById("searchRestaurant");
   let resName = searchRestaurant.value;
   let result = [];
-  for(let i = 0 ; i < restaurantArray.length ; i++)
-  {
-    if(restaurantArray[i].restaurantName === resName)
+  for (let i = 0; i < restaurantArray.length; i++) {
+    if (restaurantArray[i].restaurantName === resName)
       result.push(restaurantArray[i]);
   }
 
   const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
-  
+
   const ScreenRestaurant_div = document.createElement("div");
   ScreenRestaurant_div.id = "background_div";
   const title = document.createElement("h1");
@@ -395,10 +393,9 @@ function searchRestaurant(){
     divideLine.style.borderWidth = "medium";
     divideLine.style.backgroundColor = "black";
     ScreenRestaurant_div.appendChild(divideLine);
-    for (let i = 0; i < result.length ; i++)
+    for (let i = 0; i < result.length; i++)
       ScreenRestaurant_div.appendChild(createRestaurant(result[i]));
-  }
-  else{
+  } else {
     title.textContent = "לא נמצאו מסעדות";
     ScreenRestaurant_div.appendChild(title);
   }
@@ -407,7 +404,6 @@ function searchRestaurant(){
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
-
 
 //2 recipes
 function btRecipes1() {
@@ -691,7 +687,7 @@ function viewButchers() {
   search.placeholder = "חיפוש אטליז";
 
   const btSearch = document.createElement("button");
-  btSearch.addEventListener('click', searchBucher);
+  btSearch.addEventListener("click", searchBucher);
   btSearch.textContent = "חפש";
 
   ScreenButcher_div.appendChild(search);
@@ -705,8 +701,8 @@ function viewButchers() {
     ScreenButcher_div.appendChild(divideLine);
   }
 
-  for (let i = 0; i < butchersArray.length; i++){
-    console.log(butchersArray[i]);
+  for (let i = 0; i < butchersArray.length; i++) {
+    // console.log(butchersArray[i]);
     ScreenButcher_div.appendChild(createButher(butchersArray[i]));
   }
 
@@ -714,20 +710,17 @@ function viewButchers() {
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
-function searchBucher(){
-
+function searchBucher() {
   const searchButcher = document.getElementById("searchButcher");
   let resName = searchButcher.value;
   let result = [];
-  for(let i = 0 ; i < butchersArray.length ; i++)
-  {
-    if(butchersArray[i].butcherName === resName)
-      result.push(butchersArray[i]);
+  for (let i = 0; i < butchersArray.length; i++) {
+    if (butchersArray[i].butcherName === resName) result.push(butchersArray[i]);
   }
 
   const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
-  
+
   const ScreenButcher_div = document.createElement("div");
   ScreenButcher_div.id = "background_div";
   const title = document.createElement("h1");
@@ -740,10 +733,9 @@ function searchBucher(){
     divideLine.style.borderWidth = "medium";
     divideLine.style.backgroundColor = "black";
     ScreenButcher_div.appendChild(divideLine);
-    for (let i = 0; i < result.length ; i++)
+    for (let i = 0; i < result.length; i++)
       ScreenButcher_div.appendChild(createButher(result[i]));
-  }
-  else{
+  } else {
     title.textContent = "לא נמצאו אטליזים";
     ScreenButcher_div.appendChild(title);
   }
@@ -751,8 +743,6 @@ function searchBucher(){
   docFrag.appendChild(ScreenButcher_div);
   docFrag.id = "main";
   main.replaceWith(docFrag);
-
-
 }
 function saveButcher() {
   const docFrag1 = document.getElementById("background_div");
@@ -790,19 +780,18 @@ function saveButcher() {
 }
 //5 explenation of meats
 function btExplanation_of_meats1() {
-
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
   // const br = document.createElement("br");
   // const br1 = document.createElement("br");
-  
+
   const ScreenExp_div = document.createElement("div");
   ScreenExp_div.id = "background_div";
   const title = document.createElement("h1");
   title.textContent = "חלקי הפרה";
   ScreenExp_div.appendChild(title);
   // ScreenExp_div.appendChild(br);
-  
+
   const ScreenInside_div = document.createElement("div");
   ScreenInside_div.style.display = "flex";
   ScreenInside_div.style.flexWrap = "wrap";
@@ -831,7 +820,7 @@ function btExplanation_of_meats1() {
   בשר מספר 17 - פלדה - כסליים - לנזיד , לטחינה ולרולדה.
   בשר מספר 18 - שריר אחורי - פולי - לנזיד , למרק  ולבישול איטי.
   בשר מספר 19 - ויסבראטן - ראש ירכה - לצלי קדירה.`;
-  
+
   const beefImage = document.createElement("img");
   beefImage.src = "./images/Beef.png";
   beefImage.style.width = "450px";
@@ -916,16 +905,16 @@ function btGrillman_is_needed1() {
 function displayNextImage() {
   // x = (x === images.length - 1) ? 0 : x + 1;
   // document.getElementById("img").src = images[x];
-  document.getElementById("img").style.backgroundImage ="url(" + images[x]+")";
+  document.getElementById("img").style.backgroundImage =
+    "url(" + images[x] + ")";
   x++;
   // while(true){
-    var delayInMilliseconds = 4000; //1 second
-    setTimeout(function() {
-      displayNextImage();
-      
-      if(x == images.length)
-        x = 0;
-    }, delayInMilliseconds)
+  var delayInMilliseconds = 4000; //1 second
+  setTimeout(function () {
+    displayNextImage();
+
+    if (x == images.length) x = 0;
+  }, delayInMilliseconds);
   // }
 }
 
@@ -933,15 +922,12 @@ let images = [];
 let x = 0;
 window.onload = writeMessage;
 function writeMessage() {
-
   images[0] = "./images/homepage_high3.jpg";
   images[1] = "./images/homepage_high2.jpg";
   images[2] = "./images/homepage_high.jpg";
-  
-displayNextImage();
+
+  displayNextImage();
   navigationBarLoading();
-
-
 }
 
 //---------------------------------------------
@@ -1119,7 +1105,7 @@ function btViewRecipe1() {
 
   const btSearch = document.createElement("button");
   btSearch.textContent = "חפש";
-  btSearch.addEventListener('click', searchRecipe);
+  btSearch.addEventListener("click", searchRecipe);
 
   ScreenRecipe_div.appendChild(search);
   ScreenRecipe_div.appendChild(btSearch);
@@ -1140,19 +1126,16 @@ function btViewRecipe1() {
   main.replaceWith(docFrag);
 }
 function searchRecipe() {
-  
   const searchRecipe = document.getElementById("searchRecipe");
   let resName = searchRecipe.value;
   let result = [];
-  for(let i = 0 ; i < recipesArray.length ; i++)
-  {
-    if(recipesArray[i].recipeName === resName)
-      result.push(recipesArray[i]);
+  for (let i = 0; i < recipesArray.length; i++) {
+    if (recipesArray[i].recipeName === resName) result.push(recipesArray[i]);
   }
 
   const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
-  
+
   const ScreenRecipe_div = document.createElement("div");
   ScreenRecipe_div.id = "background_div";
   const title = document.createElement("h1");
@@ -1165,10 +1148,9 @@ function searchRecipe() {
     divideLine.style.borderWidth = "medium";
     divideLine.style.backgroundColor = "black";
     ScreenRecipe_div.appendChild(divideLine);
-    for (let i = 0; i < result.length ; i++)
-    ScreenRecipe_div.appendChild(createRecipe(result[i]));
-  }
-  else{
+    for (let i = 0; i < result.length; i++)
+      ScreenRecipe_div.appendChild(createRecipe(result[i]));
+  } else {
     title.textContent = "לא נמצאו מתכונים";
     ScreenRecipe_div.appendChild(title);
   }
@@ -1309,7 +1291,7 @@ function grillManList() {
   search.placeholder = "חיפוש גרילמן: ";
 
   const btSearch = document.createElement("button");
-  btSearch.addEventListener('click', searchGrillman);
+  btSearch.addEventListener("click", searchGrillman);
   btSearch.textContent = "חפש";
 
   ScreenGrillman_div.appendChild(search);
@@ -1330,20 +1312,18 @@ function grillManList() {
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
-function searchGrillman(){
-
+function searchGrillman() {
   const searchGrillman = document.getElementById("searchGrillman");
   let resName = searchGrillman.value;
   let result = [];
-  for(let i = 0 ; i < grillmanArray.length ; i++)
-  {
-    if(grillmanArray[i].grillmanName === resName)
+  for (let i = 0; i < grillmanArray.length; i++) {
+    if (grillmanArray[i].grillmanName === resName)
       result.push(grillmanArray[i]);
   }
 
   const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
-  
+
   const ScreenGrillman_div = document.createElement("div");
   ScreenGrillman_div.id = "background_div";
   const title = document.createElement("h1");
@@ -1356,10 +1336,9 @@ function searchGrillman(){
     divideLine.style.borderWidth = "medium";
     divideLine.style.backgroundColor = "black";
     ScreenGrillman_div.appendChild(divideLine);
-    for (let i = 0; i < result.length ; i++)
+    for (let i = 0; i < result.length; i++)
       ScreenGrillman_div.appendChild(createGrillman(result[i]));
-  }
-  else{
+  } else {
     title.textContent = "לא נמצאו גרילמנים";
     ScreenGrillman_div.appendChild(title);
   }
@@ -1367,7 +1346,6 @@ function searchGrillman(){
   docFrag.appendChild(ScreenGrillman_div);
   docFrag.id = "main";
   main.replaceWith(docFrag);
-
 }
 //2 event functions
 function Event(
