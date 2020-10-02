@@ -824,7 +824,7 @@ function btExplanation_of_meats1() {
   const beefImage = document.createElement("img");
   beefImage.src = "./images/Beef.png";
   beefImage.style.width = "450px";
-  beefImage.style.height = "500px";
+  beefImage.style.height = "400px";
   beefImage.style.paddingTop = "70px";
 
   ScreenInside_div.appendChild(Explention);
@@ -988,7 +988,7 @@ function btAddRecipe1() {
   const br6 = document.createElement("br");
   const br7 = document.createElement("br");
 
-  const new_recipe = document.getElementById("background_div");
+  const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
 
   const title = document.createElement("h3");
@@ -999,51 +999,53 @@ function btAddRecipe1() {
   const inputTitle = document.createElement("input");
   inputTitle.placeholder = "שם המתכון: ";
   inputTitle.id = "inputTitle";
+  docFrag.appendChild(br6);
+  docFrag.appendChild(br7);
+  docFrag.appendChild(inputTitle);
   //Ingredients text
   const div1 = document.createElement("div");
   div1.textContent = "מצרכים: ";
+  docFrag.appendChild(br);
+  docFrag.appendChild(br1);
+  docFrag.appendChild(div1);
+
   const textArea1 = document.createElement("textarea");
   textArea1.id = "textAreaIngredients";
+  docFrag.appendChild(textArea1);
+  docFrag.appendChild(br2);
+  docFrag.appendChild(br3);
   //Prepration text
   const div2 = document.createElement("div");
   div2.textContent = "אופן הכנה: ";
   const textArea2 = document.createElement("textarea");
   textArea2.id = "textAreaPrepration";
+  docFrag.appendChild(div2);
+  docFrag.appendChild(textArea2);
+  docFrag.appendChild(br4);
+  docFrag.appendChild(br5);
   //Editor name
   const editorName = document.createElement("input");
   editorName.placeholder = "שם: ";
   editorName.id = "editorName";
+  docFrag.appendChild(editorName);
   //save button
   const btSave = document.createElement("button");
   btSave.textContent = "שמור";
   btSave.id = "btSave";
   btSave.addEventListener("click", saveRecipe);
+  docFrag.appendChild(btSave);
   //chef image
   const chefImage = document.createElement("img");
   chefImage.src = "./images/chafe.jpg";
   chefImage.className = "small_images";
-
-  //Build the new frag
-  // docFrag.appendChild(select);
-  docFrag.appendChild(br6);
-  docFrag.appendChild(br7);
-  docFrag.appendChild(inputTitle);
-  docFrag.appendChild(br);
-  docFrag.appendChild(br1);
-  docFrag.appendChild(div1);
-  docFrag.appendChild(textArea1);
-  docFrag.appendChild(br2);
-  docFrag.appendChild(br3);
-  docFrag.appendChild(div2);
-  docFrag.appendChild(textArea2);
-  docFrag.appendChild(br4);
-  docFrag.appendChild(br5);
-  docFrag.appendChild(editorName);
-  docFrag.appendChild(btSave);
   docFrag.appendChild(chefImage);
 
+  // const ScreenInside_div = document.createElement("div");
+  // ScreenInside_div.style.display = "flex";
+  // ScreenInside_div.style.flexWrap = "wrap";
+
   docFrag.id = "background_div";
-  new_recipe.replaceWith(docFrag);
+  main.replaceWith(docFrag);
 }
 
 function saveRecipe() {
