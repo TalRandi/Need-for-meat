@@ -43,7 +43,7 @@ function createRestaurant(resObject) {
   resDiv.className = "restaurant_class";
 
   const resName = document.createElement("h2");
-  resName.className = "restaurantName";
+  resName.className = "butcherRestaurant";
   resName.textContent = resObject.restaurantName;
   const resDesctiption = document.createElement("div");
   resDesctiption.className = "description";
@@ -229,7 +229,7 @@ function addRestaurant() {
   const docFrag = document.createElement("div");
 
   const title = document.createElement("h3");
-  title.textContent = "חלון הוספת מסעדה";
+  title.textContent = "הוספת מסעדה";
   docFrag.appendChild(title);
 
   //Restaurant name
@@ -492,14 +492,16 @@ function createButher(butcherObject) {
 
   butchDiv.className = "butcher_class";
 
-  const butcherName = document.createElement("h4");
+  const butcherName = document.createElement("h2");
+  butcherName.className = "butcherRestaurant";
   butcherName.textContent = "שם האטליז:    " + butcherObject.butcherName;
-  const description = document.createElement("par");
+  const description = document.createElement("div");
+  description.className = "description";
   description.textContent = "תיאור:    " + butcherObject.butcherDescription;
   const location = document.createElement("h5");
   location.textContent = "מיקום:    " + butcherObject.butcherLocation;
   const kosher = document.createElement("h5");
-  kosher.textContent = "כשר:    " + butcherObject.butcherKosher;
+  kosher.textContent = "כשרות:    " + butcherObject.butcherKosher;
 
   butchDiv.appendChild(butcherName);
   butchDiv.appendChild(description);
@@ -622,7 +624,7 @@ function addButcher() {
   const docFrag = document.createElement("div");
 
   const title = document.createElement("h3");
-  title.textContent = "חלון הוספת אטליז";
+  title.textContent = "הוספת אטליז";
   docFrag.appendChild(title);
 
   //Butcher name
@@ -1004,7 +1006,7 @@ function btAddRecipe1() {
   const docFrag = document.createElement("div");
 
   const title = document.createElement("h3");
-  title.textContent = "חלון הוספת מתכון";
+  title.textContent = "הוספת מתכון";
   docFrag.appendChild(title);
 
   //Recipe title
@@ -1230,7 +1232,7 @@ function newGrillman() {
   main.replaceWith(docFrag);
 
   const title = document.createElement("h3");
-  title.textContent = "חלון הוספת גרילמן";
+  title.textContent = "הוספת גרילמן";
   docFrag.appendChild(title);
 
   //Grillman's details
