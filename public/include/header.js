@@ -1703,7 +1703,7 @@ function sendRecipeToFireBase(r1) {
   firebase
     .database()
     .ref("Recipes")
-    .child(restaurantCounter + "")
+    .child(recipeCounter + "")
     .set(r1);
   //counter
   recipeCounter++;
