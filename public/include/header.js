@@ -43,7 +43,7 @@ function createRestaurant(resObject) {
   resDiv.className = "restaurant_class";
 
   const resName = document.createElement("h2");
-  resName.className = "butcherRestaurant";
+  resName.className = "butcherRestaurantRecipe";
   resName.textContent = resObject.restaurantName;
   const resDesctiption = document.createElement("div");
   resDesctiption.className = "description";
@@ -281,6 +281,12 @@ function addRestaurant() {
   btSave.style.top = "90%";
   btSave.addEventListener("click", saveRestaurant);
   docFrag.appendChild(btSave);
+  
+  //restaurant image
+  const grillmanImage = document.createElement("img");
+  grillmanImage.src = "./images/restaurantImg.jpg";
+  grillmanImage.className = "small_images";
+  docFrag.appendChild(grillmanImage);
 
   docFrag.id = "background_div";
   new_restaurant.replaceWith(docFrag);
@@ -480,31 +486,40 @@ function Butcher(name = "", description = "", location = "", kosher = true) {
 let butchersArray = [];
 
 //butchers functions
-function createButher(butcherObject) {
+function createButcher(butcherObject) {
   const butchDiv = document.createElement("div");
-  const br = document.createElement("br");
-  const br1 = document.createElement("br");
-  const br2 = document.createElement("br");
 
   butchDiv.className = "butcher_class";
 
   const butcherName = document.createElement("h2");
-  butcherName.className = "butcherRestaurant";
+  butcherName.className = "butcherRestaurantRecipe";
   butcherName.textContent = "שם האטליז:    " + butcherObject.butcherName;
+  const descriptionTitle = document.createElement("h3");
+  descriptionTitle.textContent = "תיאור: ";
   const description = document.createElement("div");
   description.className = "description";
-  description.textContent = "תיאור:    " + butcherObject.butcherDescription;
-  const location = document.createElement("h5");
-  location.textContent = "מיקום:    " + butcherObject.butcherLocation;
-  const kosher = document.createElement("h5");
-  kosher.textContent = "כשרות:    " + butcherObject.butcherKosher;
+  description.textContent = butcherObject.butcherDescription;
+
+  const location = document.createElement("i");
+  location.className = "material-icons";
+  if (butcherObject.butcherLocation != "")
+    location.textContent = butcherObject.butcherLocation + "place";
+  else location.textContent = "לא צוין מיקום";
+
+  const kosher = document.createElement("h2");
+  if (butcherObject.butcherKosher) kosher.textContent = "כשר";
+  else kosher.textContent = "לא כשר";
+
+  const divideLine = document.createElement("hr");
+  divideLine.className = "solid";
 
   butchDiv.appendChild(butcherName);
+  butchDiv.appendChild(descriptionTitle);
   butchDiv.appendChild(description);
-  butchDiv.appendChild(br);
-  butchDiv.appendChild(br1);
-  butchDiv.appendChild(location);
   butchDiv.appendChild(kosher);
+  butchDiv.appendChild(location);
+  if (butcherObject != butchersArray[butchersArray.length - 1])
+    butchDiv.appendChild(divideLine);
 
   return butchDiv;
 }
@@ -652,6 +667,12 @@ function addButcher() {
   btSave.style.top = "90%";
   btSave.addEventListener("click", saveButcher);
 
+  //butcher image
+  const grillmanImage = document.createElement("img");
+  grillmanImage.src = "./images/butcherImg.jpg";
+  grillmanImage.className = "small_images";
+  docFrag.appendChild(grillmanImage);  
+
   docFrag.appendChild(br);
   docFrag.appendChild(br1);
   docFrag.appendChild(inputTitle);
@@ -703,7 +724,7 @@ function viewButchers() {
 
   for (let i = 0; i < butchersArray.length; i++) {
     // console.log(butchersArray[i]);
-    ScreenButcher_div.appendChild(createButher(butchersArray[i]));
+    ScreenButcher_div.appendChild(createButcher(butchersArray[i]));
   }
 
   docFrag.appendChild(ScreenButcher_div);
@@ -734,7 +755,7 @@ function searchBucher() {
     divideLine.style.backgroundColor = "black";
     ScreenButcher_div.appendChild(divideLine);
     for (let i = 0; i < result.length; i++)
-      ScreenButcher_div.appendChild(createButher(result[i]));
+      ScreenButcher_div.appendChild(createButcher(result[i]));
   } else {
     title.textContent = "לא נמצאו אטליזים";
     ScreenButcher_div.appendChild(title);
@@ -745,7 +766,6 @@ function searchBucher() {
   main.replaceWith(docFrag);
 }
 function saveButcher() {
-  const docFrag1 = document.getElementById("background_div");
 
   const inputTitleButcher = document.getElementById("inputTitleButcher").value;
   const butchDescription = document.getElementById("textAreaButcher").value;
@@ -776,7 +796,6 @@ function saveButcher() {
   document.getElementById("butcherLocation").value = "";
   document.getElementById("butcherKosher").value = "";
 
-  // docFrag1.appendChild(createButher(butchersArray[butchersArray.length - 1]));
 }
 //5 explenation of meats
 function btExplanation_of_meats1() {
@@ -831,7 +850,7 @@ function btExplanation_of_meats1() {
   ScreenInside_div.appendChild(beefImage);
   ScreenExp_div.appendChild(ScreenInside_div);
   docFrag.appendChild(ScreenExp_div);
-  // docFrag.className = "zoom";
+
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
@@ -901,21 +920,23 @@ function btGrillman_is_needed1() {
 
   docFrag.id = "main";
   main.replaceWith(docFrag);
+  
 }
 function displayNextImage() {
-  // x = (x === images.length - 1) ? 0 : x + 1;
-  // document.getElementById("img").src = images[x];
-  document.getElementById("img").style.backgroundImage =
-    "url(" + images[x] + ")";
+
+  document.getElementById("img").style.backgroundImage = "url(" + images[x] + ")";
   x++;
-  // while(true){
-  var delayInMilliseconds = 4000; //1 second
+
+  //delay
+  var delayInMilliseconds = 4000; //4 second
   setTimeout(function () {
     displayNextImage();
 
-    if (x == images.length) x = 0;
+    if(x == images.length) 
+      x = 0;
+    
   }, delayInMilliseconds);
-  // }
+  
 }
 
 let images = [];
@@ -953,12 +974,17 @@ function createRecipe(recipeObject) {
 
   resDiv.className = "recipe_class";
 
-  const recName = document.createElement("h4");
+  const recName = document.createElement("h2");
+  recName.className = "butcherRestaurantRecipe";
   recName.textContent = recipeObject.recipeName;
-  const ingredients = document.createElement("par");
-  ingredients.textContent = "מצרכים:    " + recipeObject.recipeIngredients;
-  const prepration = document.createElement("par");
-  prepration.textContent = "אופן ההכנה:    " + recipeObject.recipePrepration;
+  const ingredientsTitle = document.createElement("h4");
+  ingredientsTitle.textContent = "מצרכים: ";
+  const ingredients = document.createElement("pre");
+  ingredients.textContent = recipeObject.recipeIngredients;
+  const preprationTitle = document.createElement("h4");
+  preprationTitle.textContent = "אופן ההכנה: ";
+  const prepration = document.createElement("pre");
+  prepration.textContent = recipeObject.recipePrepration;
   const editor = document.createElement("h5");
   editor.textContent = "עורך המתכון:    " + recipeObject.editorName;
 
@@ -966,9 +992,11 @@ function createRecipe(recipeObject) {
   divideLine.className = "solid";
 
   resDiv.appendChild(recName);
+  resDiv.appendChild(ingredientsTitle);
   resDiv.appendChild(ingredients);
   resDiv.appendChild(br);
   resDiv.appendChild(br1);
+  resDiv.appendChild(preprationTitle);
   resDiv.appendChild(prepration);
   resDiv.appendChild(editor);
   if (recipeObject != recipesArray[recipesArray.length - 1])
@@ -994,7 +1022,7 @@ function btAddRecipe1() {
   const title = document.createElement("h3");
   title.textContent = "הוספת מתכון";
   docFrag.appendChild(title);
-
+  
   //Recipe title
   const inputTitle = document.createElement("input");
   inputTitle.placeholder = "שם המתכון: ";
@@ -1184,8 +1212,10 @@ function createGrillman(grillmanObject) {
   const grillmanPhone = document.createElement("h4");
   grillmanPhone.textContent =
     "מספר פלאפון:    " + grillmanObject.grillmanPhoneNumber;
+  const detailsTitle = document.createElement("h3");
+  detailsTitle.textContent = "פרטים: ";
   const details = document.createElement("par");
-  details.textContent = "פרטים:    " + grillmanObject.grillmanDetails;
+  details.textContent = grillmanObject.grillmanDetails;
   const price = document.createElement("h5");
   price.textContent = "מחיר לשעת עבודה:    " + grillmanObject.grillmanPrice;
 
@@ -1194,6 +1224,7 @@ function createGrillman(grillmanObject) {
 
   grillDiv.appendChild(grillmanName);
   grillDiv.appendChild(grillmanPhone);
+  grillDiv.appendChild(detailsTitle);
   grillDiv.appendChild(details);
   grillDiv.appendChild(price);
 
@@ -1473,12 +1504,11 @@ function newEvent() {
   docFrag.appendChild(btSave);
 
   //beef image
-  // const beefEventImage = document.createElement("img");
-  // beefEventImage.src = "./images/beef_event.jpg";
-  // beefEventImage.style.position = "absolute";
-  // beefEventImage.style.left = "70px";
-  // beefEventImage.style.top = "70px";
-  // docFrag.appendChild(beefEventImage);
+
+  const grillmanImage = document.createElement("img");
+  grillmanImage.src = "./images/restaurantImg.jpg";
+  grillmanImage.className = "small_images";
+  docFrag.appendChild(grillmanImage);
 
   main.replaceWith(docFrag);
 }
