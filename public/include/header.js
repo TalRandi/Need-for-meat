@@ -922,6 +922,7 @@ function btGrillman_is_needed1() {
   main.replaceWith(docFrag);
   
 }
+
 function displayNextImage() {
 
   document.getElementById("img").style.backgroundImage = "url(" + images[x] + ")";
@@ -1712,6 +1713,7 @@ function sendRestauranToFireBase(r1) {
 }
 
 function getRestauranFromFireBase() {
+  // console.log(restaurantCounter);
   for (let i = 0; i < restaurantCounter; i++) {
     number = i;
     firebase
@@ -1722,6 +1724,7 @@ function getRestauranFromFireBase() {
         let r1 = snapshot.val();
         if (r1 != null) {
           restaurantArray.push(r1);
+          // viewRestaurant();
         }
       });
   }
