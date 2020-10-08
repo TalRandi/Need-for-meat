@@ -192,3 +192,33 @@ footer {
   margin: auto;
   transition: ease-in-out 2s;
 }
+#center-title{
+  margin: auto;
+  color: rgb(124, 101, 98);
+  text-align: center;
+  /* padding-top: 17%; */
+  font-size: 100px;
+  text-shadow: 2px 2px #0f0101;
+  -webkit-animation: mymove 3s infinite;
+  animation: mymove 4s infinite;
+}
+#homepage-div{
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  text-align: center;
+  width: 50%;
+}
+.hompage-hr{
+  border: 0;
+  height: 2px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+@-webkit-keyframes mymove {
+  50% {text-shadow: 10px 20px 30px rgb(255, 183, 183);}
+}
+
+@keyframes mymove {
+  50% {text-shadow: 10px 20px 30px rgb(73, 3, 3);
+    color: rgb(0, 0, 0);}
+}
