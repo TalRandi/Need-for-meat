@@ -137,13 +137,6 @@ restaurantArray.push(Restaurant("שפשוואן", des5, 5));
 restaurantArray.push(Restaurant("בני הדייג", des6, 4, false, "תל אביב"));
 
 function btRestaurants1() {
-  ///get all Restaurant from fb
-  if (restaurantFlag) {
-    getRestauranFromFireBase();
-    restaurantFlag = false;
-  }
-  // console.log("im here 1 " + restaurantArray.length);
-
   const br = document.createElement("br");
   const br1 = document.createElement("br");
 
@@ -178,36 +171,6 @@ function btRestaurants1() {
 מחפשים מסעדה מומלצת? כאן תוכלו למצוא מגוון רחב של מסעדות בכל האזורים, מכל הסוגים והסגנונות.`;
 
   ScreenRes_div.appendChild(article);
-
-  // const title = document.createElement("h1");
-  // title.textContent = "מסעדות";
-  // ScreenRes_div.appendChild(title);
-
-  // const search = document.createElement("input");
-  // search.style.fontSize = "16px";
-  // search.placeholder = "חיפוש מסעדה:";
-
-  // const btSearch = document.createElement("button");
-  // btSearch.textContent = "חפש";
-
-  // ScreenRes_div.appendChild(search);
-  // ScreenRes_div.appendChild(btSearch);
-  // ScreenRes_div.appendChild(br);
-
-  // if (restaurantArray.length != 0) {
-  //   const divideLine = document.createElement("hr");
-  //   divideLine.style.borderStyle = "solid double";
-  //   divideLine.style.borderWidth = "medium";
-  //   divideLine.style.backgroundColor = "black";
-  //   ScreenRes_div.appendChild(divideLine);
-  // }
-
-  // const divideLine = document.createElement("hr");
-  // divideLine.className = "solid";
-
-  // for (let i = 0; i < restaurantArray.length; i++) {
-  //   ScreenRes_div.appendChild(createRestaurant(restaurantArray[i]));
-  // }
 
   docFrag.appendChild(ScreenRes_div);
   docFrag.id = "main";
@@ -281,7 +244,7 @@ function addRestaurant() {
   btSave.style.top = "90%";
   btSave.addEventListener("click", saveRestaurant);
   docFrag.appendChild(btSave);
-  
+
   //restaurant image
   const grillmanImage = document.createElement("img");
   grillmanImage.src = "./images/restaurantImg.jpg";
@@ -330,12 +293,6 @@ function saveRestaurant() {
 }
 
 function viewRestaurant() {
-  ///get all Restaurant from fb
-  if (restaurantFlag) {
-    getRestauranFromFireBase();
-    restaurantFlag = false;
-  }
-
   const br = document.createElement("br");
 
   const main = document.getElementById("background_div");
@@ -366,7 +323,6 @@ function viewRestaurant() {
     divideLine.style.backgroundColor = "black";
     ScreenRestaurant_div.appendChild(divideLine);
   }
-
   for (let i = 0; i < restaurantArray.length; i++)
     ScreenRestaurant_div.appendChild(createRestaurant(restaurantArray[i]));
 
@@ -413,12 +369,6 @@ function searchRestaurant() {
 
 //2 recipes
 function btRecipes1() {
-  //get all Recipes from fb
-  if (recipeFlag) {
-    getRecipeFromFireBase();
-    recipeFlag = false;
-  }
-
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   // const br2 = document.createElement("br");
@@ -524,12 +474,6 @@ function createButcher(butcherObject) {
   return butchDiv;
 }
 function btButchers1() {
-  //get all the butchers from fb
-  if (buthcerFlag) {
-    getButcherFromFireBase();
-    buthcerFlag = false;
-  }
-
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   // const br2 = document.createElement("br");
@@ -564,60 +508,6 @@ function btButchers1() {
   ScreenButchers_div.id = "background_div";
   docFrag.appendChild(ScreenButchers_div);
 
-  // const ScreenButchers_div = document.createElement("div");
-  // ScreenButchers_div.id = "background_div";
-
-  // const title = document.createElement("h1");
-  // title.textContent = "אטליזים";
-  // ScreenButchers_div.appendChild(title);
-
-  // const search = document.createElement("input");
-  // search.placeholder = "חיפוש אטליז:";
-
-  // const btSearch = document.createElement("button");
-  // btSearch.textContent = "חפש";
-
-  // const butcherName1 = document.createElement("h2");
-  // butcherName1.className = "butcherName";
-  // butcherName1.textContent = "-מרינדו-";
-  // const bucherDesc1 = document.createElement("par");
-  // bucherDesc1.textContent = `רועי תבור ואיתמר קנדליק אמנם מגיעים ממושב כנף שברמת הגולן, אבל משווקים את התוצרת שלהם בכל הארץ.
-  // נקודות מכירה שלהם תמצאו בסניפי ספייסס ביהוד ובתל-אביב. חלק מהבשר כבר מתובל וארוז בוואקום, ונותר רק להתחיל לצלות.
-  // יש פה שוק טלה בעשבי תיבול, רוסטביף לתנור, צלעות טלה פרוסות למחבת בתיבול צ'ילי, שום ודבש, אנטרקוט, סינטה במגוון מרינדות, קבבים, וסוגים שונים של בשר טחון. לצד הבשר יש גם דליקטסים ייחודיים, כגון צירי עגל וטלה`;
-
-  // const butcherName2 = document.createElement("h2");
-  // butcherName2.textContent = "-אטליז פרץ-";
-  // butcherName2.className = "butcherName";
-  // const butcherDesc2 = document.createElement("par");
-  // butcherDesc2.textContent = `לא נוצץ, לא מפונפן, לא מתוקשר – ובכל זאת, אטליז פרץ הוא מקום שכונתי, שבו תוכלו להשיג קציצות ביתיות, ירקרקות מרוב עשבי תיבול, קבבים טורקיים תוצרת בית, וגם נקניק סוג'וק יבש שמכינים בני משפחת פרץ.
-  // הבעלים משתייכים לשושלת קצבים מאיזמיר, טורקיה, וניכר בהם שהם גאים במלאכתם.`;
-
-  // const butcherName3 = document.createElement("h2");
-  // butcherName3.textContent = "-לגעת באוכל-";
-  // butcherName3.className = "butcherName";
-  // const butcherDesc3 = document.createElement("par");
-  // butcherDesc3.textContent = `את האנטרקוט מיישנים כאן כ‭21-‬ יום במקרר מיוחד, לדרגת יישון אופטימאלית. הנתח עטוף בשומן ומשויש היטב, ויש לו טעם בשרי יוצא דופן.
-  // 135 שקל לקילו, והוא שלכם. חוץ מזה, יש פה מבחר נאה של נתחי בשר מיוחדים, בשרים מעושנים ודגים, וצוות של מומחי בשר שישמח לענות לכם על כל שאלה.`;
-
-  // ScreenButchers_div.appendChild(search);
-  // ScreenButchers_div.appendChild(btSearch);
-  // ScreenButchers_div.appendChild(br);
-  // ScreenButchers_div.appendChild(butcherName1);
-  // ScreenButchers_div.appendChild(bucherDesc1);
-  // ScreenButchers_div.appendChild(br1);
-  // ScreenButchers_div.appendChild(butcherName2);
-  // ScreenButchers_div.appendChild(butcherDesc2);
-  // ScreenButchers_div.appendChild(br2);
-  // ScreenButchers_div.appendChild(butcherName3);
-  // ScreenButchers_div.appendChild(butcherDesc3);
-
-  // const btAddButcher = document.createElement("button");
-  // btAddButcher.className = "rightSideButtons";
-  // btAddButcher.textContent = "הוסף אטליז";
-  // btAddButcher.addEventListener('click',addButcher);
-
-  // docFrag.appendChild(btAddButcher);
-  // docFrag.appendChild(ScreenButchers_div);
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
@@ -671,7 +561,7 @@ function addButcher() {
   const grillmanImage = document.createElement("img");
   grillmanImage.src = "./images/butcherImg.jpg";
   grillmanImage.className = "small_images";
-  docFrag.appendChild(grillmanImage);  
+  docFrag.appendChild(grillmanImage);
 
   docFrag.appendChild(br);
   docFrag.appendChild(br1);
@@ -766,7 +656,6 @@ function searchBucher() {
   main.replaceWith(docFrag);
 }
 function saveButcher() {
-
   const inputTitleButcher = document.getElementById("inputTitleButcher").value;
   const butchDescription = document.getElementById("textAreaButcher").value;
   const butcherLocation = document.getElementById("butcherLocation").value;
@@ -795,7 +684,6 @@ function saveButcher() {
   document.getElementById("textAreaButcher").value = "";
   document.getElementById("butcherLocation").value = "";
   document.getElementById("butcherKosher").value = "";
-
 }
 //5 explenation of meats
 function btExplanation_of_meats1() {
@@ -856,17 +744,6 @@ function btExplanation_of_meats1() {
 }
 //6 grillman
 function btGrillman_is_needed1() {
-  // get all grillmans from fb
-  if (grillManFlag) {
-    getGrillManFromFireBase();
-    grillManFlag = false;
-  }
-  // get all events from fb
-  if (eventFlag) {
-    getEventFromFireBase();
-    eventFlag = false;
-  }
-
   const br = document.createElement("br");
   const br1 = document.createElement("br");
   const br2 = document.createElement("br");
@@ -920,12 +797,11 @@ function btGrillman_is_needed1() {
 
   docFrag.id = "main";
   main.replaceWith(docFrag);
-  
 }
 
 function displayNextImage() {
-
-  document.getElementById("img").style.backgroundImage = "url(" + images[x] + ")";
+  document.getElementById("img").style.backgroundImage =
+    "url(" + images[x] + ")";
   x++;
 
   //delay
@@ -933,11 +809,8 @@ function displayNextImage() {
   setTimeout(function () {
     displayNextImage();
 
-    if(x == images.length) 
-      x = 0;
-    
+    if (x == images.length) x = 0;
   }, delayInMilliseconds);
-  
 }
 
 let images = [];
@@ -952,10 +825,7 @@ function writeMessage() {
   navigationBarLoading();
 }
 
-//---------------------------------------------
-//1 Restaurants functions
-
-//---------------------------------------------
+//---------------------------------------------recipe functions
 function Recipe(name = "", ingred = "", prep = "", edName = "") {
   return (recipe = {
     recipeName: name,
@@ -1023,7 +893,7 @@ function btAddRecipe1() {
   const title = document.createElement("h3");
   title.textContent = "הוספת מתכון";
   docFrag.appendChild(title);
-  
+
   //Recipe title
   const inputTitle = document.createElement("input");
   inputTitle.placeholder = "שם המתכון: ";
@@ -1068,11 +938,6 @@ function btAddRecipe1() {
   chefImage.src = "./images/chafe.jpg";
   chefImage.className = "small_images";
   docFrag.appendChild(chefImage);
-
-  // const ScreenInside_div = document.createElement("div");
-  // ScreenInside_div.style.display = "flex";
-  // ScreenInside_div.style.flexWrap = "wrap";
-
   docFrag.id = "background_div";
   main.replaceWith(docFrag);
 }
@@ -1113,8 +978,6 @@ function saveRecipe() {
   document.getElementById("textAreaIngredients").value = "";
   document.getElementById("textAreaPrepration").value = "";
   document.getElementById("editorName").value = "";
-
-  //docFrag1.appendChild(createRecipe(recipesArray[recipesArray.length - 1]));
 }
 
 function btViewRecipe1() {
@@ -1525,17 +1388,6 @@ function eventList() {
   title.textContent = "רשימת איוונטים";
   ScreenEvent_div.appendChild(title);
 
-  // const search = document.createElement("input");
-  // search.style.fontSize = "16px";
-  // search.placeholder = "חיפוש גרילמן: ";
-
-  // const btSearch = document.createElement("button");
-  // btSearch.textContent = "חפש";
-
-  // ScreenEvent_div.appendChild(search);
-  // // ScreenEvent_div.appendChild(btSearch);
-  // ScreenEvent_div.appendChild(br);
-
   if (eventArray.length != 0) {
     const divideLine = document.createElement("hr");
     divideLine.style.borderStyle = "solid double";
@@ -1603,27 +1455,10 @@ function saveNewEvent() {
 
 //--------------------------------------------------------------------------
 // firebase
-let restaurantCounter = 0;
-let recipeCounter = 0;
-let butcherCounter = 0;
-let grillManCounter = 0;
-let eventCounter = 0;
-let restaurantFlag = true;
-let recipeFlag = true;
-let buthcerFlag = true;
-let grillManFlag = true;
-let eventFlag = true;
 
-// function User(name, pass) {
-//   let user = {
-//     Name: name,
-//     Pass: pass,
-//   };
-//   return user;
-// }
 function fireBase() {
   //init
-
+  /*
   //get restaurant Counter
   firebase
     .database()
@@ -1633,227 +1468,124 @@ function fireBase() {
       restaurantCounter = snapshot.val().restaurantCounter;
       // console.log("restaurantCounter: " + restaurantCounter);
     });
-  //get recipe counter
-  firebase
-    .database()
-    .ref("Recipes")
-    .child("recipeCounter")
-    .on("value", function (snapshot) {
-      recipeCounter = snapshot.val().recipeCounter;
-    });
-  //get butcher counter
-  firebase
-    .database()
-    .ref("Butchers")
-    .child("butcherCounter")
-    .on("value", function (snapshot) {
-      butcherCounter = snapshot.val().butcherCounter;
-    });
-  //get grillMan counter
-  firebase
-    .database()
-    .ref("GrillMans")
-    .child("grillManCounter")
-    .on("value", function (snapshot) {
-      grillManCounter = snapshot.val().grillManCounter;
-    });
-  //get Events counter
-  firebase
-    .database()
-    .ref("Events")
-    .child("eventCounter")
-    .on("value", function (snapshot) {
-      eventCounter = snapshot.val().eventCounter;
-    });
-
-  // console.log("recipeCounter: " + recipeCounter);
-  // getRecipeFromFireBase();
-  // getRestauranFromFireBase();
-
-  ///
-  // let u1 = User("yisrael", "1234");
-  // let u2 = User("meir", "4020");
-  // firebase
-  //   .database()
-  //   .ref("recipes")
-  //   .child(0 + "")
-  //   .set(u1);
-  // recipeCounter++;
-  // firebase
-  //   .database()
-  //   .ref("recipes")
-  //   .child(1 + "")
-  //   .set(u2);
-  // recipeCounter++;
-  // for (let i = 1; i < 3; i++) {
-  //   number = i;
-  //   firebase
-  //     .database()
-  //     .ref("recipes")
-  //     .child(number + "")
-  //     .on("value", function (snapshot) {
-  //       let u3 = snapshot.val();
-  //       console.log(u3);
-  //     });
-  // }
+  
+*/
+  getRestauranFromFireBase();
+  getRecipeFromFireBase();
+  getButcherFromFireBase();
+  getGrillManFromFireBase();
+  getEventFromFireBase();
 }
-//send and get Restaurants from fb
+
+// //send and get Restaurants from fb
+// function sendRestauranToFireBase(r1) {
+//   firebase
+//     .database()
+//     .ref("Restaurants")
+//     .child(restaurantCounter + "")
+//     .set(r1);
+//   //counter
+//   restaurantCounter++;
+//   firebase.database().ref("Restaurants").child("restaurantCounter").set({
+//     restaurantCounter: restaurantCounter,
+//   });
+//   // console.log("im here res count: " + restaurantCounter);
+// }
+
+// function getRestauranFromFireBase() {
+//   for (let i = 0; i < restaurantCounter; i++) {
+//     number = i;
+//     firebase
+//       .database()
+//       .ref("Restaurants")
+//       .child(number + "")
+//       .on("value", function (snapshot) {
+//         let r1 = snapshot.val();
+//         if (r1 != null) {
+//           restaurantArray.push(r1);
+//         }
+//       });
+//   }
+// }
 function sendRestauranToFireBase(r1) {
-  firebase
-    .database()
-    .ref("Restaurants")
-    .child(restaurantCounter + "")
-    .set(r1);
-  //counter
-  restaurantCounter++;
-  firebase.database().ref("Restaurants").child("restaurantCounter").set({
-    restaurantCounter: restaurantCounter,
-  });
-  // console.log("im here res count: " + restaurantCounter);
+  firebase.database().ref("Restaurants").child(r1.restaurantName).set(r1);
 }
-
 function getRestauranFromFireBase() {
-  // console.log(restaurantCounter);
-  for (let i = 0; i < restaurantCounter; i++) {
-    number = i;
-    firebase
-      .database()
-      .ref("Restaurants")
-      .child(number + "")
-      .on("value", function (snapshot) {
-        let r1 = snapshot.val();
-        if (r1 != null) {
-          restaurantArray.push(r1);
-          // viewRestaurant();
-        }
-      });
-  }
+  let database = firebase.database().ref("Restaurants");
+  database.once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      // let childKey = childSnapshot.key;
+      let childData = childSnapshot.val();
+      // console.log("childKey " + childKey);
+      // console.log("childData " + childData);
+      // console.log("childData name " + childData.restaurantName);
+      restaurantArray.push(childData);
+      //addARestaurantToTheArray(childData);
+    });
+  });
+}
+//need to add to all the other
+function addARestaurantToTheArray(childData) {
+  restaurantArray.push(childData);
+  viewRestaurant();
 }
 
 //send and get recipes from fb
-
 function sendRecipeToFireBase(r1) {
-  firebase
-    .database()
-    .ref("Recipes")
-    .child(recipeCounter + "")
-    .set(r1);
-  //counter
-  recipeCounter++;
-  firebase.database().ref("Recipes").child("recipeCounter").set({
-    recipeCounter: recipeCounter,
-  });
+  firebase.database().ref("Recipes").child(r1.recipeName).set(r1);
 }
-
 function getRecipeFromFireBase() {
-  // console.log("restaurantCounter " + restaurantCounter);
-
-  for (let i = 0; i < recipeCounter; i++) {
-    number = i;
-    firebase
-      .database()
-      .ref("Recipes")
-      .child(number + "")
-      .on("value", function (snapshot) {
-        let r1 = snapshot.val();
-        // console.log(r1);
-        if (r1 != null) {
-          recipesArray.push(r1);
-        }
-      });
-  }
+  let database = firebase.database().ref("Recipes");
+  database.once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      let childData = childSnapshot.val();
+      recipesArray.push(childData);
+      //addARecipeToTheArray(childData);
+    });
+  });
 }
 
 //send and get Butchers from fb
-
-function sendButcherToFireBase(b1) {
-  firebase
-    .database()
-    .ref("Butchers")
-    .child(butcherCounter + "")
-    .set(b1);
-  //counter
-  butcherCounter++;
-  firebase.database().ref("Butchers").child("butcherCounter").set({
-    butcherCounter: butcherCounter,
+function sendButcherToFireBase(r1) {
+  firebase.database().ref("Butchers").child(r1.butcherName).set(r1);
+}
+function getButcherFromFireBase() {
+  let database = firebase.database().ref("Butchers");
+  database.once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      let childData = childSnapshot.val();
+      butchersArray.push(childData);
+      //addAButcherToTheArray(childData);
+    });
   });
 }
-
-function getButcherFromFireBase() {
-  for (let i = 0; i < butcherCounter; i++) {
-    number = i;
-    firebase
-      .database()
-      .ref("Butchers")
-      .child(number + "")
-      .on("value", function (snapshot) {
-        let b1 = snapshot.val();
-        if (b1 != null) {
-          butchersArray.push(b1);
-        }
-      });
-  }
-}
-//
 
 //send and get Grillman from fb
-
-function sendGrillManToFireBase(g1) {
-  firebase
-    .database()
-    .ref("GrillMans")
-    .child(grillManCounter + "")
-    .set(g1);
-  //counter
-  grillManCounter++;
-  firebase.database().ref("GrillMans").child("grillManCounter").set({
-    grillManCounter: grillManCounter,
-  });
+function sendGrillManToFireBase(r1) {
+  firebase.database().ref("GrillMans").child(r1.grillmanName).set(r1);
 }
-
 function getGrillManFromFireBase() {
-  for (let i = 0; i < grillManCounter; i++) {
-    number = i;
-    firebase
-      .database()
-      .ref("GrillMans")
-      .child(number + "")
-      .on("value", function (snapshot) {
-        let g1 = snapshot.val();
-        if (g1 != null) {
-          grillmanArray.push(g1);
-        }
-      });
-  }
+  let database = firebase.database().ref("GrillMans");
+  database.once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      let childData = childSnapshot.val();
+      grillmanArray.push(childData);
+      //addAGrillManToTheArray(childData);
+    });
+  });
 }
 
 //send and get event from fb
-
-function sendEventToFireBase(e1) {
-  firebase
-    .database()
-    .ref("Events")
-    .child(eventCounter + "")
-    .set(e1);
-  //counter
-  eventCounter++;
-  firebase.database().ref("Events").child("eventCounter").set({
-    eventCounter: eventCounter,
-  });
+function sendEventToFireBase(r1) {
+  firebase.database().ref("Events").child(r1.eventName).set(r1);
 }
-
 function getEventFromFireBase() {
-  for (let i = 0; i < eventCounter; i++) {
-    number = i;
-    firebase
-      .database()
-      .ref("Events")
-      .child(number + "")
-      .on("value", function (snapshot) {
-        let e1 = snapshot.val();
-        if (e1 != null) {
-          eventArray.push(e1);
-        }
-      });
-  }
+  let database = firebase.database().ref("Events");
+  database.once("value", function (snapshot) {
+    snapshot.forEach(function (childSnapshot) {
+      let childData = childSnapshot.val();
+      eventArray.push(childData);
+      //addAEventToTheArray(childData);
+    });
+  });
 }

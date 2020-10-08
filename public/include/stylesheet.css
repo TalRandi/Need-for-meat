@@ -2,16 +2,21 @@
   transition: 5s ease-in-out;
 } */
 nav {
-  background: #C50000;
-  background: rgb(183,143,27);
-  background: radial-gradient(circle, rgba(183,143,27,1) 0%, rgba(166,161,40,1) 35%, rgba(145,34,22,1) 100%);
+  background: #c50000;
+  background: rgb(183, 143, 27);
+  background: radial-gradient(
+    circle,
+    rgba(183, 143, 27, 1) 0%,
+    rgba(166, 161, 40, 1) 35%,
+    rgba(145, 34, 22, 1) 100%
+  );
   opacity: 0.9;
   padding: 10px;
   text-align: center;
   border: 5px inset #91991c;
   border-radius: 40px 0px 40px 0px;
 }
-nav:hover{
+nav:hover {
   border: 6px inset #91991c;
 }
 button {
@@ -23,7 +28,7 @@ button {
   color: rgb(255, 255, 255);
   font-family: verdana;
   font-size: 18px;
-  background-color: #C50000;
+  background-color: #c50000;
 }
 button:active {
   transform: translate(0px, 5px);
@@ -33,19 +38,19 @@ button:active {
 button:hover {
   background-color: #fffb0091;
 }
-.rightSideButtons{
+.rightSideButtons {
   background-color: #000000;
 }
-.rightSideButtons:active { 
+.rightSideButtons:active {
   box-shadow: 8px 8px 0px 0px #333138;
 }
 .rightSideButtons:hover {
   background-color: #57564291;
 }
-h1{
+h1 {
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 40px;
-  color:  rgb(73, 3, 3);
+  color: rgb(73, 3, 3);
   /* text-decoration: underline solid rgb(73, 3, 3); */
   margin: auto;
   text-align: center;
@@ -53,24 +58,24 @@ h1{
 h3 {
   font-size: 25px;
   font-weight: bold;
-  color:  rgb(34, 4, 4);
+  color: rgb(34, 4, 4);
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
   /* padding-bottom: 30px; */
 }
-h4{
-  color:  rgb(73, 3, 3);
+h4 {
+  color: rgb(73, 3, 3);
   font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
-h5{
+h5 {
   color: yellow;
 }
-pre{
+pre {
   font-weight: bold;
   line-height: 25px;
   color: #11100de5;
   font-size: large;
 }
-.par{
+.par {
   font-weight: bold;
   text-align: center;
   color: #11100de5;
@@ -80,26 +85,27 @@ pre{
   padding: 10px;
   line-height: 2.2;
 }
-.description{
+.description {
   font-weight: bold;
   font-size: large;
   width: 50%;
 }
-::placeholder{
+::placeholder {
   opacity: 0.7;
-  color:rgb(41, 29, 29) ;
+  color: rgb(41, 29, 29);
   font-weight: bold;
 }
-textarea{
+textarea {
   align-content: center;
   width: 50em;
   height: 10em;
 }
-input, textarea{
-  border: 2px solid #C50000;
+input,
+textarea {
+  border: 2px solid #c50000;
   border-radius: 20px;
   /* background-color: cornflowerblue; */
-  background: linear-gradient(#C50000, #A46206, #D7C819);
+  background: linear-gradient(#c50000, #a46206, #d7c819);
   color: #520105;
 }
 body {
@@ -114,9 +120,9 @@ footer {
   font-size: large;
   color: yellow;
 }
-.material-icons{
+.material-icons {
   color: rgb(56, 240, 0);
-} 
+}
 /* stars */
 .fa-star {
   color: rgb(171, 175, 136);
@@ -124,19 +130,23 @@ footer {
 .checked {
   color: yellow;
 }
-.solid{
+.solid {
   border-top: 1px solid rgb(187, 187, 187);
   border-radius: 5px;
 }
 /* 2 recipe ----------------------------------------------------------------*/
 #background_div {
-  
   position: absolute;
   overflow: auto;
-  background: #CEC82B;
+  background: #cec82b;
   opacity: 0.9;
-  background: rgb(183,143,27);
-  background: radial-gradient(circle, rgba(183,143,27,1) 0%, rgba(166,161,40,1) 35%, rgba(145,34,22,1) 100%);
+  background: rgb(183, 143, 27);
+  background: radial-gradient(
+    circle,
+    rgba(183, 143, 27, 1) 0%,
+    rgba(166, 161, 40, 1) 35%,
+    rgba(145, 34, 22, 1) 100%
+  );
   border: 5px inset #91991c;
   border-radius: 40px 0px 40px 0px;
   /* background: -moz-radial-gradient(center, #CEC82B 0%, #A46206 59%, #C50000 100%);
@@ -147,10 +157,10 @@ footer {
   width: 82%;
   height: 80%;
   right: 150px;
-  top: 120px; 
+  top: 120px;
   transition: 1s;
 }
-#background_div:hover{
+#background_div:hover {
   width: 83%;
 }
 #main {
@@ -160,10 +170,10 @@ footer {
 .rightSideButtons {
   width: 125px;
 }
-.butcherName{
+.butcherName {
   color: aqua;
 }
-.butcherRestaurantRecipe{
+.butcherRestaurantRecipe {
   color: rgb(0, 36, 0);
 }
 .small_images {
