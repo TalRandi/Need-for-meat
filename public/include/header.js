@@ -11,11 +11,6 @@ function navigationBarLoading() {
   btRecipes.textContent = "מתכונים";
   btRecipes.addEventListener("click", btRecipes1);
   docFrag.appendChild(btRecipes);
-  //3 equipment
-  // const btEquipment = document.createElement("button");
-  // btEquipment.textContent = "ציוד";
-  // btEquipment.addEventListener("click", btEquipment1);
-  // docFrag.appendChild(btEquipment);
   //4 Butchers
   const btButchers = document.createElement("button");
   btButchers.textContent = "אטליזים/ מקומות לקניית בשר";
@@ -142,6 +137,9 @@ function btRestaurants1() {
 
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
+  const homepage_div = document.getElementById("homepage-div");
+  if(homepage_div)
+    homepage_div.parentNode.removeChild(homepage_div);
 
   const btAddRestaurant = document.createElement("button");
   btAddRestaurant.textContent = "הוסף מסעדה";
@@ -371,10 +369,12 @@ function searchRestaurant() {
 function btRecipes1() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
-  // const br2 = document.createElement("br");
 
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
+  const homepage_div = document.getElementById("homepage-div");
+  if(homepage_div)
+    homepage_div.parentNode.removeChild(homepage_div);
 
   const btAddRecipe = document.createElement("button");
   btAddRecipe.textContent = "הוסף מתכון";
@@ -408,21 +408,6 @@ function btRecipes1() {
   docFrag.id = "main";
   main.replaceWith(docFrag);
 }
-//3 equeipment
-// function btEquipment1() {
-//   const main = document.getElementById("main");
-//   const docFrag = document.createElement("div");
-
-//   const screenDiv = document.createElement("div");
-//   screenDiv.id = "background_div";
-//   const title = document.createElement("h3");
-//   title.textContent = "ציוד";
-//   screenDiv.appendChild(title);
-
-//   docFrag.appendChild(screenDiv);
-//   docFrag.id = "main";
-//   main.replaceWith(docFrag);
-//}
 //4 butchers
 function Butcher(name = "", description = "", location = "", kosher = true) {
   return (butcher = {
@@ -476,10 +461,12 @@ function createButcher(butcherObject) {
 function btButchers1() {
   const br = document.createElement("br");
   const br1 = document.createElement("br");
-  // const br2 = document.createElement("br");
 
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
+  const homepage_div = document.getElementById("homepage-div");
+  if(homepage_div)
+    homepage_div.parentNode.removeChild(homepage_div);
 
   const btAddButcher = document.createElement("button");
   btAddButcher.textContent = "הוסף אטליז";
@@ -751,6 +738,9 @@ function btGrillman_is_needed1() {
 
   const main = document.getElementById("main");
   const docFrag = document.createElement("div");
+  const homepage_div = document.getElementById("homepage-div");
+  if(homepage_div)
+    homepage_div.parentNode.removeChild(homepage_div);
 
   const screenDiv = document.createElement("div");
   screenDiv.id = "background_div";
@@ -1377,7 +1367,6 @@ function newEvent() {
   main.replaceWith(docFrag);
 }
 function eventList() {
-  // const br = document.createElement("br");
 
   const main = document.getElementById("background_div");
   const docFrag = document.createElement("div");
